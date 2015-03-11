@@ -6,7 +6,7 @@
 #include <initializer_list> //C++11
 
 #include "exceptions.hpp"
-#include "debug.hpp"
+//#include "debug.hpp"
 
 #define EMPTY_STACK 4294967295 //Realmente, es un -1, si le hacemos ++ da 0;
 #define UNINITIALIZED_VALUE 0
@@ -24,7 +24,7 @@ namespace dra{
 template<class T>
 class dra::stack
 {
-	private:
+	public:
 	T *s_;
 	size_t sz_;
 	size_t msz_;
@@ -39,7 +39,7 @@ class dra::stack
 	stack& operator=(const stack&);
 	~stack(void);
 	//================================================================ Capacidad
-	bool empty(void) const;
+	inline bool empty(void) const;
 	size_t size(void) const;
 	void resize(size_t);
 	//======================================================= Acceso a elementos
@@ -119,8 +119,6 @@ dra::stack<T>& dra::stack<T>::operator=(const stack& s)
 template<class T>
 bool dra::stack<T>::empty(void) const
 {
-	TRACE(top_);
-	TRACE(EMPTY_STACK);
 	return (top_ == EMPTY_STACK);
 }
 
@@ -150,6 +148,7 @@ void dra::stack<T>::resize(size_t new_sz)
 		}catch(...){
 			throw exception::mem_error("Memory error (full memory?)");
 		}
+		
 		if(s_ != nullptr){
 			memcpy(tmp_ptr, s_, sz_*sizeof(T));
 			delete[] s_;
@@ -182,12 +181,10 @@ template<class T>
 void dra::stack<T>::push(const T& val)
 {
 	top_++;
-	if(top_ > MAX_SIZE){
-		TRACE(top_);
+	if(top_ > MAX_SIZE)
 		throw exception::length_error("Stack overflow!");
-	}
-		
-	if(top_ > sz_)
+	
+	if(top_ >= sz_)
 		resize(sz_+1);
 	
 	s_[top_] = val;
@@ -208,9 +205,10 @@ void dra::stack<T>::pop(void)
 template<class T>
 std::ostream& dra::stack<T>::toStream(std::ostream& os) const
 {
-	for(dra::iterator_t i = 0; i < sz_; i++)
-		os << s_[i] << " ";
-		
+	if(top_ != EMPTY_STACK){
+		for(dra::iterator_t i = 0; i <= top_; i++)
+			os << s_[i] << " ";
+	}
 	return os;
 }
 

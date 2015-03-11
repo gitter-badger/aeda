@@ -8,14 +8,15 @@ int main(void)
 {
 	dra::stack<int> hola;
 	
-	
-	hola.push(1);
-	hola.push(2);
-	hola.push(3);
-	hola.push(4);
-	
-	
+	for(int i = 0; i < 33; i++){
+		hola.push(i+1);
+	}
 	cout << hola << endl;
+	for(int i = 0; i < 32; i++){
+		hola.pop();
+	}
+	cout << hola << endl;
+	
 	
 	return 0;
 }
