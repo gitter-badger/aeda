@@ -52,6 +52,10 @@ class dra::stack
 	std::ostream& toStream(std::ostream& os) const;
 };
 
+//==============================================================================
+//====================================== Constructores, destructores y operador=
+//==============================================================================
+
 template<class T>
 dra::stack<T>::stack(void):
 s_(nullptr),
@@ -222,4 +226,4 @@ std::ostream& operator<<(std::ostream& os, const dra::stack<T>& s)
 	return os;
 }
 
-	#endif
+#endif
