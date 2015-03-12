@@ -20,5 +20,11 @@ int main(void)
     
     myqueue3 = myqueue2;
     TRACE(myqueue3.size());
+    
+    cout << myqueue3 << endl;
+    
+    TRACE(myqueue3.front());
+    TRACE(myqueue3.rear());
+    
     return 0;
 }

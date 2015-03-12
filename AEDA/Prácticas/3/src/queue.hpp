@@ -112,8 +112,7 @@ dra::queue<T>& dra::queue<T>::operator=(const queue& q)
 	resize(q.sz_);
 	
 	if(!q.empty())
-		for(int i = 0; i <= q.rear_; i++)
-			q_ = q.q_;
+		memcpy(q_, q.q_, sz_*sizeof(T));
 	
 	rear_ = q.rear_;
 }
@@ -179,25 +178,34 @@ dra::size_t dra::queue<T>::size(void) const
 template<class T>
 T& dra::queue<T>::front(void)
 {
-	
+	if(empty())
+		throw exception::length_error("Empty Queue!");
+	return q_[0];
 }
 
 template<class T>
 T dra::queue<T>::front(void) const
 {
-	
+	if(empty())
+		throw exception::length_error("Empty Queue!");
+	return q_[0];
 }
 
 template<class T>
 T& dra::queue<T>::rear(void)
 {
-	
+	TRACE(rear_);
+	if(empty())
+		throw exception::length_error("Empty Queue!");
+	return q_[rear_];
 }
 
 template<class T>
 T dra::queue<T>::rear(void) const
 {
-	
+	if(empty())
+		throw exception::length_error("Empty Queue!");
+	return q_[rear_];
 }
 
 //==============================================================================
@@ -206,13 +214,19 @@ T dra::queue<T>::rear(void) const
 template<class T>
 void dra::queue<T>::push(const T& val)
 {
+	rear_++;
+	if(rear_ >= sz_)
+		resize(sz_+1);
+	q_[rear_] = val;
 	
 }
 
 template<class T>
 void dra::queue<T>::pop(void)
 {
-	
+	if(empty())
+		throw exception::length_error("Empty Queue!");
+	rear_--;
 }
 
 template<class T>
