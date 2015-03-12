@@ -24,7 +24,7 @@ namespace dra{
 template<class T>
 class dra::stack
 {
-	public:
+	private:
 	T *s_;
 	size_t sz_;
 	size_t msz_;
