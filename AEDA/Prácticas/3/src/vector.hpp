@@ -124,7 +124,7 @@ dra::vector<T>::vector(const vector<T>& vec):
     *this = vec;
 }
 
-vector(const vector<T>& vec, dra::iterator_t first, dra::iterator_t last):
+dra::vector<T>(const vector<T>& vec, dra::iterator_t first, dra::iterator_t last):
     v_(nullptr),
     sz_(last-first),
     msz_(sz_ + DEFAULT_BUFFER_SIZE),
