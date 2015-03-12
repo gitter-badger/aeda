@@ -104,7 +104,7 @@ template<class T>
 dra::stack<T>::~stack(void)
 {
 	if(s_ != nullptr)
-	delete[] s_;
+		delete[] s_;
 }
 
 template<class T>
@@ -209,7 +209,7 @@ void dra::stack<T>::pop(void)
 template<class T>
 std::ostream& dra::stack<T>::toStream(std::ostream& os) const
 {
-	if(top_ != EMPTY_STACK){
+	if(!queue()){
 		for(dra::iterator_t i = 0; i <= top_; i++)
 			os << s_[i] << " ";
 	}

@@ -51,7 +51,7 @@ public:
 	void pop(void);
 	void swap(queue& it);
 	//====================================================================== E/S
-	std::ostream& toStream(std::ostream&);
+	std::ostream& toStream(std::ostream&) const;
 };
 
 //==============================================================================
@@ -65,7 +65,7 @@ sz_(UNINITIALIZED_VALUE),
 buffer_(DEFAULT_BUFFER_SIZE),
 msz_(sz_+buffer_)
 {
-	
+	resize(UNINITIALIZED_VALUE);
 }
 
 template<class T>
@@ -76,13 +76,18 @@ sz_(UNINITIALIZED_VALUE),
 buffer_(DEFAULT_BUFFER_SIZE),
 msz_(sz_+buffer_)
 {
-	
+	resize(sz);
 }
 
 template<class T>
-dra::queue<T>::queue(const queue& q)
+dra::queue<T>::queue(const queue& q):
+q_(nullptr),
+rear_(EMPTY_QUEUE),
+sz_(UNINITIALIZED_VALUE),
+buffer_(DEFAULT_BUFFER_SIZE),
+msz_(sz_+buffer_)
 {
-	
+	*this = q;
 }
 
 template<class T>
@@ -93,19 +98,31 @@ sz_(UNINITIALIZED_VALUE),
 buffer_(DEFAULT_BUFFER_SIZE),
 msz_(sz_+buffer_)
 {
+	resize(il.size());
 	
+	for(auto &val : il){
+		rear_++;
+		q_[rear_] = val;
+	}
 }
 
 template<class T>
 dra::queue<T>& dra::queue<T>::operator=(const queue& q)
 {
+	resize(q.sz_);
 	
+	if(!q.empty())
+		for(int i = 0; i <= q.rear_; i++)
+			q_ = q.q_;
+	
+	rear_ = q.rear_;
 }
 
 template<class T>
 dra::queue<T>::~queue(void)
 {
-	
+	if(q_ != nullptr)
+		delete[] q_;
 }
 
 //==============================================================================
@@ -114,19 +131,46 @@ dra::queue<T>::~queue(void)
 template<class T>
 bool dra::queue<T>::empty(void) const
 {
-	
+	return (rear_ == EMPTY_QUEUE);
 }
 
 template<class T>
-void dra::queue<T>::resize(dra::size_t size)
+void dra::queue<T>::resize(dra::size_t new_sz)
 {
-	
+	if((new_sz > msz_)  || (q_ == nullptr)){
+		if(new_sz > MAX_SIZE)
+			throw exception::length_error("Exceeded max vector size 'MAX_SIZE'");
+		
+		sz_ = new_sz;
+		
+		if((sz_+buffer_) > MAX_SIZE)
+			buffer_ = MAX_SIZE - sz_;
+		
+		msz_ = sz_ + buffer_;
+		
+		T *tmp_ptr = nullptr;
+		
+		try{
+			tmp_ptr = new T[msz_];
+		}
+		catch(...){
+			throw exception::mem_error("Memory error (full memory?)");
+		}
+		
+		if(q_ != nullptr){
+			memcpy(tmp_ptr, q_, sz_*sizeof(T));
+			delete[] q_;
+		}
+		q_ = tmp_ptr;
+	}
+	else
+		sz_ = new_sz;
 }
 
 template<class T>
 dra::size_t dra::queue<T>::size(void) const
 {
-	
+	return msz_;
 }
 
 //==============================================================================
@@ -182,9 +226,13 @@ void dra::queue<T>::swap(queue& it)
 //==============================================================================
 
 template<class T>
-std::ostream& dra::queue<T>::toStream(std::ostream& os)
+std::ostream& dra::queue<T>::toStream(std::ostream& os) const
 {
-	
+	if(!empty()){
+		for(dra::iterator_t i = 0; i <= rear_; i++)
+			os << q_[i] << " ";
+	}
+	return os;
 }
 
 //==============================================================================
@@ -193,7 +241,8 @@ std::ostream& dra::queue<T>::toStream(std::ostream& os)
 template<class T>
 std::ostream& operator<<(std::ostream& os, const dra::queue<T>& q)
 {
-	
+	q.toStream(os);
+	return os;
 }
 
 #endif
