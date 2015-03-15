@@ -194,7 +194,6 @@ T dra::queue<T>::front(void) const
 template<class T>
 T& dra::queue<T>::rear(void)
 {
-	TRACE(rear_);
 	if(empty())
 		throw exception::length_error("Empty Queue!");
 	return q_[rear_];
@@ -232,7 +231,9 @@ void dra::queue<T>::pop(void)
 template<class T>
 void dra::queue<T>::swap(queue& it)
 {
-	
+	dra::queue<T> aux(it);
+	it = *this;
+	*this = aux;
 }
 
 //==============================================================================

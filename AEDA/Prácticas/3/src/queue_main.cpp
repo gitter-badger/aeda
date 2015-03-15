@@ -15,16 +15,18 @@ int main(void)
     dra::queue<int> myqueue2(myqueue1);
     TRACE(myqueue2.size());
     
-    dra::queue<int> myqueue3 = {1,5,3,6,4,2,1};
+    dra::queue<int> myqueue3 = {66,5,3,6,4,2,99};
     TRACE(myqueue3.size());
     
-    myqueue3 = myqueue2;
-    TRACE(myqueue3.size());
+    SAY("llego");
     
     cout << myqueue3 << endl;
     
+    SAY("Voy a hacer el front");
     TRACE(myqueue3.front());
+    SAY("Voy a hacer el rear");
     TRACE(myqueue3.rear());
+    SAY("llego");
     
     return 0;
 }

@@ -124,7 +124,8 @@ dra::vector<T>::vector(const vector<T>& vec):
 	*this = vec;
 }
 
-dra::vector<T>(const vector<T>& vec, dra::iterator_t first, dra::iterator_t last):
+template<class T>
+dra::vector<T>::vector(const vector<T>& vec, dra::iterator_t first, dra::iterator_t last):
 	v_(nullptr),
 	sz_(last-first),
 	msz_(sz_ + DEFAULT_BUFFER_SIZE),
@@ -238,7 +239,6 @@ T dra::vector<T>::operator[](iterator_t position) const
 template<class T>
 T& dra::vector<T>::at(iterator_t position)
 {
-	//std::cout << *this << std::endl;
 	if((position < first_) || (position >= last_) || empty())
 		throw exception::out_of_range();
 	else
@@ -336,8 +336,7 @@ template<class T>
 std::ostream& dra::vector<T>::toStream(std::ostream& os) const
 {
 	for(int i = 0; i < sz_; i++)
-		os << v_[i] << ", ";
-	os << "\b\b";
+		os << v_[i] << " ";
 	return os;
 }
 
