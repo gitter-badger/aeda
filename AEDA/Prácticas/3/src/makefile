@@ -22,6 +22,9 @@ natural: natural_main.cpp natural.hpp number.hpp
 	
 integer: integer_main.cpp integer.hpp number.hpp
 	$(CC) $(CFLAGS) $@_main.cpp
+	
+rational: rational_main.cpp rational.hpp integer.hpp number.hpp
+	$(CC) $(CFLAGS) $@_main.cpp
 
 clean:
 	rm ../bin/* *~

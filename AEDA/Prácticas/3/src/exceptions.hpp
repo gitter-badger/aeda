@@ -1,3 +1,5 @@
+#ifndef _exceptions_HPP_
+#define _exceptions_HPP_
 #include <exception>
 
 namespace exception{
@@ -67,3 +69,5 @@ class exception::underflow_error:public std::exception
     
     const char* what() const throw(){return what_;}
 };
+
+#endif
