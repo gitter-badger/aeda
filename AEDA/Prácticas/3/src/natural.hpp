@@ -11,13 +11,13 @@
 #define MAX_VAL 4294967295
 
 namespace dra{
-	typedef long unsigned int number_t;
+	typedef long unsigned int natural_t;
 	class natural;
 }
 
 class dra::natural: public dra::number{
 private:
-    dra::number_t number_;
+    dra::natural_t number_;
 public:
     //================================== Constructores, destructores y operador=
     natural(void);
@@ -51,6 +51,8 @@ public:
 	bool operator>(const dra::natural& nat) const;
 	bool operator<=(const dra::natural& nat) const;
 	bool operator>=(const dra::natural& nat) const;
+	//======================================================= Conversión de tipo
+	explicit operator dra::natural_t();
     //====================================================================== E/S
     std::ostream& toStream(std::ostream& os) const;
     std::istream& fromStream(std::istream& is);
@@ -226,6 +228,14 @@ bool dra::natural::operator<=(const dra::natural& nat) const
 bool dra::natural::operator>=(const dra::natural& nat) const
 {
     return number_ >= nat.number_;
+}
+
+//==============================================================================
+//=========================================================== Conversión de tipo
+//==============================================================================
+dra::natural::operator dra::natural_t()
+{
+    return number_;
 }
 
 //==============================================================================

@@ -4,11 +4,11 @@
 
 int main(void)
 {
-    dra::number* ptr = new dra::integer(-9);
+    dra::integer test(8);
     
-    std::cout << *ptr << std::endl;
+    int i = test;
     
-    delete ptr;
+    std::cout << i << std::endl;
     
     return 0;
 }

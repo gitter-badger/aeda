@@ -8,50 +8,52 @@
 #include "exceptions.hpp"
 #include "debug.hpp"
 
-#define MIN_VAL -2147483647
-#define MAX_VAL 2147483647 
-
 namespace dra{
-	typedef dra::integer number_t; //no funca
+	typedef dra::integer rational_t;
 	class rational;
 }
 
 class dra::rational: public dra::number{
 private:
-    dra::number_t number_; //aqui esta mal
+    dra::rational_t numerator_;
+    dra::rational_t denominator_;
 public:
     //================================== Constructores, destructores y operador=
     rational(void);
     rational(long long int);
+    rational(long long int, long long int);
     rational(const rational&);
     rational& operator=(const rational&);
     ~rational(void);
+    //================================================================Utilidades
+	void simplify(void);
+	dra::rational_t abs(dra::rational_t);
     //=================================================== Operadores artiméticos
-    dra::rational operator+(const dra::rational& nat) const;
-    dra::rational operator-(const dra::rational& nat) const;
-    dra::rational operator*(const dra::rational& nat) const;
-    dra::rational operator/(const dra::rational& nat) const;
-    dra::rational operator%(const dra::rational& nat) const;
+    dra::rational operator+(const dra::rational& rat) const;
+    dra::rational operator-(const dra::rational& rat) const;
+    dra::rational operator*(const dra::rational& rat) const;
+    dra::rational operator/(const dra::rational& rat) const;
+    dra::rational operator%(const dra::rational& rat) const;
     //==================================== Operadores de incremento y decremento
     void operator++(int);
     void operator--(int);
     //====================================== Operadores de asignación compuestos
-    dra::rational operator+=(const dra::rational& nat);
-    dra::rational operator-=(const dra::rational& nat);
-    dra::rational operator*=(const dra::rational& nat);
-    dra::rational operator/=(const dra::rational& nat);
-    dra::rational operator%=(const dra::rational& nat);
+    dra::rational operator+=(const dra::rational& rat);
+    dra::rational operator-=(const dra::rational& rat);
+    dra::rational operator*=(const dra::rational& rat);
+    dra::rational operator/=(const dra::rational& rat);
+    dra::rational operator%=(const dra::rational& rat);
     //======================================================= Operadores lógicos
     bool operator!(void) const;
-    bool operator&&(const dra::rational& nat) const;
-    bool operator||(const dra::rational& nat) const;
+    bool operator&&(const dra::rational& rat) const;
+    bool operator||(const dra::rational& rat) const;
     //================================================== Operadores relacionales
-    bool operator==(const dra::rational& nat) const;
-	bool operator!=(const dra::rational& nat) const;
-	bool operator<(const dra::rational& nat) const;
-	bool operator>(const dra::rational& nat) const;
-	bool operator<=(const dra::rational& nat) const;
-	bool operator>=(const dra::rational& nat) const;
+    bool operator==(const dra::rational& rat) const;
+	bool operator!=(const dra::rational& rat) const;
+	bool operator<(const dra::rational& rat) const;
+	bool operator>(const dra::rational& rat) const;
+	bool operator<=(const dra::rational& rat) const;
+	bool operator>=(const dra::rational& rat) const;
     //====================================================================== E/S
     std::ostream& toStream(std::ostream& os) const;
     std::istream& fromStream(std::istream& is);
@@ -61,68 +63,87 @@ public:
 //====================================== Constructores, destructores y operador=
 //==============================================================================
 dra::rational::rational(void):
-number_(0)
+numerator_(0),
+denominator_(1)
 {}
 
-dra::rational::rational(long long int num):
-number_(0)
+dra::rational::rational(long long int numerator):
+numerator_(numerator),
+denominator_(1)
+{}
+
+dra::rational::rational(long long int numerator, long long int denominator):
+numerator_(numerator),
+denominator_(denominator)
 {
-    if(num < MIN_VAL)
-        throw exception::underflow_error("Exceeded 'MIN_VAL'");
-    if(num > MAX_VAL)
-        throw exception::overflow_error("Exceeded 'MAX_VAL'");
-    number_ = num;
+    simplify();
 }
 
-dra::rational::rational(const rational& nat)
+dra::rational::rational(const rational& rat)
 {
-    number_ = nat.number_; //Se podría poner *this=nat
+    numerator_ = rat.numerator_;
+    denominator_ = rat.denominator_;
 }
 
-dra::rational& dra::rational::operator=(const rational& nat)
+dra::rational& dra::rational::operator=(const rational& rat)
 {
-    number_ = nat.number_;
+    numerator_ = rat.numerator_;
+    denominator_ = rat.denominator_;
 }
 
 dra::rational::~rational(void)
 {}
 
 //==============================================================================
+//=================================================================== Utilidades
+//==============================================================================
+void dra::rational::simplify(void)
+{
+    for(rational_t i = abs(numerator_ * denominator_); i > 1; i--){
+		if((denominator_ % i == 0) && (numerator_ % i == 0)){
+			denominator_ /= i;
+			numerator_   /= i;
+		}
+	}
+}
+
+dra::rational_t dra::rational::abs(dra::rational_t num)
+{
+    if(num < 0)
+		return num*-1;
+	return num;
+}
+
+//==============================================================================
 //======================================================= Operadores artiméticos
 //==============================================================================
-dra::rational dra::rational::operator+(const dra::rational& nat) const
+dra::rational dra::rational::operator+(const dra::rational& rat) const
 {
-    if((number_ + nat.number_) > MAX_VAL)
-        throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '+'");
-    return number_ + nat.number_;
+    dra::rational aux(dra::integer_t((numerator_ * rat.denominator_) + (rat.numerator_ * denominator_)), dra::integer_t(denominator_*rat.denominator_));
+    return aux;
 }
 
-dra::rational dra::rational::operator-(const dra::rational& nat) const
+dra::rational dra::rational::operator-(const dra::rational& rat) const
 {
-    if((number_ - nat.number_) > number_)
-        throw exception::underflow_error("Exceeded 'MIN_VAL'");
-    return number_ - nat.number_;
+    int numerator = dra::integer_t((numerator_ * rat.denominator_) - (rat.numerator_ * denominator_));
+    int denominator = dra::integer_t(denominator_*rat.denominator_);
+    
+    std::cout << "Resta es: " << numerator << "/" << denominator << std::endl;
 }
 
-dra::rational dra::rational::operator*(const dra::rational& nat) const
+dra::rational dra::rational::operator*(const dra::rational& rat) const
 {
-    if((number_ * nat.number_) > MAX_VAL)
-        throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '*'");
-    return number_ * nat.number_;
+    
 }
 
-dra::rational dra::rational::operator/(const dra::rational& nat) const
+dra::rational dra::rational::operator/(const dra::rational& rat) const
 {
-    if(nat == 0)
-        throw exception::overflow_error("Divide by zero in operator '/'");
-    return number_ / nat.number_;
+    
 }
 
-dra::rational dra::rational::operator%(const dra::rational& nat) const
+dra::rational dra::rational::operator%(const dra::rational& rat) const
 {
-    if(nat == 0)
-        throw exception::overflow_error("Divide by zero in operator '%'");
-    return number_ % nat.number_;
+    
 }
 
 //==============================================================================
@@ -130,103 +151,89 @@ dra::rational dra::rational::operator%(const dra::rational& nat) const
 //==============================================================================
 void dra::rational::operator++(int)
 {
-    if((number_ + 1) > MAX_VAL)
-        throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '++'");
-    number_++;
+    
 }
 
 void dra::rational::operator--(int)
 {
-    if((number_ -1) > number_)
-        throw exception::underflow_error("Can't handle negative rationals in operator '--'");
-    number_--;
+    
 }
 //==============================================================================
 //========================================== Operadores de asignación compuestos
 //==============================================================================
-dra::rational dra::rational::operator+=(const dra::rational& nat)
+dra::rational dra::rational::operator+=(const dra::rational& rat)
 {
-    if((number_ + nat.number_) > MAX_VAL)
-        throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '+='");
-    return number_ += nat.number_;
+    
 }
 
-dra::rational dra::rational::operator-=(const dra::rational& nat)
+dra::rational dra::rational::operator-=(const dra::rational& rat)
 {
-    if((number_ - nat.number_) > number_)
-        throw exception::underflow_error("Exceeded 'MIN_VAL'");
-    return number_ -= nat.number_;
+    
 }
 
-dra::rational dra::rational::operator*=(const dra::rational& nat)
+dra::rational dra::rational::operator*=(const dra::rational& rat)
 {
-    if((number_ * nat.number_) > MAX_VAL)
-        throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '*='");
-    return number_ *= nat.number_;
+    
 }
 
-dra::rational dra::rational::operator/=(const dra::rational& nat)
+dra::rational dra::rational::operator/=(const dra::rational& rat)
 {
-    if(nat == 0)
-        throw exception::overflow_error("Divide by zero in operator '/='");
-    return number_ /= nat.number_;
+    
 }
 
-dra::rational dra::rational::operator%=(const dra::rational& nat)
+dra::rational dra::rational::operator%=(const dra::rational& rat)
 {
-    if(nat == 0)
-        throw exception::overflow_error("Divide by zero in operator '%='");
-    return number_ %= nat.number_;
+    
 }
 //==============================================================================
 //=========================================================== Operadores lógicos
 //==============================================================================
 bool dra::rational::operator!(void) const
 {
-    return !number_;
+    
 }
 
-bool dra::rational::operator&&(const dra::rational& nat) const
+bool dra::rational::operator&&(const dra::rational& rat) const
 {
-    return number_ && nat.number_;
+    
 }
 
-bool dra::rational::operator||(const dra::rational& nat) const
+bool dra::rational::operator||(const dra::rational& rat) const
 {
-    return number_ || nat.number_;
+    
 }
 
 //==============================================================================
 //====================================================== Operadores relacionales
 //==============================================================================
-bool dra::rational::operator==(const dra::rational& nat) const
+bool dra::rational::operator==(const dra::rational& rat) const
 {
-    return number_ == nat.number_;
+    
 }
 
-bool dra::rational::operator!=(const dra::rational& nat) const
+bool dra::rational::operator!=(const dra::rational& rat) const
 {
-    return number_ != nat.number_;
+    
 }
 
-bool dra::rational::operator<(const dra::rational& nat) const
+bool dra::rational::operator<(const dra::rational& rat) const
 {
-    return number_ < nat.number_;
+    
 }
 
-bool dra::rational::operator>(const dra::rational& nat) const
+bool dra::rational::operator>(const dra::rational& rat) const
 {
-    return number_ > nat.number_;
+    
 }
 
-bool dra::rational::operator<=(const dra::rational& nat) const
+bool dra::rational::operator<=(const dra::rational& rat) const
 {
-    return number_ <= nat.number_;
+    
 }
 
-bool dra::rational::operator>=(const dra::rational& nat) const
+bool dra::rational::operator>=(const dra::rational& rat) const
 {
-    return number_ >= nat.number_;
+    
 }
 
 //==============================================================================
@@ -234,25 +241,25 @@ bool dra::rational::operator>=(const dra::rational& nat) const
 //==============================================================================
 std::ostream& dra::rational::toStream(std::ostream& os) const
 {
-    os << number_;
+    os << numerator_ << "/" << denominator_;
     return os;
 }
 
 std::istream& dra::rational::fromStream(std::istream& is)
 {
-    is >> number_;
+    is >> numerator_ >> denominator_;
     return is;
 }
 
-std::ostream& operator<<(std::ostream& os, dra::rational nat)
+std::ostream& operator<<(std::ostream& os, dra::rational rat)
 {
-    nat.toStream(os);
+    rat.toStream(os);
     return os;
 }
 
-std::istream& operator>>(std::istream& is, dra::rational nat)
+std::istream& operator>>(std::istream& is, dra::rational rat)
 {
-    nat.fromStream(is);
+    rat.fromStream(is);
     return is;
 }
 

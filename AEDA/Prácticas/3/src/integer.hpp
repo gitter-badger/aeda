@@ -5,19 +5,19 @@
 
 #include "number.hpp"
 #include "exceptions.hpp"
-#include "debug.hpp"
+//#include "debug.hpp"
 
 #define MIN_VAL -2147483647
 #define MAX_VAL 2147483647 
 
 namespace dra{
-	typedef long int number_t;
+	typedef long int integer_t;
 	class integer;
 }
 
 class dra::integer: public dra::number{
 private:
-    dra::number_t number_;
+    dra::integer_t number_;
 public:
     //================================== Constructores, destructores y operador=
     integer(void);
@@ -26,31 +26,33 @@ public:
     integer& operator=(const integer&);
     ~integer(void);
     //=================================================== Operadores artiméticos
-    dra::integer operator+(const dra::integer& nat) const;
-    dra::integer operator-(const dra::integer& nat) const;
-    dra::integer operator*(const dra::integer& nat) const;
-    dra::integer operator/(const dra::integer& nat) const;
-    dra::integer operator%(const dra::integer& nat) const;
+    dra::integer operator+(const dra::integer& intg) const;
+    dra::integer operator-(const dra::integer& intg) const;
+    dra::integer operator*(const dra::integer& intg) const;
+    dra::integer operator/(const dra::integer& intg) const;
+    dra::integer operator%(const dra::integer& intg) const;
     //==================================== Operadores de incremento y decremento
     void operator++(int);
     void operator--(int);
     //====================================== Operadores de asignación compuestos
-    dra::integer operator+=(const dra::integer& nat);
-    dra::integer operator-=(const dra::integer& nat);
-    dra::integer operator*=(const dra::integer& nat);
-    dra::integer operator/=(const dra::integer& nat);
-    dra::integer operator%=(const dra::integer& nat);
+    dra::integer operator+=(const dra::integer& intg);
+    dra::integer operator-=(const dra::integer& intg);
+    dra::integer operator*=(const dra::integer& intg);
+    dra::integer operator/=(const dra::integer& intg);
+    dra::integer operator%=(const dra::integer& intg);
     //======================================================= Operadores lógicos
     bool operator!(void) const;
-    bool operator&&(const dra::integer& nat) const;
-    bool operator||(const dra::integer& nat) const;
+    bool operator&&(const dra::integer& intg) const;
+    bool operator||(const dra::integer& intg) const;
     //================================================== Operadores relacionales
-    bool operator==(const dra::integer& nat) const;
-	bool operator!=(const dra::integer& nat) const;
-	bool operator<(const dra::integer& nat) const;
-	bool operator>(const dra::integer& nat) const;
-	bool operator<=(const dra::integer& nat) const;
-	bool operator>=(const dra::integer& nat) const;
+    bool operator==(const dra::integer& intg) const;
+	bool operator!=(const dra::integer& intg) const;
+	bool operator<(const dra::integer& intg) const;
+	bool operator>(const dra::integer& intg) const;
+	bool operator<=(const dra::integer& intg) const;
+	bool operator>=(const dra::integer& intg) const;
+	//======================================================= Conversión de tipo
+	explicit operator dra::integer_t();
     //====================================================================== E/S
     std::ostream& toStream(std::ostream& os) const;
     std::istream& fromStream(std::istream& is);
@@ -73,14 +75,14 @@ number_(0)
     number_ = num;
 }
 
-dra::integer::integer(const integer& nat)
+dra::integer::integer(const integer& intg)
 {
-    number_ = nat.number_; //Se podría poner *this=nat
+    number_ = intg.number_; //Se podría poner *this=nat
 }
 
-dra::integer& dra::integer::operator=(const integer& nat)
+dra::integer& dra::integer::operator=(const integer& intg)
 {
-    number_ = nat.number_;
+    number_ = intg.number_;
 }
 
 dra::integer::~integer(void)
@@ -89,39 +91,39 @@ dra::integer::~integer(void)
 //==============================================================================
 //======================================================= Operadores artiméticos
 //==============================================================================
-dra::integer dra::integer::operator+(const dra::integer& nat) const
+dra::integer dra::integer::operator+(const dra::integer& intg) const
 {
-    if((number_ + nat.number_) > MAX_VAL)
+    if((number_ + intg.number_) > MAX_VAL)
         throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '+'");
-    return number_ + nat.number_;
+    return number_ + intg.number_;
 }
 
-dra::integer dra::integer::operator-(const dra::integer& nat) const
+dra::integer dra::integer::operator-(const dra::integer& intg) const
 {
-    if((number_ - nat.number_) > number_)
+    if((number_ - intg.number_) > number_)
         throw exception::underflow_error("Exceeded 'MIN_VAL'");
-    return number_ - nat.number_;
+    return number_ - intg.number_;
 }
 
-dra::integer dra::integer::operator*(const dra::integer& nat) const
+dra::integer dra::integer::operator*(const dra::integer& intg) const
 {
-    if((number_ * nat.number_) > MAX_VAL)
+    if((number_ * intg.number_) > MAX_VAL)
         throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '*'");
-    return number_ * nat.number_;
+    return number_ * intg.number_;
 }
 
-dra::integer dra::integer::operator/(const dra::integer& nat) const
+dra::integer dra::integer::operator/(const dra::integer& intg) const
 {
-    if(nat == 0)
+    if(intg == 0)
         throw exception::overflow_error("Divide by zero in operator '/'");
-    return number_ / nat.number_;
+    return number_ / intg.number_;
 }
 
-dra::integer dra::integer::operator%(const dra::integer& nat) const
+dra::integer dra::integer::operator%(const dra::integer& intg) const
 {
-    if(nat == 0)
+    if(intg == 0)
         throw exception::overflow_error("Divide by zero in operator '%'");
-    return number_ % nat.number_;
+    return number_ % intg.number_;
 }
 
 //==============================================================================
@@ -143,39 +145,39 @@ void dra::integer::operator--(int)
 //==============================================================================
 //========================================== Operadores de asignación compuestos
 //==============================================================================
-dra::integer dra::integer::operator+=(const dra::integer& nat)
+dra::integer dra::integer::operator+=(const dra::integer& intg)
 {
-    if((number_ + nat.number_) > MAX_VAL)
+    if((number_ + intg.number_) > MAX_VAL)
         throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '+='");
-    return number_ += nat.number_;
+    return number_ += intg.number_;
 }
 
-dra::integer dra::integer::operator-=(const dra::integer& nat)
+dra::integer dra::integer::operator-=(const dra::integer& intg)
 {
-    if((number_ - nat.number_) > number_)
+    if((number_ - intg.number_) > number_)
         throw exception::underflow_error("Exceeded 'MIN_VAL'");
-    return number_ -= nat.number_;
+    return number_ -= intg.number_;
 }
 
-dra::integer dra::integer::operator*=(const dra::integer& nat)
+dra::integer dra::integer::operator*=(const dra::integer& intg)
 {
-    if((number_ * nat.number_) > MAX_VAL)
+    if((number_ * intg.number_) > MAX_VAL)
         throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '*='");
-    return number_ *= nat.number_;
+    return number_ *= intg.number_;
 }
 
-dra::integer dra::integer::operator/=(const dra::integer& nat)
+dra::integer dra::integer::operator/=(const dra::integer& intg)
 {
-    if(nat == 0)
+    if(intg == 0)
         throw exception::overflow_error("Divide by zero in operator '/='");
-    return number_ /= nat.number_;
+    return number_ /= intg.number_;
 }
 
-dra::integer dra::integer::operator%=(const dra::integer& nat)
+dra::integer dra::integer::operator%=(const dra::integer& intg)
 {
-    if(nat == 0)
+    if(intg == 0)
         throw exception::overflow_error("Divide by zero in operator '%='");
-    return number_ %= nat.number_;
+    return number_ %= intg.number_;
 }
 //==============================================================================
 //=========================================================== Operadores lógicos
@@ -185,47 +187,55 @@ bool dra::integer::operator!(void) const
     return !number_;
 }
 
-bool dra::integer::operator&&(const dra::integer& nat) const
+bool dra::integer::operator&&(const dra::integer& intg) const
 {
-    return number_ && nat.number_;
+    return number_ && intg.number_;
 }
 
-bool dra::integer::operator||(const dra::integer& nat) const
+bool dra::integer::operator||(const dra::integer& intg) const
 {
-    return number_ || nat.number_;
+    return number_ || intg.number_;
 }
 
 //==============================================================================
 //====================================================== Operadores relacionales
 //==============================================================================
-bool dra::integer::operator==(const dra::integer& nat) const
+bool dra::integer::operator==(const dra::integer& intg) const
 {
-    return number_ == nat.number_;
+    return number_ == intg.number_;
 }
 
-bool dra::integer::operator!=(const dra::integer& nat) const
+bool dra::integer::operator!=(const dra::integer& intg) const
 {
-    return number_ != nat.number_;
+    return number_ != intg.number_;
 }
 
-bool dra::integer::operator<(const dra::integer& nat) const
+bool dra::integer::operator<(const dra::integer& intg) const
 {
-    return number_ < nat.number_;
+    return number_ < intg.number_;
 }
 
-bool dra::integer::operator>(const dra::integer& nat) const
+bool dra::integer::operator>(const dra::integer& intg) const
 {
-    return number_ > nat.number_;
+    return number_ > intg.number_;
 }
 
-bool dra::integer::operator<=(const dra::integer& nat) const
+bool dra::integer::operator<=(const dra::integer& intg) const
 {
-    return number_ <= nat.number_;
+    return number_ <= intg.number_;
 }
 
-bool dra::integer::operator>=(const dra::integer& nat) const
+bool dra::integer::operator>=(const dra::integer& intg) const
 {
-    return number_ >= nat.number_;
+    return number_ >= intg.number_;
+}
+
+//==============================================================================
+//=========================================================== Conversión de tipo
+//==============================================================================
+dra::integer::operator dra::integer_t()
+{
+    return number_;
 }
 
 //==============================================================================
@@ -243,15 +253,15 @@ std::istream& dra::integer::fromStream(std::istream& is)
     return is;
 }
 
-std::ostream& operator<<(std::ostream& os, dra::integer nat)
+std::ostream& operator<<(std::ostream& os, dra::integer intg)
 {
-    nat.toStream(os);
+    intg.toStream(os);
     return os;
 }
 
-std::istream& operator>>(std::istream& is, dra::integer nat)
+std::istream& operator>>(std::istream& is, dra::integer intg)
 {
-    nat.fromStream(is);
+    intg.fromStream(is);
     return is;
 }
 
