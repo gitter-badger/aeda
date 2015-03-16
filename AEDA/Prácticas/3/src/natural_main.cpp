@@ -4,11 +4,10 @@
 
 int main(void)
 {
-    dra::number* ptr = new dra::natural(9);
+    dra::natural testing(9);
     
-    std::cout << *ptr << std::endl;
-    
-    delete ptr;
+    testing = testing / 0;
+
     
     return 0;
 }

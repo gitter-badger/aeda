@@ -5,9 +5,10 @@
 
 #include "number.hpp"
 #include "exceptions.hpp"
-#include "debug.hpp"
+//#include "debug.hpp"
 
 #define MAX_VAL 4294967295
+#define MIN_VAL 0
 
 namespace dra{
 	typedef long unsigned int number_t;
@@ -65,10 +66,10 @@ number_(0)
 dra::natural::natural(long long int num):
 number_(0)
 {
-    if(num < 0)
-        throw exception::out_of_range("Can't handle negative naturals");
+    if(num < MIN_VAL)
+        throw exception::underflow_error("Can't handle negative naturals");
     if(num > MAX_VAL)
-        throw exception::out_of_range("Exceeded 'MAX_VAL'");
+        throw exception::overflow_error("Exceeded 'MAX_VAL'");
     number_ = num;
 }
 
@@ -91,31 +92,35 @@ dra::natural::~natural(void)
 dra::natural dra::natural::operator+(const dra::natural& nat) const
 {
     if((number_ + nat.number_) > MAX_VAL)
-        throw exception::out_of_range("Exceeded 'MAX_VAL' in operator '+'");
+        throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '+'");
     return number_ + nat.number_;
 }
 
 dra::natural dra::natural::operator-(const dra::natural& nat) const
 {
     if((number_ - nat.number_) > number_)
-        throw exception::out_of_range("Can't handle negative naturals in operator '-'");
+        throw exception::underflow_error("Can't handle negative naturals in operator '-'");
     return number_ - nat.number_;
 }
 
 dra::natural dra::natural::operator*(const dra::natural& nat) const
 {
     if((number_ * nat.number_) > MAX_VAL)
-        throw exception::out_of_range("Exceeded 'MAX_VAL' in operator '*'");
+        throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '*'");
     return number_ * nat.number_;
 }
 
 dra::natural dra::natural::operator/(const dra::natural& nat) const
 {
+    if(nat == 0)
+        throw exception::overflow_error("Divide by zero in operator '/'");
     return number_ / nat.number_;
 }
 
 dra::natural dra::natural::operator%(const dra::natural& nat) const
 {
+    if(nat == 0)
+        throw exception::overflow_error("Divide by zero in operator '%'");
     return number_ % nat.number_;
 }
 
@@ -125,14 +130,14 @@ dra::natural dra::natural::operator%(const dra::natural& nat) const
 void dra::natural::operator++(int)
 {
     if((number_ + 1) > MAX_VAL)
-        throw exception::out_of_range("Exceeded 'MAX_VAL' in operator '++'");
+        throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '++'");
     number_++;
 }
 
 void dra::natural::operator--(int)
 {
     if((number_ -1) > number_)
-        throw exception::out_of_range("Can't handle negative naturals in operator '--'");
+        throw exception::underflow_error("Can't handle negative naturals in operator '--'");
     number_--;
 }
 //==============================================================================
@@ -141,31 +146,35 @@ void dra::natural::operator--(int)
 dra::natural dra::natural::operator+=(const dra::natural& nat)
 {
     if((number_ + nat.number_) > MAX_VAL)
-        throw exception::out_of_range("Exceeded 'MAX_VAL' in operator '+='");
+        throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '+='");
     return number_ += nat.number_;
 }
 
 dra::natural dra::natural::operator-=(const dra::natural& nat)
 {
     if((number_ - nat.number_) > number_)
-        throw exception::out_of_range("Can't handle negative naturals in operator '-='");
+        throw exception::underflow_error("Can't handle negative naturals in operator '-='");
     return number_ -= nat.number_;
 }
 
 dra::natural dra::natural::operator*=(const dra::natural& nat)
 {
     if((number_ * nat.number_) > MAX_VAL)
-        throw exception::out_of_range("Exceeded 'MAX_VAL' in operator '*='");
+        throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '*='");
     return number_ *= nat.number_;
 }
 
 dra::natural dra::natural::operator/=(const dra::natural& nat)
 {
+    if(nat == 0)
+        throw exception::overflow_error("Divide by zero in operator '/='");
     return number_ /= nat.number_;
 }
 
 dra::natural dra::natural::operator%=(const dra::natural& nat)
 {
+    if(nat == 0)
+        throw exception::overflow_error("Divide by zero in operator '%='");
     return number_ %= nat.number_;
 }
 //==============================================================================

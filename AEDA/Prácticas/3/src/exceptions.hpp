@@ -4,6 +4,8 @@ namespace exception{
     class mem_error;
     class out_of_range;
     class length_error;
+    class overflow_error;
+    class underflow_error;
 }
 
 class exception::mem_error:public std::exception
@@ -38,6 +40,30 @@ class exception::length_error:public std::exception
     public:
     length_error(void): what_("Length error"){}
     length_error(const char* what_arg): what_(what_arg){}
+    
+    const char* what() const throw(){return what_;}
+};
+
+class exception::overflow_error:public std::exception
+{
+    private:
+    const char* what_;
+    
+    public:
+    overflow_error(void): what_("Overflow error"){}
+    overflow_error(const char* what_arg): what_(what_arg){}
+    
+    const char* what() const throw(){return what_;}
+};
+
+class exception::underflow_error:public std::exception
+{
+    private:
+    const char* what_;
+    
+    public:
+    underflow_error(void): what_("Underflow error"){}
+    underflow_error(const char* what_arg): what_(what_arg){}
     
     const char* what() const throw(){return what_;}
 };
