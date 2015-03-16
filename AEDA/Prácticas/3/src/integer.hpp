@@ -8,7 +8,7 @@
 //#include "debug.hpp"
 
 #define MIN_VAL -2147483647
-#define MAX_VAL 2147483647 
+#define MAX_VAL 2147483647
 
 namespace dra{
 	typedef long int integer_t;
@@ -100,7 +100,7 @@ dra::integer dra::integer::operator+(const dra::integer& intg) const
 
 dra::integer dra::integer::operator-(const dra::integer& intg) const
 {
-    if((number_ - intg.number_) > number_)
+    if((number_ - intg.number_) < MIN_VAL)
         throw exception::underflow_error("Exceeded 'MIN_VAL'");
     return number_ - intg.number_;
 }
@@ -138,7 +138,7 @@ void dra::integer::operator++(int)
 
 void dra::integer::operator--(int)
 {
-    if((number_ -1) > number_)
+    if((number_ -1) < MIN_VAL)
         throw exception::underflow_error("Can't handle negative integers in operator '--'");
     number_--;
 }
@@ -154,7 +154,7 @@ dra::integer dra::integer::operator+=(const dra::integer& intg)
 
 dra::integer dra::integer::operator-=(const dra::integer& intg)
 {
-    if((number_ - intg.number_) > number_)
+    if((number_ - intg.number_) < MIN_VAL)
         throw exception::underflow_error("Exceeded 'MIN_VAL'");
     return number_ -= intg.number_;
 }

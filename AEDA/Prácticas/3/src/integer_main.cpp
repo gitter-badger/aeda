@@ -4,11 +4,15 @@
 
 int main(void)
 {
-    dra::integer test(8);
+    dra::integer test1(-2147483644);
     
-    int i = test;
+    dra::integer test2(-1);
     
-    std::cout << i << std::endl;
+    dra::integer test3;
+    
+    test3 = test1 - test2;
+    
+    std::cout << test3 << std::endl;
     
     return 0;
 }

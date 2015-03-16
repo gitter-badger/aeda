@@ -4,16 +4,14 @@
 
 int main(void)
 {
-    dra::rational test(16,5);
+    dra::rational aux1(1565,14566);
+    dra::rational aux2(6556,3);
+    dra::rational aux3(12678,4);
+    dra::rational aux4;
     
-    dra::rational other(16,9);
+    std::cout << "Voy a hacer la operacion" << std::endl;
     
-    std::cout << other << " - " << test << std::endl;
-    
-    
-    dra::rational othero(other-test);
-    
-    std::cout << othero << std::endl;
+    aux4 = aux1 + aux2 - aux3;
     
     return 0;
 }

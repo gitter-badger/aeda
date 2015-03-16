@@ -99,11 +99,19 @@ dra::rational::~rational(void)
 //==============================================================================
 void dra::rational::simplify(void)
 {
+    std::cout << "Simplificando: " << numerator_ << "/" << denominator_ << std::endl;
     for(rational_t i = abs(numerator_ * denominator_); i > 1; i--){
+        std::cout << "Se puede dividir arriba y abajo por " << i << "?" << std::endl;
 		if((denominator_ % i == 0) && (numerator_ % i == 0)){
+		    std::cout << "Si!" << std::endl;
 			denominator_ /= i;
 			numerator_   /= i;
 		}
+		//sleep(1);
+	}
+	if(denominator_ < 0){
+	    denominator_*=-1;
+	    numerator_*=-1;
 	}
 }
 
@@ -119,16 +127,12 @@ dra::rational_t dra::rational::abs(dra::rational_t num)
 //==============================================================================
 dra::rational dra::rational::operator+(const dra::rational& rat) const
 {
-    dra::rational aux(dra::integer_t((numerator_ * rat.denominator_) + (rat.numerator_ * denominator_)), dra::integer_t(denominator_*rat.denominator_));
-    return aux;
+    return dra::rational(dra::integer_t((numerator_ * rat.denominator_) + (rat.numerator_ * denominator_)), dra::integer_t(denominator_*rat.denominator_));
 }
 
 dra::rational dra::rational::operator-(const dra::rational& rat) const
 {
-    int numerator = dra::integer_t((numerator_ * rat.denominator_) - (rat.numerator_ * denominator_));
-    int denominator = dra::integer_t(denominator_*rat.denominator_);
-    
-    std::cout << "Resta es: " << numerator << "/" << denominator << std::endl;
+    return dra::rational(dra::integer_t((numerator_ * rat.denominator_) - (rat.numerator_ * denominator_)), dra::integer_t(denominator_*rat.denominator_));
 }
 
 dra::rational dra::rational::operator*(const dra::rational& rat) const
