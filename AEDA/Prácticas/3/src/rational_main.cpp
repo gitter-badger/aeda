@@ -4,14 +4,13 @@
 
 int main(void)
 {
-    dra::rational aux1(1565,14566);
-    dra::rational aux2(6556,3);
-    dra::rational aux3(12678,4);
-    dra::rational aux4;
+    dra::rational aux1(14,-314);
     
-    std::cout << "Voy a hacer la operacion" << std::endl;
+    dra::rational aux2(13,-314);
     
-    aux4 = aux1 + aux2 - aux3;
+    bool logic = aux1 >= aux2;
+    
+    std::cout << logic << std::endl;
     
     return 0;
 }

@@ -27,13 +27,12 @@ public:
     ~rational(void);
     //================================================================Utilidades
 	void simplify(void);
-	dra::rational_t abs(dra::rational_t);
+	dra::rational_t min(dra::rational_t, dra::rational_t);
     //=================================================== Operadores artiméticos
     dra::rational operator+(const dra::rational& rat) const;
     dra::rational operator-(const dra::rational& rat) const;
     dra::rational operator*(const dra::rational& rat) const;
     dra::rational operator/(const dra::rational& rat) const;
-    dra::rational operator%(const dra::rational& rat) const;
     //==================================== Operadores de incremento y decremento
     void operator++(int);
     void operator--(int);
@@ -42,11 +41,6 @@ public:
     dra::rational operator-=(const dra::rational& rat);
     dra::rational operator*=(const dra::rational& rat);
     dra::rational operator/=(const dra::rational& rat);
-    dra::rational operator%=(const dra::rational& rat);
-    //======================================================= Operadores lógicos
-    bool operator!(void) const;
-    bool operator&&(const dra::rational& rat) const;
-    bool operator||(const dra::rational& rat) const;
     //================================================== Operadores relacionales
     bool operator==(const dra::rational& rat) const;
 	bool operator!=(const dra::rational& rat) const;
@@ -99,15 +93,12 @@ dra::rational::~rational(void)
 //==============================================================================
 void dra::rational::simplify(void)
 {
-    std::cout << "Simplificando: " << numerator_ << "/" << denominator_ << std::endl;
-    for(rational_t i = abs(numerator_ * denominator_); i > 1; i--){
-        std::cout << "Se puede dividir arriba y abajo por " << i << "?" << std::endl;
-		if((denominator_ % i == 0) && (numerator_ % i == 0)){
-		    std::cout << "Si!" << std::endl;
+    dra::integer zero;
+    for(dra::integer i = min(numerator_, denominator_); i > 1; i--){
+		if(((denominator_ % i) == zero) && ((numerator_ % i) == zero)){
 			denominator_ /= i;
 			numerator_   /= i;
 		}
-		//sleep(1);
 	}
 	if(denominator_ < 0){
 	    denominator_*=-1;
@@ -115,11 +106,11 @@ void dra::rational::simplify(void)
 	}
 }
 
-dra::rational_t dra::rational::abs(dra::rational_t num)
+dra::rational_t dra::rational::min(dra::rational_t one, dra::rational_t two)
 {
-    if(num < 0)
-		return num*-1;
-	return num;
+    if(one < 0) one*=-1;
+    if(two < 0) two*=-1;
+    return (one>two)? two: one;
 }
 
 //==============================================================================
@@ -137,17 +128,12 @@ dra::rational dra::rational::operator-(const dra::rational& rat) const
 
 dra::rational dra::rational::operator*(const dra::rational& rat) const
 {
-    
+    return dra::rational(dra::integer_t(numerator_*rat.numerator_), dra::integer_t(denominator_*rat.denominator_));
 }
 
 dra::rational dra::rational::operator/(const dra::rational& rat) const
 {
-    
-}
-
-dra::rational dra::rational::operator%(const dra::rational& rat) const
-{
-    
+    return dra::rational(dra::integer_t(numerator_*rat.denominator_), dra::integer_t(denominator_*rat.numerator_));
 }
 
 //==============================================================================
@@ -155,56 +141,34 @@ dra::rational dra::rational::operator%(const dra::rational& rat) const
 //==============================================================================
 void dra::rational::operator++(int)
 {
-    
+    *this = *this + dra::rational(1);
 }
 
 void dra::rational::operator--(int)
 {
-    
+    *this = *this - dra::rational(1);
 }
 //==============================================================================
 //========================================== Operadores de asignación compuestos
 //==============================================================================
 dra::rational dra::rational::operator+=(const dra::rational& rat)
 {
-    
+    return *this = *this + rat;
 }
 
 dra::rational dra::rational::operator-=(const dra::rational& rat)
 {
-    
+    return *this = *this - rat;
 }
 
 dra::rational dra::rational::operator*=(const dra::rational& rat)
 {
-    
+    return *this = *this * rat;
 }
 
 dra::rational dra::rational::operator/=(const dra::rational& rat)
 {
-    
-}
-
-dra::rational dra::rational::operator%=(const dra::rational& rat)
-{
-    
-}
-//==============================================================================
-//=========================================================== Operadores lógicos
-//==============================================================================
-bool dra::rational::operator!(void) const
-{
-    
-}
-
-bool dra::rational::operator&&(const dra::rational& rat) const
-{
-    
-}
-
-bool dra::rational::operator||(const dra::rational& rat) const
-{
-    
+    return *this = *this / rat;
 }
 
 //==============================================================================
@@ -212,32 +176,32 @@ bool dra::rational::operator||(const dra::rational& rat) const
 //==============================================================================
 bool dra::rational::operator==(const dra::rational& rat) const
 {
-    
+    return (numerator_ == rat.numerator_) && (denominator_ == rat.denominator_);
 }
 
 bool dra::rational::operator!=(const dra::rational& rat) const
 {
-    
+    return (numerator_ != rat.numerator_) || (denominator_ != rat.denominator_);
 }
 
 bool dra::rational::operator<(const dra::rational& rat) const
 {
-    
+    return numerator_*rat.denominator_ < rat.numerator_*denominator_;
 }
 
 bool dra::rational::operator>(const dra::rational& rat) const
 {
-    
+    return numerator_*rat.denominator_ > rat.numerator_*denominator_;
 }
 
 bool dra::rational::operator<=(const dra::rational& rat) const
 {
-    
+    return numerator_*rat.denominator_ <= rat.numerator_*denominator_;
 }
 
 bool dra::rational::operator>=(const dra::rational& rat) const
 {
-    
+    return numerator_*rat.denominator_ >= rat.numerator_*denominator_;
 }
 
 //==============================================================================
