@@ -25,9 +25,14 @@ public:
     rational(const rational&);
     rational& operator=(const rational&);
     ~rational(void);
-    //================================================================Utilidades
+    //=============================================================== Utilidades
 	void simplify(void);
 	dra::rational_t min(dra::rational_t, dra::rational_t);
+	//=================================================================== Acceso
+	dra::integer get_numerator(void) const;
+	dra::integer get_denominator(void) const;
+	void set_numerator(const dra::integer&);
+	void set_denominator(const dra::integer&);
     //=================================================== Operadores artiméticos
     dra::rational operator+(const dra::rational& rat) const;
     dra::rational operator-(const dra::rational& rat) const;
@@ -113,6 +118,31 @@ dra::rational_t dra::rational::min(dra::rational_t one, dra::rational_t two)
     return (one>two)? two: one;
 }
 
+//==============================================================================
+//======================================================================= Acceso
+//==============================================================================
+dra::integer dra::rational::get_numerator(void) const
+{
+    return numerator_;
+}
+
+dra::integer dra::rational::get_denominator(void) const
+{
+    return denominator_;
+}
+
+void dra::rational::set_numerator(const dra::integer& num)
+{
+    numerator_ = num;
+    simplify();
+}
+
+void dra::rational::set_denominator(const dra::integer& den)
+{
+    denominator_ = den;
+    simplify();
+}
+	
 //==============================================================================
 //======================================================= Operadores artiméticos
 //==============================================================================
