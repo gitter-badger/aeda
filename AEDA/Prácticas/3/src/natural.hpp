@@ -87,7 +87,7 @@ dra::natural dra::natural::operator+(const dra::natural& nat) const
 
 dra::natural dra::natural::operator-(const dra::natural& nat) const
 {
-    if((number_ - nat.number_) < 0)
+    if((number_ - nat.number_) > number_)
         throw exception::out_of_range("Can't handle negative naturals in operator '-'");
     return number_ - nat.number_;
 }
@@ -121,7 +121,7 @@ void dra::natural::operator++(int)
 
 void dra::natural::operator--(int)
 {
-    if((number_ -1) < 0)
+    if((number_ -1) > number_)
         throw exception::out_of_range("Can't handle negative naturals in operator '--'");
     number_--;
 }
