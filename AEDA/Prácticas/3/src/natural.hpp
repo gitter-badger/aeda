@@ -24,16 +24,26 @@ public:
     natural(const natural&);
     natural& operator=(const natural&);
     ~natural(void);
-    //===================================== Sobrecarga de operadores artiméticos
+    //=================================================== Operadores artiméticos
     dra::natural operator+(const dra::natural& nat) const;
     dra::natural operator-(const dra::natural& nat) const;
     dra::natural operator*(const dra::natural& nat) const;
     dra::natural operator/(const dra::natural& nat) const;
     dra::natural operator%(const dra::natural& nat) const;
-    //=========================== Sobrecarga de operadores artiméticos con igual
+    //==================================== Operadores de incremento y decremento
     void operator++(int);
     void operator--(int);
-    //========================================= Sobrecarga de operadores lógicos
+    //====================================== Operadores de asignación compuestos
+    dra::natural operator+=(const dra::natural& nat);
+    dra::natural operator-=(const dra::natural& nat);
+    dra::natural operator*=(const dra::natural& nat);
+    dra::natural operator/=(const dra::natural& nat);
+    dra::natural operator%=(const dra::natural& nat);
+    //======================================================= Operadores lógicos
+    bool operator!(void) const;
+    bool operator&&(const dra::natural& nat) const;
+    bool operator||(const dra::natural& nat) const;
+    //================================================== Operadores relacionales
     bool operator==(const dra::natural& nat) const;
 	bool operator!=(const dra::natural& nat) const;
 	bool operator<(const dra::natural& nat) const;
@@ -76,7 +86,7 @@ dra::natural::~natural(void)
 {}
 
 //==============================================================================
-//========================================= Sobrecarga de operadores artiméticos
+//======================================================= Operadores artiméticos
 //==============================================================================
 dra::natural dra::natural::operator+(const dra::natural& nat) const
 {
@@ -110,7 +120,7 @@ dra::natural dra::natural::operator%(const dra::natural& nat) const
 }
 
 //==============================================================================
-//=============================== Sobrecarga de operadores artiméticos con igual
+//======================================== Operadores de incremento y decremento
 //==============================================================================
 void dra::natural::operator++(int)
 {
@@ -125,9 +135,59 @@ void dra::natural::operator--(int)
         throw exception::out_of_range("Can't handle negative naturals in operator '--'");
     number_--;
 }
+//==============================================================================
+//========================================== Operadores de asignación compuestos
+//==============================================================================
+dra::natural dra::natural::operator+=(const dra::natural& nat)
+{
+    if((number_ + nat.number_) > MAX_VAL)
+        throw exception::out_of_range("Exceeded 'MAX_VAL' in operator '+='");
+    return number_ += nat.number_;
+}
+
+dra::natural dra::natural::operator-=(const dra::natural& nat)
+{
+    if((number_ - nat.number_) > number_)
+        throw exception::out_of_range("Can't handle negative naturals in operator '-='");
+    return number_ -= nat.number_;
+}
+
+dra::natural dra::natural::operator*=(const dra::natural& nat)
+{
+    if((number_ * nat.number_) > MAX_VAL)
+        throw exception::out_of_range("Exceeded 'MAX_VAL' in operator '*='");
+    return number_ *= nat.number_;
+}
+
+dra::natural dra::natural::operator/=(const dra::natural& nat)
+{
+    return number_ /= nat.number_;
+}
+
+dra::natural dra::natural::operator%=(const dra::natural& nat)
+{
+    return number_ %= nat.number_;
+}
+//==============================================================================
+//=========================================================== Operadores lógicos
+//==============================================================================
+bool dra::natural::operator!(void) const
+{
+    return !number_;
+}
+
+bool dra::natural::operator&&(const dra::natural& nat) const
+{
+    return number_ && nat.number_;
+}
+
+bool dra::natural::operator||(const dra::natural& nat) const
+{
+    return number_ || nat.number_;
+}
 
 //==============================================================================
-//============================================= Sobrecarga de operadores lógicos
+//====================================================== Operadores relacionales
 //==============================================================================
 bool dra::natural::operator==(const dra::natural& nat) const
 {

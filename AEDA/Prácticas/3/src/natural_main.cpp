@@ -6,14 +6,9 @@ using namespace std;
 
 int main(void)
 {
-    dra::natural i = 4000;
-
+    /*number* ptr = new natural;
     
-    i+=10;
-    i-=10;
-    i*=10;
-    i/=10;
-    
+    /delete ptr;*/
     
     return 0;
 }
