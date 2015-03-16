@@ -7,8 +7,8 @@
 #include "exceptions.hpp"
 //#include "debug.hpp"
 
-#define MAX_VAL 4294967295
 #define MIN_VAL 0
+#define MAX_VAL 4294967295
 
 namespace dra{
 	typedef long unsigned int number_t;
