@@ -17,5 +17,8 @@ stack: stack_main.cpp stack.hpp
 queue: queue_main.cpp queue.hpp
 	$(CC) $(CFLAGS) $@_main.cpp
 
+natural: natural_main.cpp natural.hpp number.hpp
+	$(CC) $(CFLAGS) $@_main.cpp
+
 clean:
 	rm ../bin/* *~
