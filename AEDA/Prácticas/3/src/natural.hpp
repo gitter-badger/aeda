@@ -237,6 +237,13 @@ std::istream& dra::natural::fromStream(std::istream& is)
 std::ostream& operator<<(std::ostream& os, dra::natural nat)
 {
     nat.toStream(os);
+    return os;
+}
+
+std::istream& operator>>(std::istream& is, dra::natural nat)
+{
+    nat.fromStream(is);
+    return is;
 }
 
 #endif

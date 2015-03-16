@@ -2,13 +2,13 @@
 
 #include "natural.hpp"
 
-using namespace std;
-
 int main(void)
 {
-    /*number* ptr = new natural;
+    dra::number* ptr = new dra::natural(9);
     
-    /delete ptr;*/
+    std::cout << *ptr << std::endl;
+    
+    delete ptr;
     
     return 0;
 }
