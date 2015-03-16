@@ -4,9 +4,31 @@
 
 int main(void)
 {
-    dra::natural testing(9);
+    dra::natural test(4294967195);
     
-    testing = testing / 0;
+    while(1){
+        try{
+            test++;
+        }
+        catch(...)
+        {
+            std::cerr << "Te pasaste de vueltas wey" << std::endl;
+            break;
+        }
+    }
+    
+    test = 100;
+    
+    while(1){
+        try{
+            test--;
+        }
+        catch(...)
+        {
+            std::cerr << "Te pasaste de menos vueltas wey" << std::endl;
+            break;
+        }
+    }
 
     
     return 0;
