@@ -6,9 +6,7 @@ int main(void)
 {
     dra::natural test(5);
     
-    
-    int i;
-    i = dra::natural_t(test);
+    test != 3;
     
     
     return 0;
