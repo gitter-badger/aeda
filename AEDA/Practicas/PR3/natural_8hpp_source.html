@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>Práctica 3: Fichero Fuente src/natural.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Práctica 3
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Implementación de plantillas, jerarquías y excepciones</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="annotated.html"><span>Clases</span></a></li>
+      <li class="current"><a href="files.html"><span>Archivos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="globals.html"><span>Miembros&#160;de&#160;los&#160;ficheros</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">natural.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="natural_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifndef _NATURAL_HPP_</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define _NATURAL_HPP_</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;number.hpp&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;exceptions.hpp&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">//#include &quot;debug.hpp&quot;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="natural_8hpp.html#a02d2382990ff4049368a385423d598f1">   29</a></span>&#160;<span class="preprocessor">#define NAT_MIN_VAL 0</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="natural_8hpp.html#a7ccecbc7b89ac3e9f2341cdb3403fcd1">   31</a></span>&#160;<span class="preprocessor">#define NAT_MAX_VAL 4294967295</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacedra.html">dra</a>{</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">typedef</span> <span class="keywordtype">long</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> natural_t;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">class </span>natural;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html">   40</a></span>&#160;<span class="keyword">class </span><a class="code" href="classdra_1_1natural.html">dra::natural</a>: <span class="keyword">public</span> <a class="code" href="classdra_1_1number.html">dra::number</a>{</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    dra::natural_t number_;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="classdra_1_1natural.html#a1a1f5c18e2e0bd94733c92a00729c92b">natural</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="classdra_1_1natural.html#a1a1f5c18e2e0bd94733c92a00729c92b">natural</a>(<span class="keywordtype">long</span> <span class="keywordtype">long</span> <span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="classdra_1_1natural.html#a1a1f5c18e2e0bd94733c92a00729c92b">natural</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">natural</a>&amp;);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="classdra_1_1natural.html">natural</a>&amp; <a class="code" href="classdra_1_1natural.html#a5d49ba2101bd60e6b2e7e636cf936128">operator=</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">natural</a>&amp;);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="classdra_1_1natural.html#aefbd5425148c50f5e93d99f61efee7c0">~natural</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="classdra_1_1natural.html">dra::natural</a> <a class="code" href="classdra_1_1natural.html#a67e67cc9f0ae7745fbbff5107d5f3402">operator+</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="classdra_1_1natural.html">dra::natural</a> <a class="code" href="classdra_1_1natural.html#a303c43a7d0967759f8408cc98c95dc7c">operator-</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <a class="code" href="classdra_1_1natural.html">dra::natural</a> <a class="code" href="classdra_1_1natural.html#a4a23cae3f85a417c2e5fb2eb333f8c80">operator*</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="classdra_1_1natural.html">dra::natural</a> <a class="code" href="classdra_1_1natural.html#a562ec8960b4c2b07c2841ec4dd1b18a1">operator/</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="classdra_1_1natural.html">dra::natural</a> <a class="code" href="classdra_1_1natural.html#a0835912c35c2bebfc6ea6c5e1022a061">operator%</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classdra_1_1natural.html#a4edba2ababa4584d2efcaaa58f8f5819">operator++</a>(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classdra_1_1natural.html#ae95cf3983fc0d67ec0f6bdbd1d1aa7c6">operator--</a>(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <a class="code" href="classdra_1_1natural.html">dra::natural</a> <a class="code" href="classdra_1_1natural.html#aaedb4f488660c663208e2c0f32723ed6">operator+=</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="classdra_1_1natural.html">dra::natural</a> <a class="code" href="classdra_1_1natural.html#aba26adcd08828c864eb38fc7e031250c">operator-=</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <a class="code" href="classdra_1_1natural.html">dra::natural</a> <a class="code" href="classdra_1_1natural.html#ade98d8e7c616d2b173ff04a6d588c505">operator*=</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <a class="code" href="classdra_1_1natural.html">dra::natural</a> <a class="code" href="classdra_1_1natural.html#a516fd7db1d7f5ce92cd6f539c64c6e3f">operator/=</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <a class="code" href="classdra_1_1natural.html">dra::natural</a> <a class="code" href="classdra_1_1natural.html#ac204d0b7d3d7efb0d166154d9f17bb44">operator%=</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classdra_1_1natural.html#ac4a3f021b383594169d36c3846872ad7">operator==</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classdra_1_1natural.html#a6dd19d7ffa92408c48aaac24a866e68f">operator!=</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classdra_1_1natural.html#ac69726258a9a746fd1e8f49f6b7199fd">operator&lt;</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classdra_1_1natural.html#aed32ae9fa673cc0e801265834da09ca2">operator&gt;</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classdra_1_1natural.html#ad26991f045cf57d25133704b03990320">operator&lt;=</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classdra_1_1natural.html#a635396cd2c336d2e06e9a5f9b5ee5bfa">operator&gt;=</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keyword">explicit</span> <span class="keyword">operator</span> dra::natural_t();</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    std::ostream&amp; <a class="code" href="classdra_1_1natural.html#abbc68a27ee8ed5d939e7acc29b858bf1">toStream</a>(std::ostream&amp; os) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    std::istream&amp; <a class="code" href="classdra_1_1natural.html#a9caa3d8695b96b919078265f63b6d863">fromStream</a>(std::istream&amp; is);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;};</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">//==============================================================================</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">//====================================== Constructores, destructores y operador=</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">//==============================================================================</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#a1a1f5c18e2e0bd94733c92a00729c92b">  133</a></span>&#160;<a class="code" href="classdra_1_1natural.html#a1a1f5c18e2e0bd94733c92a00729c92b">dra::natural::natural</a>(<span class="keywordtype">void</span>):</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;number_(0)</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;{</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;}</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;</div>
+<div class="line"><a name="l00142"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#a7653a40a0c38243145934273d9740d3b">  142</a></span>&#160;<a class="code" href="classdra_1_1natural.html#a1a1f5c18e2e0bd94733c92a00729c92b">dra::natural::natural</a>(<span class="keywordtype">long</span> <span class="keywordtype">long</span> <span class="keywordtype">int</span> num):</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;number_(0)</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;{</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keywordflow">if</span>(num &lt; <a class="code" href="natural_8hpp.html#a02d2382990ff4049368a385423d598f1">NAT_MIN_VAL</a>)</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classexception_1_1underflow__error.html">exception::underflow_error</a>(<span class="stringliteral">&quot;Can&#39;t handle negative naturals&quot;</span>);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordflow">if</span>(num &gt; <a class="code" href="natural_8hpp.html#a7ccecbc7b89ac3e9f2341cdb3403fcd1">NAT_MAX_VAL</a>)</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classexception_1_1overflow__error.html">exception::overflow_error</a>(<span class="stringliteral">&quot;Exceeded &#39;NAT_MAX_VAL&#39;&quot;</span>);</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    number_ = num;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;}</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;</div>
+<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#ab0b70181416a1406cb4e2b3ea0e9ed76">  157</a></span>&#160;<a class="code" href="classdra_1_1natural.html#a1a1f5c18e2e0bd94733c92a00729c92b">dra::natural::natural</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">natural</a>&amp; nat)</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;{</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    number_ = nat.number_;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;}</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
+<div class="line"><a name="l00167"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#a5d49ba2101bd60e6b2e7e636cf936128">  167</a></span>&#160;<a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; <a class="code" href="classdra_1_1natural.html#a5d49ba2101bd60e6b2e7e636cf936128">dra::natural::operator=</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">natural</a>&amp; nat)</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;{</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    number_ = nat.number_;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;}</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;</div>
+<div class="line"><a name="l00177"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#aefbd5425148c50f5e93d99f61efee7c0">  177</a></span>&#160;<a class="code" href="classdra_1_1natural.html#aefbd5425148c50f5e93d99f61efee7c0">dra::natural::~natural</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;{}</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">//==============================================================================</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment">//======================================================= Operadores artiméticos</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">//==============================================================================</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#a67e67cc9f0ae7745fbbff5107d5f3402">  183</a></span>&#160;<a class="code" href="classdra_1_1natural.html">dra::natural</a> <a class="code" href="classdra_1_1natural.html#a67e67cc9f0ae7745fbbff5107d5f3402">dra::natural::operator+</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keywordflow">if</span>((number_ + nat.number_) &gt; <a class="code" href="natural_8hpp.html#a7ccecbc7b89ac3e9f2341cdb3403fcd1">NAT_MAX_VAL</a>)</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classexception_1_1overflow__error.html">exception::overflow_error</a>(<span class="stringliteral">&quot;Exceeded &#39;NAT_MAX_VAL&#39; in operator &#39;+&#39;&quot;</span>);</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keywordflow">return</span> number_ + nat.number_;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;}</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;</div>
+<div class="line"><a name="l00196"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#a303c43a7d0967759f8408cc98c95dc7c">  196</a></span>&#160;<a class="code" href="classdra_1_1natural.html">dra::natural</a> <a class="code" href="classdra_1_1natural.html#a303c43a7d0967759f8408cc98c95dc7c">dra::natural::operator-</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keywordflow">if</span>((number_ - nat.number_) &lt; <a class="code" href="natural_8hpp.html#a02d2382990ff4049368a385423d598f1">NAT_MIN_VAL</a>)</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classexception_1_1underflow__error.html">exception::underflow_error</a>(<span class="stringliteral">&quot;Can&#39;t handle negative naturals in operator &#39;-&#39;&quot;</span>);</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keywordflow">return</span> number_ - nat.number_;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;}</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;</div>
+<div class="line"><a name="l00209"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#a4a23cae3f85a417c2e5fb2eb333f8c80">  209</a></span>&#160;<a class="code" href="classdra_1_1natural.html">dra::natural</a> <a class="code" href="classdra_1_1natural.html#a4a23cae3f85a417c2e5fb2eb333f8c80">dra::natural::operator*</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keywordflow">if</span>((number_ * nat.number_) &gt; <a class="code" href="natural_8hpp.html#a7ccecbc7b89ac3e9f2341cdb3403fcd1">NAT_MAX_VAL</a>)</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classexception_1_1overflow__error.html">exception::overflow_error</a>(<span class="stringliteral">&quot;Exceeded &#39;NAT_MAX_VAL&#39; in operator &#39;*&#39;&quot;</span>);</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keywordflow">return</span> number_ * nat.number_;</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;}</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;</div>
+<div class="line"><a name="l00222"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#a562ec8960b4c2b07c2841ec4dd1b18a1">  222</a></span>&#160;<a class="code" href="classdra_1_1natural.html">dra::natural</a> <a class="code" href="classdra_1_1natural.html#a562ec8960b4c2b07c2841ec4dd1b18a1">dra::natural::operator/</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keywordflow">if</span>(nat == 0)</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classexception_1_1overflow__error.html">exception::overflow_error</a>(<span class="stringliteral">&quot;Divide by zero in operator &#39;/&#39;&quot;</span>);</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="keywordflow">return</span> number_ / nat.number_;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;}</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;</div>
+<div class="line"><a name="l00235"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#a0835912c35c2bebfc6ea6c5e1022a061">  235</a></span>&#160;<a class="code" href="classdra_1_1natural.html">dra::natural</a> <a class="code" href="classdra_1_1natural.html#a0835912c35c2bebfc6ea6c5e1022a061">dra::natural::operator%</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="keywordflow">if</span>(nat == 0)</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classexception_1_1overflow__error.html">exception::overflow_error</a>(<span class="stringliteral">&quot;Divide by zero in operator &#39;%&#39;&quot;</span>);</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <span class="keywordflow">return</span> number_ % nat.number_;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;}</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">//==============================================================================</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">//======================================== Operadores de incremento y decremento</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">//==============================================================================</span></div>
+<div class="line"><a name="l00251"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#a4edba2ababa4584d2efcaaa58f8f5819">  251</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classdra_1_1natural.html#a4edba2ababa4584d2efcaaa58f8f5819">dra::natural::operator++</a>(<span class="keywordtype">int</span>)</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;{</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="keywordflow">if</span>((number_ + 1) &gt; <a class="code" href="natural_8hpp.html#a7ccecbc7b89ac3e9f2341cdb3403fcd1">NAT_MAX_VAL</a>)</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classexception_1_1overflow__error.html">exception::overflow_error</a>(<span class="stringliteral">&quot;Exceeded &#39;NAT_MAX_VAL&#39; in operator &#39;++&#39;&quot;</span>);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    number_++;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;}</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;</div>
+<div class="line"><a name="l00263"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#ae95cf3983fc0d67ec0f6bdbd1d1aa7c6">  263</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classdra_1_1natural.html#ae95cf3983fc0d67ec0f6bdbd1d1aa7c6">dra::natural::operator--</a>(<span class="keywordtype">int</span>)</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;{</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="keywordflow">if</span>((number_ -1) &lt; <a class="code" href="natural_8hpp.html#a02d2382990ff4049368a385423d598f1">NAT_MIN_VAL</a>)</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classexception_1_1underflow__error.html">exception::underflow_error</a>(<span class="stringliteral">&quot;Can&#39;t handle negative naturals in operator &#39;--&#39;&quot;</span>);</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    number_--;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;}</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">//==============================================================================</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">//========================================== Operadores de asignación compuestos</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">//==============================================================================</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#aaedb4f488660c663208e2c0f32723ed6">  277</a></span>&#160;<a class="code" href="classdra_1_1natural.html">dra::natural</a> <a class="code" href="classdra_1_1natural.html#aaedb4f488660c663208e2c0f32723ed6">dra::natural::operator+=</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat)</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;{</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    <span class="keywordflow">if</span>((number_ + nat.number_) &gt; <a class="code" href="natural_8hpp.html#a7ccecbc7b89ac3e9f2341cdb3403fcd1">NAT_MAX_VAL</a>)</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classexception_1_1overflow__error.html">exception::overflow_error</a>(<span class="stringliteral">&quot;Exceeded &#39;NAT_MAX_VAL&#39; in operator &#39;+=&#39;&quot;</span>);</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keywordflow">return</span> number_ += nat.number_;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;}</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;</div>
+<div class="line"><a name="l00290"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#aba26adcd08828c864eb38fc7e031250c">  290</a></span>&#160;<a class="code" href="classdra_1_1natural.html">dra::natural</a> <a class="code" href="classdra_1_1natural.html#aba26adcd08828c864eb38fc7e031250c">dra::natural::operator-=</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat)</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;{</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="keywordflow">if</span>((number_ - nat.number_) &lt; <a class="code" href="natural_8hpp.html#a02d2382990ff4049368a385423d598f1">NAT_MIN_VAL</a>)</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classexception_1_1underflow__error.html">exception::underflow_error</a>(<span class="stringliteral">&quot;Can&#39;t handle negative naturals in operator &#39;-=&#39;&quot;</span>);</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    <span class="keywordflow">return</span> number_ -= nat.number_;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;}</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;</div>
+<div class="line"><a name="l00303"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#ade98d8e7c616d2b173ff04a6d588c505">  303</a></span>&#160;<a class="code" href="classdra_1_1natural.html">dra::natural</a> <a class="code" href="classdra_1_1natural.html#ade98d8e7c616d2b173ff04a6d588c505">dra::natural::operator*=</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat)</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;{</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    <span class="keywordflow">if</span>((number_ * nat.number_) &gt; <a class="code" href="natural_8hpp.html#a7ccecbc7b89ac3e9f2341cdb3403fcd1">NAT_MAX_VAL</a>)</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classexception_1_1overflow__error.html">exception::overflow_error</a>(<span class="stringliteral">&quot;Exceeded &#39;NAT_MAX_VAL&#39; in operator &#39;*=&#39;&quot;</span>);</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    <span class="keywordflow">return</span> number_ *= nat.number_;</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;}</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;</div>
+<div class="line"><a name="l00316"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#a516fd7db1d7f5ce92cd6f539c64c6e3f">  316</a></span>&#160;<a class="code" href="classdra_1_1natural.html">dra::natural</a> <a class="code" href="classdra_1_1natural.html#a516fd7db1d7f5ce92cd6f539c64c6e3f">dra::natural::operator/=</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat)</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;{</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <span class="keywordflow">if</span>(nat == 0)</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classexception_1_1overflow__error.html">exception::overflow_error</a>(<span class="stringliteral">&quot;Divide by zero in operator &#39;/=&#39;&quot;</span>);</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <span class="keywordflow">return</span> number_ /= nat.number_;</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;}</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;</div>
+<div class="line"><a name="l00329"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#ac204d0b7d3d7efb0d166154d9f17bb44">  329</a></span>&#160;<a class="code" href="classdra_1_1natural.html">dra::natural</a> <a class="code" href="classdra_1_1natural.html#ac204d0b7d3d7efb0d166154d9f17bb44">dra::natural::operator%=</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat)</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;{</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keywordflow">if</span>(nat == 0)</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classexception_1_1overflow__error.html">exception::overflow_error</a>(<span class="stringliteral">&quot;Divide by zero in operator &#39;%=&#39;&quot;</span>);</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    <span class="keywordflow">return</span> number_ %= nat.number_;</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;}</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment">//==============================================================================</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment">//====================================================== Operadores relacionales</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment">//==============================================================================</span></div>
+<div class="line"><a name="l00345"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#ac4a3f021b383594169d36c3846872ad7">  345</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classdra_1_1natural.html#ac4a3f021b383594169d36c3846872ad7">dra::natural::operator==</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    <span class="keywordflow">return</span> number_ == nat.number_;</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;}</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;</div>
+<div class="line"><a name="l00356"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#a6dd19d7ffa92408c48aaac24a866e68f">  356</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classdra_1_1natural.html#a6dd19d7ffa92408c48aaac24a866e68f">dra::natural::operator!=</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <span class="keywordflow">return</span> number_ != nat.number_;</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;}</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;</div>
+<div class="line"><a name="l00367"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#ac69726258a9a746fd1e8f49f6b7199fd">  367</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classdra_1_1natural.html#ac69726258a9a746fd1e8f49f6b7199fd">dra::natural::operator&lt;</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    <span class="keywordflow">return</span> number_ &lt; nat.number_;</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;}</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;</div>
+<div class="line"><a name="l00378"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#aed32ae9fa673cc0e801265834da09ca2">  378</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classdra_1_1natural.html#aed32ae9fa673cc0e801265834da09ca2">dra::natural::operator&gt;</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    <span class="keywordflow">return</span> number_ &gt; nat.number_;</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;}</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;</div>
+<div class="line"><a name="l00389"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#ad26991f045cf57d25133704b03990320">  389</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classdra_1_1natural.html#ad26991f045cf57d25133704b03990320">dra::natural::operator&lt;=</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    <span class="keywordflow">return</span> number_ &lt;= nat.number_;</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;}</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;</div>
+<div class="line"><a name="l00400"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#a635396cd2c336d2e06e9a5f9b5ee5bfa">  400</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classdra_1_1natural.html#a635396cd2c336d2e06e9a5f9b5ee5bfa">dra::natural::operator&gt;=</a>(<span class="keyword">const</span> <a class="code" href="classdra_1_1natural.html">dra::natural</a>&amp; nat)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    <span class="keywordflow">return</span> number_ &gt;= nat.number_;</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;}</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="comment">//==============================================================================</span></div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="comment">//=========================================================== Conversión de tipo</span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="comment">//==============================================================================</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#a62080386418d52c99a03c8e87a1ee65a">  414</a></span>&#160;dra::natural::operator dra::natural_t()</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;{</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    <span class="keywordflow">return</span> number_;</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;}</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="comment">//==============================================================================</span></div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="comment">//========================================================================== E/S</span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="comment">//==============================================================================</span></div>
+<div class="line"><a name="l00428"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#abbc68a27ee8ed5d939e7acc29b858bf1">  428</a></span>&#160;std::ostream&amp; <a class="code" href="classdra_1_1natural.html#abbc68a27ee8ed5d939e7acc29b858bf1">dra::natural::toStream</a>(std::ostream&amp; os)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;    os &lt;&lt; number_;</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;    <span class="keywordflow">return</span> os;</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;}</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;</div>
+<div class="line"><a name="l00440"></a><span class="lineno"><a class="line" href="classdra_1_1natural.html#a9caa3d8695b96b919078265f63b6d863">  440</a></span>&#160;std::istream&amp; <a class="code" href="classdra_1_1natural.html#a9caa3d8695b96b919078265f63b6d863">dra::natural::fromStream</a>(std::istream&amp; is)</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;{</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;    is &gt;&gt; number_;</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;    <span class="keywordflow">return</span> is;</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;}</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;</div>
+<div class="line"><a name="l00452"></a><span class="lineno"><a class="line" href="natural_8hpp.html#adc4c08b483be1e6438084781da6940d8">  452</a></span>&#160;std::ostream&amp; <a class="code" href="natural_8hpp.html#adc4c08b483be1e6438084781da6940d8">operator&lt;&lt;</a>(std::ostream&amp; os, <a class="code" href="classdra_1_1natural.html">dra::natural</a> nat)</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;{</div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;    nat.<a class="code" href="classdra_1_1natural.html#abbc68a27ee8ed5d939e7acc29b858bf1">toStream</a>(os);</div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;    <span class="keywordflow">return</span> os;</div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;}</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;</div>
+<div class="line"><a name="l00465"></a><span class="lineno"><a class="line" href="natural_8hpp.html#a7c0c1ce25420c727f29f176e1caf7f55">  465</a></span>&#160;std::istream&amp; <a class="code" href="natural_8hpp.html#a7c0c1ce25420c727f29f176e1caf7f55">operator&gt;&gt;</a>(std::istream&amp; is, <a class="code" href="classdra_1_1natural.html">dra::natural</a> nat)</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;{</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;    nat.<a class="code" href="classdra_1_1natural.html#a9caa3d8695b96b919078265f63b6d863">fromStream</a>(is);</div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;    <span class="keywordflow">return</span> is;</div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;}</div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;</div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="classdra_1_1natural_html_ac4a3f021b383594169d36c3846872ad7"><div class="ttname"><a href="classdra_1_1natural.html#ac4a3f021b383594169d36c3846872ad7">dra::natural::operator==</a></div><div class="ttdeci">bool operator==(const dra::natural &amp;nat) const </div><div class="ttdoc">Operador de igualdad. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00345">natural.hpp:345</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_a4edba2ababa4584d2efcaaa58f8f5819"><div class="ttname"><a href="classdra_1_1natural.html#a4edba2ababa4584d2efcaaa58f8f5819">dra::natural::operator++</a></div><div class="ttdeci">void operator++(int)</div><div class="ttdoc">Operador de incremento. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00251">natural.hpp:251</a></div></div>
+<div class="ttc" id="classexception_1_1overflow__error_html"><div class="ttname"><a href="classexception_1_1overflow__error.html">exception::overflow_error</a></div><div class="ttdef"><b>Definition:</b> <a href="exceptions_8hpp_source.html#l00049">exceptions.hpp:49</a></div></div>
+<div class="ttc" id="classdra_1_1number_html"><div class="ttname"><a href="classdra_1_1number.html">dra::number</a></div><div class="ttdef"><b>Definition:</b> <a href="number_8hpp_source.html#l00010">number.hpp:10</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_a67e67cc9f0ae7745fbbff5107d5f3402"><div class="ttname"><a href="classdra_1_1natural.html#a67e67cc9f0ae7745fbbff5107d5f3402">dra::natural::operator+</a></div><div class="ttdeci">dra::natural operator+(const dra::natural &amp;nat) const </div><div class="ttdoc">Operador de suma. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00183">natural.hpp:183</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_aefbd5425148c50f5e93d99f61efee7c0"><div class="ttname"><a href="classdra_1_1natural.html#aefbd5425148c50f5e93d99f61efee7c0">dra::natural::~natural</a></div><div class="ttdeci">~natural(void)</div><div class="ttdoc">Destructor. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00177">natural.hpp:177</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_a303c43a7d0967759f8408cc98c95dc7c"><div class="ttname"><a href="classdra_1_1natural.html#a303c43a7d0967759f8408cc98c95dc7c">dra::natural::operator-</a></div><div class="ttdeci">dra::natural operator-(const dra::natural &amp;nat) const </div><div class="ttdoc">Operador de resta. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00196">natural.hpp:196</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_aed32ae9fa673cc0e801265834da09ca2"><div class="ttname"><a href="classdra_1_1natural.html#aed32ae9fa673cc0e801265834da09ca2">dra::natural::operator&gt;</a></div><div class="ttdeci">bool operator&gt;(const dra::natural &amp;nat) const </div><div class="ttdoc">Operador mayor que. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00378">natural.hpp:378</a></div></div>
+<div class="ttc" id="natural_8hpp_html_a7c0c1ce25420c727f29f176e1caf7f55"><div class="ttname"><a href="natural_8hpp.html#a7c0c1ce25420c727f29f176e1caf7f55">operator&gt;&gt;</a></div><div class="ttdeci">std::istream &amp; operator&gt;&gt;(std::istream &amp;is, dra::natural nat)</div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00465">natural.hpp:465</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_a562ec8960b4c2b07c2841ec4dd1b18a1"><div class="ttname"><a href="classdra_1_1natural.html#a562ec8960b4c2b07c2841ec4dd1b18a1">dra::natural::operator/</a></div><div class="ttdeci">dra::natural operator/(const dra::natural &amp;nat) const </div><div class="ttdoc">Operador de división. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00222">natural.hpp:222</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_aba26adcd08828c864eb38fc7e031250c"><div class="ttname"><a href="classdra_1_1natural.html#aba26adcd08828c864eb38fc7e031250c">dra::natural::operator-=</a></div><div class="ttdeci">dra::natural operator-=(const dra::natural &amp;nat)</div><div class="ttdoc">Operador de resta compuesto. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00290">natural.hpp:290</a></div></div>
+<div class="ttc" id="classexception_1_1underflow__error_html"><div class="ttname"><a href="classexception_1_1underflow__error.html">exception::underflow_error</a></div><div class="ttdef"><b>Definition:</b> <a href="exceptions_8hpp_source.html#l00061">exceptions.hpp:61</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_a635396cd2c336d2e06e9a5f9b5ee5bfa"><div class="ttname"><a href="classdra_1_1natural.html#a635396cd2c336d2e06e9a5f9b5ee5bfa">dra::natural::operator&gt;=</a></div><div class="ttdeci">bool operator&gt;=(const dra::natural &amp;nat) const </div><div class="ttdoc">Operador mayor o igual que. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00400">natural.hpp:400</a></div></div>
+<div class="ttc" id="namespacedra_html"><div class="ttname"><a href="namespacedra.html">dra</a></div><div class="ttdef"><b>Definition:</b> <a href="complex_8hpp_source.html#l00010">complex.hpp:10</a></div></div>
+<div class="ttc" id="natural_8hpp_html_a7ccecbc7b89ac3e9f2341cdb3403fcd1"><div class="ttname"><a href="natural_8hpp.html#a7ccecbc7b89ac3e9f2341cdb3403fcd1">NAT_MAX_VAL</a></div><div class="ttdeci">#define NAT_MAX_VAL</div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00031">natural.hpp:31</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_a0835912c35c2bebfc6ea6c5e1022a061"><div class="ttname"><a href="classdra_1_1natural.html#a0835912c35c2bebfc6ea6c5e1022a061">dra::natural::operator%</a></div><div class="ttdeci">dra::natural operator%(const dra::natural &amp;nat) const </div><div class="ttdoc">Operador de módulo. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00235">natural.hpp:235</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_ade98d8e7c616d2b173ff04a6d588c505"><div class="ttname"><a href="classdra_1_1natural.html#ade98d8e7c616d2b173ff04a6d588c505">dra::natural::operator*=</a></div><div class="ttdeci">dra::natural operator*=(const dra::natural &amp;nat)</div><div class="ttdoc">Operador de multiplicación compuesto. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00303">natural.hpp:303</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_ad26991f045cf57d25133704b03990320"><div class="ttname"><a href="classdra_1_1natural.html#ad26991f045cf57d25133704b03990320">dra::natural::operator&lt;=</a></div><div class="ttdeci">bool operator&lt;=(const dra::natural &amp;nat) const </div><div class="ttdoc">Operador menor o igual que. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00389">natural.hpp:389</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_a5d49ba2101bd60e6b2e7e636cf936128"><div class="ttname"><a href="classdra_1_1natural.html#a5d49ba2101bd60e6b2e7e636cf936128">dra::natural::operator=</a></div><div class="ttdeci">natural &amp; operator=(const natural &amp;)</div><div class="ttdoc">Operador de asignación. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00167">natural.hpp:167</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_a516fd7db1d7f5ce92cd6f539c64c6e3f"><div class="ttname"><a href="classdra_1_1natural.html#a516fd7db1d7f5ce92cd6f539c64c6e3f">dra::natural::operator/=</a></div><div class="ttdeci">dra::natural operator/=(const dra::natural &amp;nat)</div><div class="ttdoc">Operador de división compuesto. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00316">natural.hpp:316</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_ae95cf3983fc0d67ec0f6bdbd1d1aa7c6"><div class="ttname"><a href="classdra_1_1natural.html#ae95cf3983fc0d67ec0f6bdbd1d1aa7c6">dra::natural::operator--</a></div><div class="ttdeci">void operator--(int)</div><div class="ttdoc">Operador de decremento. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00263">natural.hpp:263</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_abbc68a27ee8ed5d939e7acc29b858bf1"><div class="ttname"><a href="classdra_1_1natural.html#abbc68a27ee8ed5d939e7acc29b858bf1">dra::natural::toStream</a></div><div class="ttdeci">std::ostream &amp; toStream(std::ostream &amp;os) const </div><div class="ttdoc">Inyección al stream de salida. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00428">natural.hpp:428</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html"><div class="ttname"><a href="classdra_1_1natural.html">dra::natural</a></div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00040">natural.hpp:40</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_a6dd19d7ffa92408c48aaac24a866e68f"><div class="ttname"><a href="classdra_1_1natural.html#a6dd19d7ffa92408c48aaac24a866e68f">dra::natural::operator!=</a></div><div class="ttdeci">bool operator!=(const dra::natural &amp;nat) const </div><div class="ttdoc">Operador de desigualdad. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00356">natural.hpp:356</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_ac204d0b7d3d7efb0d166154d9f17bb44"><div class="ttname"><a href="classdra_1_1natural.html#ac204d0b7d3d7efb0d166154d9f17bb44">dra::natural::operator%=</a></div><div class="ttdeci">dra::natural operator%=(const dra::natural &amp;nat)</div><div class="ttdoc">Operador de módulo compuesto. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00329">natural.hpp:329</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_ac69726258a9a746fd1e8f49f6b7199fd"><div class="ttname"><a href="classdra_1_1natural.html#ac69726258a9a746fd1e8f49f6b7199fd">dra::natural::operator&lt;</a></div><div class="ttdeci">bool operator&lt;(const dra::natural &amp;nat) const </div><div class="ttdoc">Operador menor que. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00367">natural.hpp:367</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_aaedb4f488660c663208e2c0f32723ed6"><div class="ttname"><a href="classdra_1_1natural.html#aaedb4f488660c663208e2c0f32723ed6">dra::natural::operator+=</a></div><div class="ttdeci">dra::natural operator+=(const dra::natural &amp;nat)</div><div class="ttdoc">Operador de suma compuesto. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00277">natural.hpp:277</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_a1a1f5c18e2e0bd94733c92a00729c92b"><div class="ttname"><a href="classdra_1_1natural.html#a1a1f5c18e2e0bd94733c92a00729c92b">dra::natural::natural</a></div><div class="ttdeci">natural(void)</div><div class="ttdoc">Constructor por defecto. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00133">natural.hpp:133</a></div></div>
+<div class="ttc" id="natural_8hpp_html_adc4c08b483be1e6438084781da6940d8"><div class="ttname"><a href="natural_8hpp.html#adc4c08b483be1e6438084781da6940d8">operator&lt;&lt;</a></div><div class="ttdeci">std::ostream &amp; operator&lt;&lt;(std::ostream &amp;os, dra::natural nat)</div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00452">natural.hpp:452</a></div></div>
+<div class="ttc" id="natural_8hpp_html_a02d2382990ff4049368a385423d598f1"><div class="ttname"><a href="natural_8hpp.html#a02d2382990ff4049368a385423d598f1">NAT_MIN_VAL</a></div><div class="ttdeci">#define NAT_MIN_VAL</div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00029">natural.hpp:29</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_a9caa3d8695b96b919078265f63b6d863"><div class="ttname"><a href="classdra_1_1natural.html#a9caa3d8695b96b919078265f63b6d863">dra::natural::fromStream</a></div><div class="ttdeci">std::istream &amp; fromStream(std::istream &amp;is)</div><div class="ttdoc">Inyección al stream de entrada. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00440">natural.hpp:440</a></div></div>
+<div class="ttc" id="classdra_1_1natural_html_a4a23cae3f85a417c2e5fb2eb333f8c80"><div class="ttname"><a href="classdra_1_1natural.html#a4a23cae3f85a417c2e5fb2eb333f8c80">dra::natural::operator*</a></div><div class="ttdeci">dra::natural operator*(const dra::natural &amp;nat) const </div><div class="ttdoc">Operador de multiplicación. </div><div class="ttdef"><b>Definition:</b> <a href="natural_8hpp_source.html#l00209">natural.hpp:209</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado el Martes, 17 de Marzo de 2015 21:59:22 para Práctica 3 por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>
