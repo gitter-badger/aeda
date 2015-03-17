@@ -25,6 +25,9 @@ integer: integer_main.cpp integer.hpp number.hpp
 	
 rational: rational_main.cpp rational.hpp integer.hpp number.hpp
 	$(CC) $(CFLAGS) $@_main.cpp
+	
+real: real_main.cpp real.hpp
+	$(CC) $(CFLAGS) $@_main.cpp
 
 clean:
 	rm ../bin/* *~
