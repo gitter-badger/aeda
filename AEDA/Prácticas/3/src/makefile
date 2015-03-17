@@ -2,6 +2,9 @@ CC = g++
 BIN = ../bin/$@
 CFLAGS = -std=c++11 -o $(BIN)
 
+all: *.hpp main.cpp
+	$(CC) $(CFLAGS) main.cpp
+
 node: node_main.cpp node.hpp
 	$(CC) $(CFLAGS) $@_main.cpp
 
@@ -27,6 +30,9 @@ rational: rational_main.cpp rational.hpp integer.hpp number.hpp
 	$(CC) $(CFLAGS) $@_main.cpp
 	
 real: real_main.cpp real.hpp
+	$(CC) $(CFLAGS) $@_main.cpp
+
+complex: complex_main.cpp complex.hpp
 	$(CC) $(CFLAGS) $@_main.cpp
 
 clean:

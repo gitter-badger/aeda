@@ -7,8 +7,8 @@
 #include "exceptions.hpp"
 //#include "debug.hpp"
 
-#define MIN_VAL -2147483647
-#define MAX_VAL 2147483647
+#define INT_MIN_VAL -2147483647
+#define INT_MAX_VAL 2147483647
 
 namespace dra{
 	typedef long int integer_t;
@@ -68,10 +68,10 @@ number_(0)
 dra::integer::integer(long long int num):
 number_(0)
 {
-    if(num < MIN_VAL)
-        throw exception::underflow_error("Exceeded 'MIN_VAL'");
-    if(num > MAX_VAL)
-        throw exception::overflow_error("Exceeded 'MAX_VAL'");
+    if(num < INT_MIN_VAL)
+        throw exception::underflow_error("Exceeded 'INT_MIN_VAL'");
+    if(num > INT_MAX_VAL)
+        throw exception::overflow_error("Exceeded 'INT_MAX_VAL'");
     number_ = num;
 }
 
@@ -93,22 +93,22 @@ dra::integer::~integer(void)
 //==============================================================================
 dra::integer dra::integer::operator+(const dra::integer& intg) const
 {
-    if((number_ + intg.number_) > MAX_VAL)
-        throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '+'");
+    if((number_ + intg.number_) > INT_MAX_VAL)
+        throw exception::overflow_error("Exceeded 'INT_MAX_VAL' in operator '+'");
     return number_ + intg.number_;
 }
 
 dra::integer dra::integer::operator-(const dra::integer& intg) const
 {
-    if((number_ - intg.number_) < MIN_VAL)
-        throw exception::underflow_error("Exceeded 'MIN_VAL'");
+    if((number_ - intg.number_) < INT_MIN_VAL)
+        throw exception::underflow_error("Exceeded 'INT_MIN_VAL'");
     return number_ - intg.number_;
 }
 
 dra::integer dra::integer::operator*(const dra::integer& intg) const
 {
-    if((number_ * intg.number_) > MAX_VAL)
-        throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '*'");
+    if((number_ * intg.number_) > INT_MAX_VAL)
+        throw exception::overflow_error("Exceeded 'INT_MAX_VAL' in operator '*'");
     return number_ * intg.number_;
 }
 
@@ -131,14 +131,14 @@ dra::integer dra::integer::operator%(const dra::integer& intg) const
 //==============================================================================
 void dra::integer::operator++(int)
 {
-    if((number_ + 1) > MAX_VAL)
-        throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '++'");
+    if((number_ + 1) > INT_MAX_VAL)
+        throw exception::overflow_error("Exceeded 'INT_MAX_VAL' in operator '++'");
     number_++;
 }
 
 void dra::integer::operator--(int)
 {
-    if((number_ -1) < MIN_VAL)
+    if((number_ -1) < INT_MIN_VAL)
         throw exception::underflow_error("Can't handle negative integers in operator '--'");
     number_--;
 }
@@ -147,22 +147,22 @@ void dra::integer::operator--(int)
 //==============================================================================
 dra::integer dra::integer::operator+=(const dra::integer& intg)
 {
-    if((number_ + intg.number_) > MAX_VAL)
-        throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '+='");
+    if((number_ + intg.number_) > INT_MAX_VAL)
+        throw exception::overflow_error("Exceeded 'INT_MAX_VAL' in operator '+='");
     return number_ += intg.number_;
 }
 
 dra::integer dra::integer::operator-=(const dra::integer& intg)
 {
-    if((number_ - intg.number_) < MIN_VAL)
-        throw exception::underflow_error("Exceeded 'MIN_VAL'");
+    if((number_ - intg.number_) < INT_MIN_VAL)
+        throw exception::underflow_error("Exceeded 'INT_MIN_VAL'");
     return number_ -= intg.number_;
 }
 
 dra::integer dra::integer::operator*=(const dra::integer& intg)
 {
-    if((number_ * intg.number_) > MAX_VAL)
-        throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '*='");
+    if((number_ * intg.number_) > INT_MAX_VAL)
+        throw exception::overflow_error("Exceeded 'INT_MAX_VAL' in operator '*='");
     return number_ *= intg.number_;
 }
 

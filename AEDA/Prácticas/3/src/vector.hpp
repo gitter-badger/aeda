@@ -8,9 +8,9 @@
 #include "debug.hpp"
 #include "exceptions.hpp"
 
-#define DEFAULT_BUFFER_SIZE 10
-#define UNINITIALIZED_VALUE 0
-#define MAX_SIZE 32767
+#define VEC_DEFAULT_BUFFER_SIZE 10
+#define VEC_UNINITIALIZED_VALUE 0
+#define VEC_MAX_SIZE 32767
 
 namespace dra{
 
@@ -74,24 +74,24 @@ public:
 template<class T>
 dra::vector<T>::vector(void):
 	v_(nullptr),
-	sz_(UNINITIALIZED_VALUE),
-	msz_(DEFAULT_BUFFER_SIZE),
-	buffer_(DEFAULT_BUFFER_SIZE),
-	first_(UNINITIALIZED_VALUE),
-	last_(UNINITIALIZED_VALUE)
+	sz_(VEC_UNINITIALIZED_VALUE),
+	msz_(VEC_DEFAULT_BUFFER_SIZE),
+	buffer_(VEC_DEFAULT_BUFFER_SIZE),
+	first_(VEC_UNINITIALIZED_VALUE),
+	last_(VEC_UNINITIALIZED_VALUE)
 {}
 
 template<class T>
 dra::vector<T>::vector(size_t sz):
 	v_(nullptr),
 	sz_(sz),
-	msz_(sz + DEFAULT_BUFFER_SIZE),
-	buffer_(DEFAULT_BUFFER_SIZE),
-	first_(UNINITIALIZED_VALUE),
+	msz_(sz + VEC_DEFAULT_BUFFER_SIZE),
+	buffer_(VEC_DEFAULT_BUFFER_SIZE),
+	first_(VEC_UNINITIALIZED_VALUE),
 	last_(sz_)
 {
-	if(msz_ > MAX_SIZE)
-		throw exception::length_error("Exceeded max vector size 'MAX_SIZE'");
+	if(msz_ > VEC_MAX_SIZE)
+		throw exception::length_error("Exceeded max vector size 'VEC_MAX_SIZE'");
 	try{
 		v_ = new T[msz_];
 	}catch(...){
@@ -103,13 +103,13 @@ template<class T>
 dra::vector<T>::vector(iterator_t first, iterator_t last):
 	v_(nullptr),
 	sz_(last-first),
-	msz_(sz_ + DEFAULT_BUFFER_SIZE),
-	buffer_(DEFAULT_BUFFER_SIZE),
+	msz_(sz_ + VEC_DEFAULT_BUFFER_SIZE),
+	buffer_(VEC_DEFAULT_BUFFER_SIZE),
 	first_(first),
 	last_(last)
 {
-	if(msz_ > MAX_SIZE)
-		throw exception::length_error("Exceeded max vector size 'MAX_SIZE'");
+	if(msz_ > VEC_MAX_SIZE)
+		throw exception::length_error("Exceeded max vector size 'VEC_MAX_SIZE'");
 	try{
 		v_ = new T[msz_];
 	}catch(...){
@@ -128,8 +128,8 @@ template<class T>
 dra::vector<T>::vector(const vector<T>& vec, dra::iterator_t first, dra::iterator_t last):
 	v_(nullptr),
 	sz_(last-first),
-	msz_(sz_ + DEFAULT_BUFFER_SIZE),
-	buffer_(DEFAULT_BUFFER_SIZE),
+	msz_(sz_ + VEC_DEFAULT_BUFFER_SIZE),
+	buffer_(VEC_DEFAULT_BUFFER_SIZE),
 	first_(first),
 	last_(last)
 {
@@ -140,13 +140,13 @@ template<class T>
 dra::vector<T>::vector(std::initializer_list<T> il):
 	v_(nullptr),
 	sz_(il.size()),
-	msz_(sz_ + DEFAULT_BUFFER_SIZE),
-	buffer_(DEFAULT_BUFFER_SIZE),
-	first_(UNINITIALIZED_VALUE),
+	msz_(sz_ + VEC_DEFAULT_BUFFER_SIZE),
+	buffer_(VEC_DEFAULT_BUFFER_SIZE),
+	first_(VEC_UNINITIALIZED_VALUE),
 	last_(sz_)
 {
-	if(msz_ > MAX_SIZE)
-		throw exception::length_error("Exceeded max vector size 'MAX_SIZE'");
+	if(msz_ > VEC_MAX_SIZE)
+		throw exception::length_error("Exceeded max vector size 'VEC_MAX_SIZE'");
 	try{
 		v_ = new T[msz_];
 	}catch(...){
@@ -179,7 +179,7 @@ dra::size_t dra::vector<T>::size(void) const
 template<class T>
 dra::size_t dra::vector<T>::max_size(void) const
 {
-	return MAX_SIZE;
+	return VEC_MAX_SIZE;
 }
 
 template<class T>
@@ -188,10 +188,10 @@ void dra::vector<T>::resize(dra::size_t new_sz)
 	sz_ = new_sz;
 	if(new_sz > msz_){
 
-		if(sz_ > MAX_SIZE)
-			throw exception::length_error("Exceeded max vector size 'MAX_SIZE'");
+		if(sz_ > VEC_MAX_SIZE)
+			throw exception::length_error("Exceeded max vector size 'VEC_MAX_SIZE'");
 
-		if((sz_ + buffer_) > (MAX_SIZE))
+		if((sz_ + buffer_) > (VEC_MAX_SIZE))
 			buffer_ = 0; //Pasamos de usar el buffer
 
 		msz_ = sz_ + buffer_;

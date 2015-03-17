@@ -8,10 +8,10 @@
 #include "exceptions.hpp"
 //#include "debug.hpp"
 
-#define EMPTY_STACK 4294967295 //Realmente, es un -1, si le hacemos ++ da 0;
-#define UNINITIALIZED_VALUE 0
-#define DEFAULT_BUFFER_SIZE 10
-#define MAX_SIZE 4294967294
+#define STK_EMPTY_STACK 4294967295 //Realmente, es un -1, si le hacemos ++ da 0;
+#define STK_UNINITIALIZED_VALUE 0
+#define STK_DEFAULT_BUFFER_SIZE 10
+#define STK_MAX_SIZE 4294967294
 
 namespace dra{
 	typedef unsigned int size_t;
@@ -59,21 +59,21 @@ class dra::stack
 template<class T>
 dra::stack<T>::stack(void):
 s_(nullptr),
-top_(EMPTY_STACK),
-sz_(UNINITIALIZED_VALUE),
-buffer_(DEFAULT_BUFFER_SIZE),
+top_(STK_EMPTY_STACK),
+sz_(STK_UNINITIALIZED_VALUE),
+buffer_(STK_DEFAULT_BUFFER_SIZE),
 msz_(sz_+buffer_)
 {
-	resize(UNINITIALIZED_VALUE);
+	resize(STK_UNINITIALIZED_VALUE);
 }
 
 template<class T>
 dra::stack<T>::stack(dra::size_t sz):
 s_(nullptr),
-sz_(UNINITIALIZED_VALUE),
-msz_(UNINITIALIZED_VALUE),
-top_(EMPTY_STACK),
-buffer_(DEFAULT_BUFFER_SIZE)
+sz_(STK_UNINITIALIZED_VALUE),
+msz_(STK_UNINITIALIZED_VALUE),
+top_(STK_EMPTY_STACK),
+buffer_(STK_DEFAULT_BUFFER_SIZE)
 {
 	resize(sz);
 }
@@ -87,10 +87,10 @@ dra::stack<T>::stack(const stack& s)
 template<class T>
 dra::stack<T>::stack(std::initializer_list<T> il):
 s_(nullptr),
-sz_(UNINITIALIZED_VALUE),
-msz_(UNINITIALIZED_VALUE),
-top_(EMPTY_STACK),
-buffer_(DEFAULT_BUFFER_SIZE)
+sz_(STK_UNINITIALIZED_VALUE),
+msz_(STK_UNINITIALIZED_VALUE),
+top_(STK_EMPTY_STACK),
+buffer_(STK_DEFAULT_BUFFER_SIZE)
 {
 	resize(il.size());
 	
@@ -123,7 +123,7 @@ dra::stack<T>& dra::stack<T>::operator=(const stack& s)
 template<class T>
 bool dra::stack<T>::empty(void) const
 {
-	return (top_ == EMPTY_STACK);
+	return (top_ == STK_EMPTY_STACK);
 }
 
 template<class T>
@@ -136,12 +136,12 @@ template<class T>
 void dra::stack<T>::resize(size_t new_sz)
 {
 	if((new_sz > msz_)  || (s_ == nullptr)){
-		if(new_sz > MAX_SIZE)
-			throw exception::length_error("Exceeded max vector size 'MAX_SIZE'");
+		if(new_sz > STK_MAX_SIZE)
+			throw exception::length_error("Exceeded max vector size 'STK_MAX_SIZE'");
 		sz_ = new_sz;
 		
-		if((sz_+buffer_) > MAX_SIZE)
-			buffer_ = sz_ - MAX_SIZE;
+		if((sz_+buffer_) > STK_MAX_SIZE)
+			buffer_ = sz_ - STK_MAX_SIZE;
 		
 		msz_ = sz_ + buffer_;
 		
@@ -185,7 +185,7 @@ template<class T>
 void dra::stack<T>::push(const T& val)
 {
 	top_++;
-	if(top_ > MAX_SIZE)
+	if(top_ > STK_MAX_SIZE)
 		throw exception::length_error("Stack overflow!");
 	
 	if(top_ >= sz_)
@@ -209,7 +209,7 @@ void dra::stack<T>::pop(void)
 template<class T>
 std::ostream& dra::stack<T>::toStream(std::ostream& os) const
 {
-	if(!queue()){
+	if(!empty()){
 		for(dra::iterator_t i = 0; i <= top_; i++)
 			os << s_[i] << " ";
 	}

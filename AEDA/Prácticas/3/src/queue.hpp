@@ -8,10 +8,10 @@
 #include "exceptions.hpp"
 #include "debug.hpp"
 
-#define EMPTY_QUEUE 4294967295 //Realmente, es un -1, si le hacemos ++ da 0;
-#define UNINITIALIZED_VALUE 0
-#define DEFAULT_BUFFER_SIZE 10
-#define MAX_SIZE 4294967294
+#define QUE_EMPTY_QUEUE 4294967295 //Realmente, es un -1, si le hacemos ++ da 0;
+#define QUE_UNINITIALIZED_VALUE 0
+#define QUE_DEFAULT_BUFFER_SIZE 10
+#define QUE_MAX_SIZE 4294967294
 
 namespace dra{
 	typedef unsigned int size_t;
@@ -60,20 +60,20 @@ public:
 template<class T>
 dra::queue<T>::queue(void):
 q_(nullptr),
-rear_(EMPTY_QUEUE),
-sz_(UNINITIALIZED_VALUE),
-buffer_(DEFAULT_BUFFER_SIZE),
+rear_(QUE_EMPTY_QUEUE),
+sz_(QUE_UNINITIALIZED_VALUE),
+buffer_(QUE_DEFAULT_BUFFER_SIZE),
 msz_(sz_+buffer_)
 {
-	resize(UNINITIALIZED_VALUE);
+	resize(QUE_UNINITIALIZED_VALUE);
 }
 
 template<class T>
 dra::queue<T>::queue(dra::size_t sz):
 q_(nullptr),
-rear_(EMPTY_QUEUE),
-sz_(UNINITIALIZED_VALUE),
-buffer_(DEFAULT_BUFFER_SIZE),
+rear_(QUE_EMPTY_QUEUE),
+sz_(QUE_UNINITIALIZED_VALUE),
+buffer_(QUE_DEFAULT_BUFFER_SIZE),
 msz_(sz_+buffer_)
 {
 	resize(sz);
@@ -82,9 +82,9 @@ msz_(sz_+buffer_)
 template<class T>
 dra::queue<T>::queue(const queue& q):
 q_(nullptr),
-rear_(EMPTY_QUEUE),
-sz_(UNINITIALIZED_VALUE),
-buffer_(DEFAULT_BUFFER_SIZE),
+rear_(QUE_EMPTY_QUEUE),
+sz_(QUE_UNINITIALIZED_VALUE),
+buffer_(QUE_DEFAULT_BUFFER_SIZE),
 msz_(sz_+buffer_)
 {
 	*this = q;
@@ -93,9 +93,9 @@ msz_(sz_+buffer_)
 template<class T>
 dra::queue<T>::queue(std::initializer_list<T> il):
 q_(nullptr),
-rear_(EMPTY_QUEUE),
-sz_(UNINITIALIZED_VALUE),
-buffer_(DEFAULT_BUFFER_SIZE),
+rear_(QUE_EMPTY_QUEUE),
+sz_(QUE_UNINITIALIZED_VALUE),
+buffer_(QUE_DEFAULT_BUFFER_SIZE),
 msz_(sz_+buffer_)
 {
 	resize(il.size());
@@ -130,20 +130,20 @@ dra::queue<T>::~queue(void)
 template<class T>
 bool dra::queue<T>::empty(void) const
 {
-	return (rear_ == EMPTY_QUEUE);
+	return (rear_ == QUE_EMPTY_QUEUE);
 }
 
 template<class T>
 void dra::queue<T>::resize(dra::size_t new_sz)
 {
 	if((new_sz > msz_)  || (q_ == nullptr)){
-		if(new_sz > MAX_SIZE)
-			throw exception::length_error("Exceeded max vector size 'MAX_SIZE'");
+		if(new_sz > QUE_MAX_SIZE)
+			throw exception::length_error("Exceeded max vector size 'QUE_MAX_SIZE'");
 		
 		sz_ = new_sz;
 		
-		if((sz_+buffer_) > MAX_SIZE)
-			buffer_ = MAX_SIZE - sz_;
+		if((sz_+buffer_) > QUE_MAX_SIZE)
+			buffer_ = QUE_MAX_SIZE - sz_;
 		
 		msz_ = sz_ + buffer_;
 		

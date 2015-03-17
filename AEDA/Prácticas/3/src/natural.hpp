@@ -7,8 +7,8 @@
 #include "exceptions.hpp"
 //#include "debug.hpp"
 
-#define MIN_VAL 0
-#define MAX_VAL 4294967295
+#define NAT_MIN_VAL 0
+#define NAT_MAX_VAL 4294967295
 
 namespace dra{
 	typedef long unsigned int natural_t;
@@ -68,10 +68,10 @@ number_(0)
 dra::natural::natural(long long int num):
 number_(0)
 {
-    if(num < MIN_VAL)
+    if(num < NAT_MIN_VAL)
         throw exception::underflow_error("Can't handle negative naturals");
-    if(num > MAX_VAL)
-        throw exception::overflow_error("Exceeded 'MAX_VAL'");
+    if(num > NAT_MAX_VAL)
+        throw exception::overflow_error("Exceeded 'NAT_MAX_VAL'");
     number_ = num;
 }
 
@@ -93,8 +93,8 @@ dra::natural::~natural(void)
 //==============================================================================
 dra::natural dra::natural::operator+(const dra::natural& nat) const
 {
-    if((number_ + nat.number_) > MAX_VAL)
-        throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '+'");
+    if((number_ + nat.number_) > NAT_MAX_VAL)
+        throw exception::overflow_error("Exceeded 'NAT_MAX_VAL' in operator '+'");
     return number_ + nat.number_;
 }
 
@@ -107,8 +107,8 @@ dra::natural dra::natural::operator-(const dra::natural& nat) const
 
 dra::natural dra::natural::operator*(const dra::natural& nat) const
 {
-    if((number_ * nat.number_) > MAX_VAL)
-        throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '*'");
+    if((number_ * nat.number_) > NAT_MAX_VAL)
+        throw exception::overflow_error("Exceeded 'NAT_MAX_VAL' in operator '*'");
     return number_ * nat.number_;
 }
 
@@ -131,8 +131,8 @@ dra::natural dra::natural::operator%(const dra::natural& nat) const
 //==============================================================================
 void dra::natural::operator++(int)
 {
-    if((number_ + 1) > MAX_VAL)
-        throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '++'");
+    if((number_ + 1) > NAT_MAX_VAL)
+        throw exception::overflow_error("Exceeded 'NAT_MAX_VAL' in operator '++'");
     number_++;
 }
 
@@ -147,8 +147,8 @@ void dra::natural::operator--(int)
 //==============================================================================
 dra::natural dra::natural::operator+=(const dra::natural& nat)
 {
-    if((number_ + nat.number_) > MAX_VAL)
-        throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '+='");
+    if((number_ + nat.number_) > NAT_MAX_VAL)
+        throw exception::overflow_error("Exceeded 'NAT_MAX_VAL' in operator '+='");
     return number_ += nat.number_;
 }
 
@@ -161,8 +161,8 @@ dra::natural dra::natural::operator-=(const dra::natural& nat)
 
 dra::natural dra::natural::operator*=(const dra::natural& nat)
 {
-    if((number_ * nat.number_) > MAX_VAL)
-        throw exception::overflow_error("Exceeded 'MAX_VAL' in operator '*='");
+    if((number_ * nat.number_) > NAT_MAX_VAL)
+        throw exception::overflow_error("Exceeded 'NAT_MAX_VAL' in operator '*='");
     return number_ *= nat.number_;
 }
 
