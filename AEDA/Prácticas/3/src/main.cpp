@@ -10,6 +10,7 @@
 
 int main(void)
 {
+    /*
     dra::stack<dra::number*> test;
     
     dra::number* ptr1 = new dra::natural(4);
@@ -26,10 +27,18 @@ int main(void)
     test.push(ptr5);
     
     
-    
     while(!test.empty()){
         ptr1 = test.top();
         test.pop();
         std::cout << *ptr1 << std::endl;
     }
+    */
+    dra::simplelinkedlist<dra::numbero*> test;
+    
+    test.push_back(new dra::node<dra::natural>(8));
+    test.push_back(new dra::node<dra::natural>(2));
+    test.push_back(new dra::node<dra::natural>(3));
+    test.push_back(new dra::node<dra::natural>(4));
+    
+    std::cout << test << std::endl;
 }
