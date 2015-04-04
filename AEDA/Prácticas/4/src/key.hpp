@@ -10,7 +10,7 @@ namespace dra{
 template<class T>
 class dra::key{
 private:
-    int dummy;
+    int key;
 };
 
 #endif
