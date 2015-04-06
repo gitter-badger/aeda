@@ -16,6 +16,7 @@ public:
     key_human(void);
     key_human(dra::human*);
     virtual ~key_human(void);
+    virtual std::ostream& toStream(std::ostream&);
 };
 
 dra::key_human::key_human(void):
@@ -30,6 +31,11 @@ dra::key_human::~key_human(void)
 {
     if(human_ptr_ != nullptr)
         delete human_ptr_;
+}
+
+std::ostream& dra::key_human::toStream(std::ostream& os)
+{
+    human_ptr_->toStream(os);
 }
 
 #endif

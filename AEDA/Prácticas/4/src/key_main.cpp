@@ -12,11 +12,9 @@ int main(void)
     testSubject->number() = 4258899642;
     
     
-    dra::key_human_dni key_1(testSubject);
+    dra::key* ptr = new dra::key_human_dni(testSubject);
     
-    unsigned long hasher = key_1.value();
-    
-    std::cout << hasher << std::endl;
+    std::cout << ptr << std::endl;
     
     
     return 0;

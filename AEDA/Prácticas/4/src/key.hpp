@@ -5,6 +5,7 @@
 #define MIN_KEY_VALUE 0
 #define MAX_KEY_VALUE 65534
 
+#include <iostream>
 #include "common.hpp"
 
 namespace dra{
@@ -20,6 +21,7 @@ public:
     virtual ~key(void);
     dra::key_t value(void) const;
     virtual void generate_key(void)=0;
+    virtual std::ostream& toStream(std::ostream&)=0;
 };
 
 dra::key::key(void):
@@ -32,6 +34,12 @@ dra::key::~key(void)
 dra::key_t dra::key::value(void) const
 {
     return key_;
+}
+
+std::ostream& operator<<(std::ostream& os, dra::key* key_ptr)
+{
+    key_ptr->toStream(os);
+    return os;
 }
 
 #endif
