@@ -2,8 +2,8 @@
 #define _COMMON_HPP_
 
 namespace dra{
-    template<class T> class hash_table;
-    template<class T> class bucket;
+    class hash_table;
+    class bucket;
     
     
     typedef unsigned short cells_n_t;

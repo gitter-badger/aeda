@@ -11,13 +11,13 @@ int main(void)
     testSubject->dni() = 47905505;
     testSubject->number() = 4258899642;
     
-    std::cout << *testSubject << ", direccion de memoria: " << testSubject << std::endl;
     
-    dra::key* ptr_key = new dra::key_human_dni(testSubject);
+    dra::key_human_dni key_1(testSubject);
     
-    std::cout << "Clave: " << ptr_key->value() << std::endl;
+    unsigned long hasher = key_1.value();
     
-    delete ptr_key;
+    std::cout << hasher << std::endl;
+    
     
     return 0;
 }
