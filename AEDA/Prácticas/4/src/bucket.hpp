@@ -55,7 +55,7 @@ std::ostream& dra::bucket::toStream(std::ostream& os)
         if(cell_[i] == nullptr)
             std::cout << "NULL" << std::endl;
         else
-            std::cout << cell_[i]->value() << std::endl;
+            std::cout << cell_[i] << std::endl;
     }
 }
 
