@@ -13,9 +13,11 @@ int main(void)
     
     std::cout << *testSubject << ", direccion de memoria: " << testSubject << std::endl;
     
-    dra::key_human_dni test_key(50, testSubject);
+    dra::key* ptr_key = new dra::key_human_dni(testSubject);
     
-    std::cout << "Clave: " << test_key.value() << std::endl;
+    std::cout << "Clave: " << ptr_key->value() << std::endl;
+    
+    delete ptr_key;
     
     return 0;
 }

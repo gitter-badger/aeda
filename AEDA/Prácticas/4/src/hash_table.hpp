@@ -4,16 +4,13 @@
 #include "common.hpp"
 #include "bucket.hpp"
 
-namespace dra{
-    template<class T> class hash_table;
-}
-
 template<class T>
 class dra::hash_table{
 private:
     T* table;
 public:
-    hash_table(cells_n, bucket_n, hash_mode, explore_mode);
+    hash_table(dra::cells_n_t, dra::bucket_n_t, dra::hash_m_t, dra::explore_m_t);
+    hash_index_t hash(dra::key*);
 };
 
 #endif

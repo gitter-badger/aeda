@@ -13,12 +13,11 @@ class dra::key_human:public dra::key{
 protected:
     dra::human* human_ptr_;
 public:
-    key_human(dra::key_sz_t, dra::human*);
+    key_human(dra::human*);
     virtual ~key_human(void);
 };
 
-dra::key_human::key_human(dra::key_sz_t sz, dra::human* ptr):
-key(sz),
+dra::key_human::key_human(dra::human* ptr):
 human_ptr_(ptr)
 {}
 

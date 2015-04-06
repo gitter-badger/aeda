@@ -9,23 +9,20 @@
 
 namespace dra{
     class key;
-    typedef unsigned key_t;
-    typedef unsigned key_sz_t;
+    typedef unsigned long key_t;
 }
 
 class dra::key{
 protected:
-    dra::key_sz_t sz_;
     dra::key_t key_;
 public:
-    key(dra::key_sz_t);
+    key(void);
     virtual ~key(void);
     dra::key_t value(void) const;
     virtual void generate_key(void)=0;
 };
 
-dra::key::key(dra::key_sz_t sz):
-sz_(sz),
+dra::key::key(void):
 key_(UNINITIALIZED_KEY)
 {}
 

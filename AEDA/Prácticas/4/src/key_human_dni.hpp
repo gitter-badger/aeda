@@ -12,13 +12,13 @@ namespace dra{
 
 class dra::key_human_dni:public dra::key_human{
 public:
-    key_human_dni(dra::key_sz_t, dra::human*);
+    key_human_dni(dra::human*);
     virtual ~key_human_dni(void);
     virtual void generate_key(void);
 };
 
-dra::key_human_dni::key_human_dni(dra::key_sz_t sz, dra::human* ptr):
-key_human(sz, ptr)
+dra::key_human_dni::key_human_dni(dra::human* ptr):
+key_human(ptr)
 {
     generate_key();
 }
@@ -28,7 +28,7 @@ dra::key_human_dni::~key_human_dni(void)
 
 void dra::key_human_dni::generate_key(void)
 {
-    key_ = human_ptr_->dni() % sz_;
+    key_ = human_ptr_->dni();
 }
 
 #endif

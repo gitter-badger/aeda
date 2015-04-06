@@ -2,9 +2,15 @@
 #define _COMMON_HPP_
 
 namespace dra{
-    typedef unsigned bucket_n;
-    typedef unsigned short hash_mode;
-    typedef unsigned short explore_mode;
+    template<class T> class hash_table;
+    template<class T> class bucket;
+    
+    
+    typedef unsigned short cells_n_t;
+    typedef unsigned short bucket_n_t;
+    typedef unsigned short hash_m_t;
+    typedef unsigned short explore_m_t;
+    typedef unsigned short hash_index_t;
 }
 
 #endif
