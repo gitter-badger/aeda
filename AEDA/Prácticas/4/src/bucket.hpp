@@ -45,7 +45,7 @@ bool dra::bucket::insert(dra::key* ikey)
             return true;
         }
     }
-    return false; //Hola, soy daniel pero aparezco como un tio ahi. Por la cara.
+    return false; //Hola, soy daniel pero aparezco como un tio ahi. Por la cara. Prueba 1 a ver si se arregló
 }
 
 
