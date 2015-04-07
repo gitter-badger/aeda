@@ -121,7 +121,7 @@ dra::hash_index_t dra::hash_table::probe(dra::key* my_key, unsigned i)
         case 1: return linear_probing(my_key, i);
         case 2: return quadratic_probing(my_key, i);
         case 3: return double_hashing_probing(my_key, i);
-        case 4: break;
+        case 4: return re_hashing_probing(my_key, i);
     }
 }
 
@@ -137,7 +137,14 @@ dra::hash_index_t dra::hash_table::quadratic_probing(dra::key* my_key, unsigned 
 
 dra::hash_index_t dra::hash_table::double_hashing_probing(dra::key* my_key, unsigned i)
 {
-    return (hash(my_key) + i*hash(my_key)) % bucket_n_;
+    std::cout << "Valor de la i = " << i << std::endl;
+    hash_index_t aux = (hash(my_key) + i*hash_pseudo_random(my_key)) % bucket_n_;
+
+    std::cout << "Valor del double_hashing_probing = " << aux << std::endl;
+
+    sleep(1);
+
+    return aux;
 }
 
 dra::hash_index_t dra::hash_table::re_hashing_probing(dra::key*, unsigned i)
