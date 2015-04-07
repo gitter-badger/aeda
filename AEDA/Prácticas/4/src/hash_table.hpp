@@ -19,9 +19,9 @@ private:
 
     dra::bucket** table;
 public:
-    hash_table(dra::cells_n_t, dra::bucket_n_t, dra::hash_m_t, dra::probe_m_t);
+    hash_table(dra::cells_n_t, dra::bucket_n_t, dra::hash_m_t, dra::probe_m_t); //otro comementario
     ~hash_table(void);
-    void insert(dra::key*); // test de comentario para el atom
+    void insert(dra::key*); // test de comentario para m
 
     dra::hash_index_t hash(dra::key*);
     dra::hash_index_t hash_module(dra::key*);
