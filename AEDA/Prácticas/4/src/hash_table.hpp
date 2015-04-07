@@ -16,24 +16,24 @@ private:
     dra::bucket_n_t bucket_n_;
     dra::hash_m_t hash_m_;
     dra::probe_m_t probe_m_;
-    
+
     dra::bucket** table;
 public:
     hash_table(dra::cells_n_t, dra::bucket_n_t, dra::hash_m_t, dra::probe_m_t);
     ~hash_table(void);
-    void insert(dra::key*);
-    
+    void insert(dra::key*); // test de comentario para el atom
+
     dra::hash_index_t hash(dra::key*);
     dra::hash_index_t hash_module(dra::key*);
     dra::hash_index_t hash_plus(dra::key*);
     dra::hash_index_t hash_pseudo_random(dra::key*);
-    
+
     dra::hash_index_t probe(dra::key*, unsigned);
     dra::hash_index_t linear_probing(dra::key*, unsigned);
     dra::hash_index_t quadratic_probing(dra::key*, unsigned);
     dra::hash_index_t double_hashing_probing(dra::key*, unsigned);
     dra::hash_index_t re_hashing_probing(dra::key*, unsigned);
-    
+
     std::ostream& toStream(std::ostream& os);
 };
 
