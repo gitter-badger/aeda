@@ -31,6 +31,12 @@ cells_n_(cells_n)
 
 dra::bucket::~bucket(void)
 {
+    for(int i = 0; i < cells_n_; i++)
+        if( cell_[i] != nullptr)
+            delete cell_[i];
+        else
+            return;
+
     if(cell_ != nullptr)
         delete[] cell_;
         
@@ -45,7 +51,7 @@ bool dra::bucket::insert(dra::key* ikey)
             return true;
         }
     }
-    return false; //Hola, soy daniel pero aparezco como un tio ahi. Por la cara. Prueba 1 a ver si se arregló
+    return false;
 }
 
 
