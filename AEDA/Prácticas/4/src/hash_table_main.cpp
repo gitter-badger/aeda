@@ -12,13 +12,13 @@ int main(void)
     
     
     
-    dra::hash_table test(10, 2, 1, 1);
+    dra::hash_table test(10, 2, 1, 3);
     
     dra::human* testSubject;
     
     srand(time(NULL));
     
-    for(int i = 0; i < 9; i++){
+    for(int i = 0; i < 20; i++){
         
         testSubject = new dra::human;
     

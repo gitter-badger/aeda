@@ -25,7 +25,6 @@ cell_(nullptr)
 dra::bucket::bucket(dra::cells_n_t cells_n):
 cells_n_(cells_n)
 {
-    std::cout << "Voy a construir un array de punteros a keys, " << cells_n_ << " en total." << std::endl;
     cell_ = new dra::key*[cells_n];
 }
 
@@ -39,8 +38,6 @@ dra::bucket::~bucket(void)
 
     if(cell_ != nullptr)
         delete[] cell_;
-        
-    std::cout << "Desutrido un bucket" << std::endl;
 }
 
 bool dra::bucket::search(dra::key* my_key)

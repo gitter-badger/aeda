@@ -8,6 +8,7 @@
 #include "bucket.hpp"
 #include "key.hpp"
 #include <cstdlib>
+#include <unistd.h>
 
 class dra::hash_table{
 private:
@@ -27,11 +28,11 @@ public:
     dra::hash_index_t hash_plus(dra::key*);
     dra::hash_index_t hash_pseudo_random(dra::key*);
     
-    dra::hash_index_t probe(dra::key*, dra::hash_index_t);
-    dra::hash_index_t linear_probing(dra::key*, dra::hash_index_t);
-    dra::hash_index_t quadratic_probing(dra::key*, dra::hash_index_t);
-    dra::hash_index_t double_hashing_probing(dra::key*, dra::hash_index_t);
-    dra::hash_index_t re_hashing_probing(dra::key*, dra::hash_index_t);
+    dra::hash_index_t probe(dra::key*, unsigned);
+    dra::hash_index_t linear_probing(dra::key*, unsigned);
+    dra::hash_index_t quadratic_probing(dra::key*, unsigned);
+    dra::hash_index_t double_hashing_probing(dra::key*, unsigned);
+    dra::hash_index_t re_hashing_probing(dra::key*, unsigned);
     
     std::ostream& toStream(std::ostream& os);
 };
@@ -42,12 +43,9 @@ cells_n_(cells_n),
 hash_m_(hash_m),
 probe_m_(probe_m)
 {
-    std::cout << "Voy a construir una tabla de punteros a bucket, " << bucket_n_ << ", y cada uno de tamano "  << cells_n_ << std::endl;
     table = new bucket*[bucket_n_];
-    for(int i = 0; i < bucket_n_; i++){
-        std::cout << "Entro en el for para declarar los buckets, #" << i+1 << std::endl;
+    for(int i = 0; i < bucket_n_; i++)
         table[i] = new bucket(cells_n_);
-    }
 }
 
 dra::hash_table::~hash_table(void)
@@ -57,13 +55,29 @@ dra::hash_table::~hash_table(void)
             delete table[i];
     if(table != nullptr)
         delete[] table;
-    std::cout << "Destruyo la tabla" << std::endl;
 }
 
 void dra::hash_table::insert(dra::key* my_key)
 {
-    dra::key* aux = nullptr;
-    table[probe(aux, hash(my_key))]->insert(my_key);
+    if(!table[hash(my_key)]->insert(my_key)){
+        std::cout << "No se ha podido insertar la clave " << my_key->value() << " en el bucket "  << hash(my_key) << std::endl;
+        std::cout << "Comenzando tecnica de exploracion." << std::endl;
+        int i = 0;
+        while(1){
+            hash_index_t new_bucket = probe(my_key, i);
+            std::cout << "Vamos a ver si esta en el bucket " << new_bucket << std::endl;
+            if(table[new_bucket]->search(nullptr)){
+                std::cout << "Se ha encontrado una celda candidata, insertando" << std::endl;
+                table[new_bucket]->insert(my_key);
+                break;
+            }
+            else
+                i++;
+        }
+    }
+    else{
+        std::cout << "Se ha insertado la clave " << my_key->value() << " en el bucket " << hash(my_key) << std::endl;
+    }
 }
 
 dra::hash_index_t dra::hash_table::hash(dra::key* my_key)
@@ -72,7 +86,7 @@ dra::hash_index_t dra::hash_table::hash(dra::key* my_key)
         case 1: return hash_module(my_key);
         case 2: return hash_plus(my_key);
         case 3: return hash_pseudo_random(my_key);
-        default: break;
+        default: std::cerr << "Bad hash code" << std::endl; exit(1);
     }
 }
 
@@ -84,7 +98,6 @@ dra::hash_index_t dra::hash_table::hash_module(dra::key* my_key)
 
 dra::hash_index_t dra::hash_table::hash_plus(dra::key* my_key)
 {
-    std::cout << "Hasheando con suma" << std::endl;
     int aux = my_key->value();
     int sum = 0;
     while (aux != 0)
@@ -102,53 +115,34 @@ dra::hash_index_t dra::hash_table::hash_pseudo_random(dra::key* my_key)
     return rand() % bucket_n_;
 }
 
-dra::hash_index_t dra::hash_table::probe(dra::key* my_key, dra::hash_index_t index)
+dra::hash_index_t dra::hash_table::probe(dra::key* my_key, unsigned i)
 {
     switch(probe_m_){
-        case 1: return linear_probing(my_key, index);
-        case 2: break;
-        case 3: break;
+        case 1: return linear_probing(my_key, i);
+        case 2: return quadratic_probing(my_key, i);
+        case 3: return double_hashing_probing(my_key, i);
         case 4: break;
     }
 }
 
-dra::hash_index_t dra::hash_table::linear_probing(dra::key* my_key, dra::hash_index_t index)
+dra::hash_index_t dra::hash_table::linear_probing(dra::key* my_key, unsigned i)
 {
-    if(my_key == nullptr){
-        std::cout << "Voy a buscar una clave vacia en " << index << std::endl;
-    }
-    else{
-        std::cout << "Voy a buscar la clave " << my_key->value() << " en " << index << std::endl;
-    }
-    
-    dra::hash_index_t eindex = index;
-    while(1)
-    {
-        std::cout << "Vamos a ver si esta en " << eindex << std::endl;
-        if(table[index]->search(my_key))
-            return eindex;
-        else{
-            std::cout << "No se encontro la clave en el bucket " << eindex << ", asi que pruebo en el ";
-            index++;
-            eindex = index % bucket_n_;
-            std::cout << eindex << std::endl;
-        }
-    }
+    return (hash(my_key)+i) % bucket_n_;
 }
 
-dra::hash_index_t dra::hash_table::quadratic_probing(dra::key* my_key, hash_index_t index)
+dra::hash_index_t dra::hash_table::quadratic_probing(dra::key* my_key, unsigned i)
 {
-    
+    return (hash(my_key)+(i*i)) % bucket_n_;
 }
 
-dra::hash_index_t dra::hash_table::double_hashing_probing(dra::key* my_key, hash_index_t index)
+dra::hash_index_t dra::hash_table::double_hashing_probing(dra::key* my_key, unsigned i)
 {
-    
+    return (hash(my_key) + i*hash(my_key)) % bucket_n_;
 }
 
-dra::hash_index_t dra::hash_table::re_hashing_probing(dra::key*, dra::hash_index_t index)
+dra::hash_index_t dra::hash_table::re_hashing_probing(dra::key*, unsigned i)
 {
-    
+    return (i) %  bucket_n_;
 }
 
 std::ostream& dra::hash_table::toStream(std::ostream& os)
