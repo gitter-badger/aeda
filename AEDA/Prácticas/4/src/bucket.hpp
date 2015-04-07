@@ -43,11 +43,19 @@ dra::bucket::~bucket(void)
     std::cout << "Desutrido un bucket" << std::endl;
 }
 
-bool dra::bucket::insert(dra::key* ikey)
+bool dra::bucket::search(dra::key* my_key)
+{
+    for(unsigned i = 0; i < cells_n_; i++)
+        if(cell_[i] == my_key)
+            return true;
+    return false;
+}
+
+bool dra::bucket::insert(dra::key* my_key)
 {
     for(unsigned i = 0; i < cells_n_; i++){
         if(cell_[i] == nullptr){
-            cell_[i] = ikey;
+            cell_[i] = my_key;
             return true;
         }
     }
