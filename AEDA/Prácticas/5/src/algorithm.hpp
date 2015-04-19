@@ -12,7 +12,7 @@
 
 namespace dra{
 
-void insercion(std::vector<dra::key*> &vec, bool demo = false, unsigned &p = 0)
+unsigned insercion(std::vector<dra::key*> &vec, bool demo = false, unsigned p=0)
 {
 	std::cout << "Hola, soy el algoritmo de insercion" << std::endl;
 

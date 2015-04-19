@@ -13,7 +13,7 @@ void menu(unsigned &modo, unsigned &algoritmo, unsigned &tamano, bool &salir);
 void get_modo(int indice);
 void get_algoritmo(int indice);
 void editar_modo(unsigned &modo);
-void editar_algoritmo(unsigned &algoritmo);
+void editar_algor4itmo(unsigned &algoritmo);
 void editar_tamano(unsigned &tamano);
 void ejecutar_algoritmo(unsigned &modo, unsigned &algoritmo, unsigned &tamano);
 */
@@ -22,6 +22,18 @@ int main(void)
 
 	std::vector<dra::key*> test;
 
+	for(int i = 0; i < 5; i++){
+		dra::key* dummy2 = new dra::key_human_dni(new dra::human);
+		test.push_back(dummy2);
+	}
+
+	for(int i = 0; i < 5; i++){
+		std::cout << test[i] << std::endl;
+	}
+
+	for(int i = 0; i < 5; i++){
+		delete test[i];
+	}
 }
 /*
 
