@@ -17,24 +17,57 @@ void editar_algor4itmo(unsigned &algoritmo);
 void editar_tamano(unsigned &tamano);
 void ejecutar_algoritmo(unsigned &modo, unsigned &algoritmo, unsigned &tamano);
 */
+
+void modo_demostracion(void);
+void modo_estadistica(void);
+
 int main(void)
 {
+	system("clear");
 
-	std::vector<dra::key*> test;
+	char modo = 'f';
 
-	for(int i = 0; i < 5; i++){
-		dra::key* dummy2 = new dra::key_human_dni(new dra::human);
-		test.push_back(dummy2);
+	while(modo == 'f'){
+
+		std::cout << "=======================" << std::endl;
+		std::cout << "|| Practica 5 | AEDA ||" << std::endl;
+		std::cout << "=======================" << std::endl;
+		std::cout << std::endl;
+		std::cout << "Elije el modo del programa:" << std::endl;
+		std::cout << " ·[D]emostracion" << std::endl;
+		std::cout << " ·[E]stadistica" << std::endl;
+		if(modo == '(')
+			std::cout << "Modo invalido, introduce otro" << std::endl;
+		std::cout << "   >";
+
+		std::cin >> modo;
+
+		if(modo == 'd' || modo == 'D')
+			modo_demostracion();
+		else if(modo == 'e' || modo == 'E')
+			modo_estadistica();
+		else{
+			modo = 'f';
+
+
+		}
 	}
 
-	for(int i = 0; i < 5; i++){
-		std::cout << test[i] << std::endl;
-	}
-
-	for(int i = 0; i < 5; i++){
-		delete test[i];
-	}
 }
+
+void modo_demostracion(void)
+{
+	system("clear");
+	std::cout << "Este es el modo demostracion" << std::endl;
+}
+
+void modo_estadistica(void)
+{
+	system("clear");
+	std::cout << "Este es el modo estadistica" << std::endl;
+}
+
+
 /*
 
 void menu(unsigned &modo, unsigned &algoritmo, unsigned &tamano, bool &salir)
@@ -141,4 +174,23 @@ void ejecutar_algoritmo(unsigned &modo, unsigned &algoritmo, unsigned &tamano)
 {
 
 }
+*/
+
+/*Manera de meter las cosas
+
+	std::vector<dra::key*> test;
+
+	for(int i = 0; i < 5; i++){
+		dra::key* dummy2 = new dra::key_human_dni(new dra::human);
+		test.push_back(dummy2);
+	}
+
+	for(int i = 0; i < 5; i++){
+		std::cout << test[i] << std::endl;
+	}
+
+	for(int i = 0; i < 5; i++){
+		delete test[i];
+	}
+
 */
