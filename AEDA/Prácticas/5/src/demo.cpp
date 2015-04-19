@@ -1,13 +1,7 @@
-#include <iostream>
-#include <vector>
+#include "demo.hpp"
 
-#include "key.hpp"
-#include "key_human.hpp"
-#include "key_human_dni.hpp"
-#include "human.hpp"
-#include "algorithm.hpp"
-
-void cabecera_demo(int tamano, int error){
+void cabecera_demo(int tamano, int error)
+{
 	system("clear");
 	
 	std::cout << "===========================================\n";

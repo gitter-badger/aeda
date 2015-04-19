@@ -1,11 +1,4 @@
-#include <iostream>
-#include <vector>
-
-#include "key.hpp"
-#include "key_human.hpp"
-#include "key_human_dni.hpp"
-#include "human.hpp"
-#include "algorithm.hpp"
+#include "estadistica.hpp"
 
 void modo_estadistica(void)
 {

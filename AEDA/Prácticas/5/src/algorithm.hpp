@@ -1,8 +1,6 @@
 #ifndef _ALGORITHM_HPP_
 #define _ALGORITHM_HPP_
 
-
-
 #include <vector>
 
 #include "key.hpp"
