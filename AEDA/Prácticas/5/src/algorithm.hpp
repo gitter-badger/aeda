@@ -8,6 +8,8 @@
 #include "key_human_dni.hpp"
 #include "human.hpp"
 
+#include <unistd.h>
+
 namespace dra{
 
 unsigned insercion(std::vector<dra::key*> &vec, bool demo = false)
@@ -151,7 +153,7 @@ unsigned seleccion(std::vector<dra::key*> &vec, bool demo = false)
 					std::cout << k << ". " << vec[k]->value();
 					if(k == i)
 						std::cout << "<--- Por el que voy a cambiar";
-					else if(k == min)
+					if(k == min)
 						std::cout << "<--- El minimo por ahora";
 					else if(k == j)
 						std::cout << "<--- El que estoy mirando ahora";
@@ -182,6 +184,96 @@ unsigned seleccion(std::vector<dra::key*> &vec, bool demo = false)
 
 	return comparaciones;
 }
+
+unsigned shellsort(std::vector<dra::key*> &vec, bool demo = false)
+{
+	unsigned comparaciones = 0;
+
+	if(demo){
+		system("clear");
+
+		std::cout << "[PROGRAMA] Tu vector antes de empezar esta asi:" << std::endl;
+		for(int i = 0; i < vec.size(); i++)
+			std::cout << i << ". " << vec[i]->value() << std::endl;
+
+		std::cin.ignore().get();
+	}
+
+
+	double alpha;
+
+	do{
+		std::cout << "Elije el alfa que quieras entre 0 y 1: a=";
+		std::cin >> alpha;
+	}while(alpha > 1 || alpha < 0);
+
+	int delta = vec.size();
+
+	while(delta > 1){
+		delta = delta * alpha;
+		if(demo){
+
+			system("clear");
+			std::cout << "[PROGRAMA] Voy a ordenar con delta = " << delta << std::endl;
+			unsigned k = 0;
+			for(int i = 0; i < vec.size(); i++){
+				std::cout << vec[i]->value();
+				if(k == i){
+					std::cout << " <--- ";
+					k+=delta;
+				}
+				std::cout << std::endl;
+			}
+
+			std::cin.ignore().get();
+		}
+
+		for(unsigned i = delta; i<vec.size(); i++){
+			dra::key* x = vec[i];
+			unsigned j = i;
+			comparaciones++;
+			while((j >= delta) && (x->value() < vec[j-delta]->value())){
+				vec[j] = vec[j-delta];
+				j = j - delta;
+				comparaciones++;
+			}
+			vec[j] = x;
+		}
+		if(demo){
+
+			system("clear");
+			std::cout << "[PROGRAMA] Ya deberia estar ordenado con delta = " << delta << std::endl;
+			unsigned k = 0;
+			for(int i = 0; i < vec.size(); i++){
+				std::cout << vec[i]->value();
+				if(k == i){
+					std::cout << " <--- ";
+					k+=delta;
+				}
+				std::cout << std::endl;
+			}
+
+			std::cin.ignore().get();
+		}
+	}
+
+	if(demo){
+
+		system("clear");
+		std::cout << "[PROGRAMA] Hecho! tu vector ya esta ordenado, me ha tomado " << comparaciones << " pasos" << std::endl;
+
+		for(int i = 0; i < vec.size(); i++)
+			std::cout << vec[i] << std::endl;
+
+		std::cin.ignore().get();
+	}
+}
+
+unsigned quicksort(std::vector<dra::key*> &vec, bool demo = false)
+{
+
+}
+
 
 }
 

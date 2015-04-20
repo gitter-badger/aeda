@@ -133,7 +133,7 @@ void editar_tamano(unsigned& tamano, unsigned& error)
 
 	std::cin >> tamano;
 
-	if(tamano > 200){
+	if(tamano > 25){
 		tamano = 10;
 		error = 2;
 	}
@@ -149,6 +149,7 @@ void ejecutar_algoritmo(unsigned modo, unsigned tamano, unsigned algoritmo)
 	switch(algoritmo){
 		case 0: dra::insercion(test, modo); break;
 		case 1: dra::seleccion(test, modo); break;
+		case 2: dra::shellsort(test, modo); break;
 	}
 
 	for(unsigned i = 0; i < tamano; i++)
