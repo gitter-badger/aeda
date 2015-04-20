@@ -10,6 +10,7 @@
 void cabecera_demo(int tamano, int error);
 void modo_demostracion(void);
 void editar_tamano(unsigned& tamano, unsigned& error);
+void ejecutar_algoritmo(unsigned modo, unsigned tamano, unsigned algoritmo);
 
 int main(void)
 {
@@ -41,13 +42,13 @@ int main(void)
 		error = false;
 		
 		switch(modo){
-			case 'o':
-			case 'O': modo_demostracion(); break;
-			case 'a':
-			case 'A': //modo_estadistica(); break;
-			case 'q':
-			case 'Q': quedarse = false;
-			default: error = true;
+		case 'o':
+		case 'O': modo_demostracion(); break;
+		case 'a':
+		case 'A': //modo_estadistica(); break;
+		case 'q':
+		case 'Q': quedarse = false;
+		default: error = true;
 		}
 	}
 }
@@ -72,12 +73,13 @@ void cabecera_demo(int tamano, int error)
 	std::cout << " o) Shells[o]rt\n"; //2
 	std::cout << " u) Q[u]ickSort\n"; //3
 	std::cout << " g) Mer[g]eSort\n"; //4
+	std::cout << " a) Atr[a]s\n";
 
 	switch(error){
-		case 0: break;
-		case 1: std::cout << "El modo introducido es invalido\n"; break;
-		case 2: std::cout << "El tamano no puede ser mayor que 25\n"; break;
-		default: std::cout << "Error desconocido\n"; break;
+	case 0: break;
+	case 1: std::cout << "El modo introducido es invalido\n"; break;
+	case 2: std::cout << "El tamano no puede ser mayor que 25\n"; break;
+	default: std::cout << "Error desconocido\n"; break;
 	}
 	std::cout << "   >";
 
@@ -91,9 +93,9 @@ void modo_demostracion(void)
 	unsigned error = 0;
 
 	unsigned tamano = 10;
-	unsigned algoritmo = 0;
 
 	while(quedarse){
+		unsigned algoritmo = 999;
 
 		cabecera_demo(tamano, error);
 
@@ -102,12 +104,24 @@ void modo_demostracion(void)
 		error = 0;
 
 		switch(modo){
-			case 't':
-			case 'T': editar_tamano(tamano, error);
-			case 'a':
-			case 'A': quedarse = false; break;
-			default: error = 1;
+		case 't':
+		case 'T': editar_tamano(tamano, error); break;
+		case 'i':
+		case 'I': algoritmo = 0; break;
+		case 'e':
+		case 'E': algoritmo = 1; break;
+		case 'o':
+		case 'O': algoritmo = 2; break;
+		case 'u':
+		case 'U': algoritmo = 3; break;
+		case 'g':
+		case 'G': algoritmo = 4; break;
+		case 'a':
+		case 'A': quedarse = false; break;
+		default: error = 1;
 		}
+		if(algoritmo != 999)
+			ejecutar_algoritmo(1, tamano, algoritmo);
 	}
 }
 
@@ -119,10 +133,26 @@ void editar_tamano(unsigned& tamano, unsigned& error)
 
 	std::cin >> tamano;
 
-	if(tamano > 25){
+	if(tamano > 200){
 		tamano = 10;
 		error = 2;
 	}
+}
+
+void ejecutar_algoritmo(unsigned modo, unsigned tamano, unsigned algoritmo)
+{
+	std::vector<dra::key*> test;
+
+	for(unsigned i = 0; i < tamano; i++)
+		test.push_back(new dra::key_human_dni(new dra::human));
+
+	switch(algoritmo){
+		case 0: dra::insercion(test, modo); break;
+		case 1: dra::seleccion(test, modo); break;
+	}
+
+	for(unsigned i = 0; i < tamano; i++)
+		delete test[i];
 }
 
 
