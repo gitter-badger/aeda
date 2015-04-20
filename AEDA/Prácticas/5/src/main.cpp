@@ -29,8 +29,8 @@ int main(void)
 		std::cout << " o) Dem[o]stracion\n";
 		std::cout << " a) Est[a]distica\n";
 		std::cout << " q) Salir\n";
-		
-		
+
+
 		if(error)
 			std::cout << "Modo invalido, introduce otro\n";
 		std::cout << "   >";
@@ -38,9 +38,9 @@ int main(void)
 		std::cout.flush();
 
 		std::cin >> modo;
-		
+
 		error = false;
-		
+
 		switch(modo){
 		case 'o':
 		case 'O': modo_demostracion(); break;
@@ -147,9 +147,10 @@ void ejecutar_algoritmo(unsigned modo, unsigned tamano, unsigned algoritmo)
 		test.push_back(new dra::key_human_dni(new dra::human));
 
 	switch(algoritmo){
-		case 0: dra::insercion(test, modo); break;
-		case 1: dra::seleccion(test, modo); break;
-		case 2: dra::shellsort(test, modo); break;
+	case 0: dra::insercion(test, modo); break;
+	case 1: dra::seleccion(test, modo); break;
+	case 2: dra::shellsort(test, modo); break;
+	case 3: dra::quicksort(test, 0, test.size()-1, modo); break;
 	}
 
 	for(unsigned i = 0; i < tamano; i++)
@@ -167,3 +168,4 @@ void modo_estadistica(void)
 	std::cout << "Foo" << std::endl;
 	std::cin.ignore().get();
 }
+

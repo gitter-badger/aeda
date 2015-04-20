@@ -143,7 +143,7 @@ unsigned seleccion(std::vector<dra::key*> &vec, bool demo = false)
 
 			if(demo){
 				system("clear");
-				std::cout << "[PROGRAMA] el que miro ahora(" << vec[j]->value() << ") < el minimo provisinal(" << vec[min]->value() << ")? ";
+				std::cout << "[PROGRAMA] el que miro ahora(" << vec[j]->value() << ") < el minimo provisional(" << vec[min]->value() << ")? ";
 				if(vec[j]->value() < vec[min]->value())
 					std::cout << "Si, asi que este es el nuevo minimo" << std::endl;
 				else
@@ -270,13 +270,30 @@ unsigned shellsort(std::vector<dra::key*> &vec, bool demo = false)
 }
 
 unsigned quicksort(std::vector<dra::key*> &vec, unsigned ini, unsigned fin, bool demo = false)
-{/*
-	auto i = ini; auto f = fin;
+{
+	if(ini >= fin)
+		return 0;
+	if(demo){
+
+		system("clear");
+		std::cout << "[PROGRAMA] Este es tu vector" << std::endl;
+
+		for(int j = ini; j < fin; j++)
+			std::cout << vec[j]->value() << std::endl;
+
+		std::cin.ignore().get();
+	}
+
+
+	unsigned i = ini; unsigned f = fin;
+
 	dra::key* p = vec[(i+f)/2];
+
+
 	while(i < f)
 	{
 		while (vec[i]->value() < p->value()) i++;
-		while (vec[i]->value() > p->value()) f++;
+		while (vec[f]->value() > p->value()) f--;
 
 		if(i < f)
 		{
@@ -287,7 +304,20 @@ unsigned quicksort(std::vector<dra::key*> &vec, unsigned ini, unsigned fin, bool
 		}
 	}
 	if(ini < f) quicksort(vec, ini, f, demo);
-	if(i < fin) quicksort(vec, i, fin, demo);*/
+	if(i < fin) quicksort(vec, i, fin, demo);
+
+	if(demo){
+
+		system("clear");
+		std::cout << "[PROGRAMA] Hecho! tu vector ya esta ordenado" << std::endl;
+
+		for(int j = ini; j < fin; j++)
+			std::cout << vec[j]->value() << std::endl;
+
+		std::cin.ignore().get();
+	}
+}
+
 }
 
 #endif
