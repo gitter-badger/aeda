@@ -269,12 +269,25 @@ unsigned shellsort(std::vector<dra::key*> &vec, bool demo = false)
 	}
 }
 
-unsigned quicksort(std::vector<dra::key*> &vec, bool demo = false)
-{
+unsigned quicksort(std::vector<dra::key*> &vec, unsigned ini, unsigned fin, bool demo = false)
+{/*
+	auto i = ini; auto f = fin;
+	dra::key* p = vec[(i+f)/2];
+	while(i < f)
+	{
+		while (vec[i]->value() < p->value()) i++;
+		while (vec[i]->value() > p->value()) f++;
 
-}
-
-
+		if(i < f)
+		{
+			dra::key* x = vec[i];
+			vec[i] = vec[f];
+			vec[f] = x;
+			i++; f--;
+		}
+	}
+	if(ini < f) quicksort(vec, ini, f, demo);
+	if(i < fin) quicksort(vec, i, fin, demo);*/
 }
 
 #endif
