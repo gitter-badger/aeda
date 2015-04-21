@@ -166,7 +166,7 @@ void probar_algoritmo(unsigned tamano, unsigned algoritmo)
 	system("clear");
 	std::cout << "[PROGRAMA] Hecho! tu vector ya esta ordenado, me ha tomado " << comparaciones << " pasos" << std::endl;
 	for(int i = 0; i < test.size(); i++)
-		std::cout << test[i]->value() << std::endl;
+		std::cout << test[i] << std::endl;
 	std::cin.get();
 
 	for(unsigned i = 0; i < tamano; i++)
@@ -200,6 +200,8 @@ void modo_estadistica(void)
 	unsigned tamano;
 	unsigned pruebas;
 
+	const unsigned cantidad_algoritmos = 5;
+
 
 	std::cout << "==========================================\n";
 	std::cout << "|| AEDA | Practica 5 | Modo estadistica ||\n";
@@ -220,9 +222,9 @@ void modo_estadistica(void)
 	std::cin >> pruebas;
 
 
-	long unsigned comparaciones[5][5]; //0=actual 1=minimo, 2=medio, 3=maximo, 4=acumulado
+	long unsigned comparaciones[cantidad_algoritmos][5]; //0=actual 1=minimo, 2=medio, 3=maximo, 4=acumulado
 
-	for(int i = 0; i < 5; i++){
+	for(int i = 0; i < cantidad_algoritmos; i++){
 		for(int j = 0; j < 5; j++){
 			if(j!=1)
 				comparaciones[i][j] = 0;
@@ -241,7 +243,7 @@ void modo_estadistica(void)
 
 		std::vector<dra::key*> test_backup = test;
 
-		for(unsigned j = 0; j < 5; j++){
+		for(unsigned j = 0; j < cantidad_algoritmos; j++){
 			test = test_backup;
 			comparaciones[j][0] = ejecutar_algoritmo(test, 0, j);
 			if(comparaciones[j][1] > comparaciones[j][0])
@@ -257,13 +259,14 @@ void modo_estadistica(void)
 			std::cout << "==========================================\n";
 			std::cout << "\n";
 			printf("|%10s|%10s|%10s|%10s|%10s|\n", "Algoritmo", "Minimo", "Medio", "Maximo", "Acumulado");
-			for(int k = 0; k < 5; k++){
+			for(int k = 0; k < cantidad_algoritmos; k++){
 				switch(k){
 				case 0: printf("|%10s", "Insercion"); break;
 				case 1: printf("|%10s", "Seleccion"); break;
 				case 2: printf("|%10s", "ShellSort"); break;
 				case 3: printf("|%10s", "QuickSort"); break;
 				case 4: printf("|%10s", "MergeSort"); break;
+				default: printf("|%10s", "???????"); break;
 				}
 				printf("|%10lu|%10lu|%10lu|%10lu|\n", comparaciones[k][1], comparaciones[k][2], comparaciones[k][3], comparaciones[k][4]);
 			}
@@ -272,7 +275,7 @@ void modo_estadistica(void)
 		for(unsigned j = 0; j < tamano; j++)
 			delete test[j];
 	}
-	for(unsigned j = 0; j < 5; j++){
+	for(unsigned j = 0; j < cantidad_algoritmos; j++){
 		comparaciones[j][2] = comparaciones[j][4] / pruebas;
 	}
 
@@ -283,13 +286,14 @@ void modo_estadistica(void)
 	std::cout << "==========================================\n";
 	std::cout << "\n";
 	printf("|%10s|%10s|%10s|%10s|%10s|\n", "Algoritmo", "Minimo", "Medio", "Maximo", "Acumulado");
-	for(int k = 0; k < 5; k++){
+	for(int k = 0; k < cantidad_algoritmos; k++){
 		switch(k){
 		case 0: printf("|%10s", "Insercion"); break;
 		case 1: printf("|%10s", "Seleccion"); break;
 		case 2: printf("|%10s", "ShellSort"); break;
 		case 3: printf("|%10s", "QuickSort"); break;
 		case 4: printf("|%10s", "MergeSort"); break;
+		default: printf("|%10s", "???????"); break;
 		}
 		printf("|%10lu|%10lu|%10lu|%10lu|\n", comparaciones[k][1], comparaciones[k][2], comparaciones[k][3], comparaciones[k][4]);
 	}

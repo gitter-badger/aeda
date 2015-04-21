@@ -13,9 +13,15 @@
 
 namespace dra{
 
-*dra::key max(std::vector<dra::key*> &vec)
+dra::key* max(std::vector<dra::key*> &vec)
 {
-	dra::key*//aqui me quede
+	dra::key* max = vec[0];
+
+	for(int i = 0; i < vec.size(); i++){
+		if(vec[i]->value() > max->value())
+			max = vec[i];
+	}
+	return max;
 }
 
 
@@ -365,10 +371,51 @@ unsigned mergeSort(std::vector<dra::key*> &vec, bool demo = false)
 	return comparaciones;
 }
 
+void ordenarDigitos(std::vector<dra::key*> &vec, int exp, unsigned &comparaciones, bool demo = false)
+{
+	std::vector<dra::key*> output(vec.size());
+	std::vector<int> count(10);
+
+	for (int i = 0; i < vec.size(); i++){
+		comparaciones++;
+		count[ (vec[i]->value()/exp)%10 ]++;
+	}
+
+	system("clear");
+	if(demo){
+		std::cout << "[PROGRAMA] Aqui esta el vector de contadores" << std::endl;
+		for(int i = 0; i < count.size(); i++)
+			std::cout << "Numeros que acaben en " << i << " tengo " << count[i] << std::endl;
+	}
+	std::cin.get();
+
+	for (int i = 1; i < 10; i++){
+		comparaciones++;
+		count[i] += count[i - 1];
+	}
+
+
+	for (int i = vec.size() - 1; i >= 0; i--)
+	{
+		comparaciones++;
+		output[count[ (vec[i]->value()/exp)%10 ] - 1] = vec[i];
+		count[ (vec[i]->value()/exp)%10 ]--;
+	}
+
+
+	vec = output;
+}
+
 unsigned radixSort(std::vector<dra::key*> &vec, bool demo = false)
 {
-	
-	std::cin.get();
+	unsigned comparaciones = 0;
+
+	long unsigned mayor = max(vec)->value();
+
+	for (int exp = 1; mayor/exp > 0; exp *= 10)
+			ordenarDigitos(vec, exp, comparaciones, demo);
+
+	return comparaciones;
 }
 
 }
