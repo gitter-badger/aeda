@@ -17,7 +17,7 @@
         binaryTree.insert(nodo_ptr)
         binaryNode* nodo_ptr = new binaryNode(2);
         binaryTree.insert(nodo_ptr)
-        std::cout << test3 << std::endl;
+        std::cout << mi_arbol << std::endl;
     }
   * \endcode
 */
