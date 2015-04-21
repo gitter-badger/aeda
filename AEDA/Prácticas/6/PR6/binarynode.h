@@ -65,19 +65,19 @@ binaryNode<T>*& binaryNode<T>::right(void)
 }
 
 template<class T>
-binaryNode<T>* binaryNode<T>::right(void)
+binaryNode<T>* binaryNode<T>::right(void) const
 {
 	return right_;
 }
 
 template<class T>
-T& binaryNode<T>::binaryNode(void)
+T& binaryNode<T>::data(void)
 {
 	return data_;
 }
 
 template<class T>
-T binaryNode<T>::binaryNode(void) const
+T binaryNode<T>::data(void) const
 {
 	return data_;
 }
