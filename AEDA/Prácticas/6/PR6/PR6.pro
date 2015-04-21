@@ -10,5 +10,6 @@ include(deployment.pri)
 qtcAddDeployment()
 
 HEADERS += \
-    binarynode.h
+    binarynode.h \
+    binarytree.h
 

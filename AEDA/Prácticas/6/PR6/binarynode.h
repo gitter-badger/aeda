@@ -23,7 +23,13 @@ public:
 	T& data(void);
 	T data(void) const;
 
-	binaryNode<T>& operator=(const binaryNode<T>&);
+	/*
+	bool leave(void) const;
+
+	unsigned size(void) const;
+
+	bool height(void) const;*/
+
 	std::ostream& toStream(std::ostream& os) const;
 };
 
@@ -86,7 +92,6 @@ T binaryNode<T>::data(void) const
 {
 	return data_;
 }
-
 
 template<class T>
 std::ostream& binaryNode<T>::toStream(std::ostream& os) const

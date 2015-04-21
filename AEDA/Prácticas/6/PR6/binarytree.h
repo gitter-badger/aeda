@@ -37,47 +37,76 @@ class binaryTree{
 private:
 	binaryNode<T>* root_;
 public:
-	/** @name Constructores y destructor*/
-	///@{
-	/** \brief Constructor por defecto */
 	binaryTree(void);
-	/** \brief Destructor */
 	~binaryTree(void);
-	///@}
-	/** @name Recorridos */
-	///@{
-	preOrder(void);
-	postOrder(void);
-	inOrder(void);
-	///@}
-	/** @name Inserciones */
-	///@{
-	void insertLeave(binaryNode<T>* leave);
-	void insertRoot(binaryNode<T>* root);
+
+
+	void preOrder(binaryNode<T>* node = root_);
+	void postOrder(binaryNode<T>* node_ = root_);
+	void inOrder(binaryNode<T>* node = root_);
+
+	void insert(binaryNode<T>* node);
 	void insertBalanced(binaryNode<T>* node);
 	void insertOrdered(binaryNode<T>* node);
-	///@}
-	/** @name Eliminaciones */
-	///@{
-	void delete(T& data);
-	///@}
-	/** @name Utilidades */
-	///@{
-	bool empty(void) const;
-	binaryNode<T>* find(T& data);
-	///@}
-};
 
-binaryTree::binaryTree(void):
+	void prune(binaryNode<T>* node = root_);
+	bool leave(binaryNode<T>* node = root_) const;
+
+	bool empty(binaryNode<T> *node = root_) const;
+	unsigned size(binaryNode<T> *node = root_) const;
+	unsigned height(binaryNode<T> *node = root_) const;
+
+	binaryNode<T>* find(T& data);
+};
+/*
+template<class T>
+binaryTree<T>::binaryTree(void):
 root_(nullptr)
 {}
 
-binaryTree::~binaryTree(void)
+template<class T>
+binaryTree<T>::~binaryTree(void)
 {
-	if(!empty())
-		delete root_
+	prune(root_);
 }
 
+template<class T>
+void binaryTree<T>::prune(binaryNode<T>* node = root_)
+{
+	if(empty(node))
+		return;
+	prune(node->left());
+	prune(node->right());
+	delete node;
+	node = nullptr;
+}
+
+template<class T>
+unsigned binaryTree<T>::size(binaryNode<T>* node = root_) const
+{
+	if(empty(node))
+		return 0;
+	return(1 + size(node->left()) + size(node->right()));
+}
+
+template<class T>
+bool binaryTree<T>::leave(binaryNode<T>* node = root_) const
+{
+	return empty(node->left()) && empty(node->right());
+}
+
+template<class T>
+bool binaryTree<T>::empty(binaryNode<T>* node = root_) const
+{
+	return node == nullptr;
+}
+
+template<class T>
+unsigned binaryTree<T>::height(binaryNode<T> *node = root_) const
+{
+	return 0;
+}
+*/
 }
 
 #endif // BINARYTREE
