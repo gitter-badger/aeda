@@ -44,7 +44,12 @@ data_(data)
 
 template<class T>
 binaryNode<T>::~binaryNode(void)
-{}
+{
+	if(left_ != nullptr)
+		delete left_;
+	if(right_ != nullptr)
+		delete right_;
+}
 
 template<class T>
 binaryNode<T>*& binaryNode<T>::left(void)
