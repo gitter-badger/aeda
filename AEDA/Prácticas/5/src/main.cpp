@@ -10,7 +10,11 @@
 void cabecera_demo(int tamano, int error);
 void modo_demostracion(void);
 void editar_tamano(unsigned& tamano, unsigned& error);
-void ejecutar_algoritmo(unsigned modo, unsigned tamano, unsigned algoritmo);
+void probar_algoritmo(unsigned tamano, unsigned algoritmo);
+unsigned ejecutar_algoritmo(std::vector<dra::key*> &vec, unsigned modo, unsigned algoritmo);
+
+
+void modo_estadistica(void);
 
 int main(void)
 {
@@ -45,7 +49,7 @@ int main(void)
 		case 'o':
 		case 'O': modo_demostracion(); break;
 		case 'a':
-		case 'A': //modo_estadistica(); break;
+		case 'A': modo_estadistica(); break;
 		case 'q':
 		case 'Q': quedarse = false;
 		default: error = true;
@@ -121,7 +125,7 @@ void modo_demostracion(void)
 		default: error = 1;
 		}
 		if(algoritmo != 999)
-			ejecutar_algoritmo(1, tamano, algoritmo);
+			probar_algoritmo(tamano, algoritmo);
 	}
 }
 
@@ -139,22 +143,47 @@ void editar_tamano(unsigned& tamano, unsigned& error)
 	}
 }
 
-void ejecutar_algoritmo(unsigned modo, unsigned tamano, unsigned algoritmo)
+void probar_algoritmo(unsigned tamano, unsigned algoritmo)
 {
 	std::vector<dra::key*> test;
 
 	for(unsigned i = 0; i < tamano; i++)
 		test.push_back(new dra::key_human_dni(new dra::human));
 
-	switch(algoritmo){
-	case 0: dra::insercion(test, modo); break;
-	case 1: dra::seleccion(test, modo); break;
-	case 2: dra::shellsort(test, modo); break;
-	case 3: dra::quicksort(test, 0, test.size()-1, modo); break;
-	}
+	system("clear");
+	std::cout << "[PROGRAMA] Tu vector antes de empezar esta asi:" << std::endl;
+	for(int i = 0; i < test.size(); i++)
+		std::cout << test[i]->value() << std::endl;
+	std::cin.ignore().get();
+
+
+	unsigned comparaciones = ejecutar_algoritmo(test, 1, algoritmo);
+
+
+	system("clear");
+	std::cout << "[PROGRAMA] Hecho! tu vector ya esta ordenado, me ha tomado " << comparaciones << " pasos" << std::endl;
+	for(int i = 0; i < test.size(); i++)
+		std::cout << test[i]->value() << std::endl;
+	std::cin.get();
 
 	for(unsigned i = 0; i < tamano; i++)
 		delete test[i];
+
+}
+
+unsigned ejecutar_algoritmo(std::vector<dra::key*> &vec, unsigned modo, unsigned algoritmo)
+{
+	unsigned comparaciones = 0;
+
+	switch(algoritmo){
+	case 0: comparaciones = dra::insercion(vec, modo); break;
+	case 1: comparaciones = dra::seleccion(vec, modo); break;
+	case 2: comparaciones = dra::shellsort(vec, modo); break;
+	case 3: comparaciones = dra::quickSort(vec, modo); break;
+	case 4: comparaciones = dra::mergeSort(vec, modo); break;
+	}
+
+	return comparaciones;
 }
 
 
@@ -164,8 +193,102 @@ void ejecutar_algoritmo(unsigned modo, unsigned tamano, unsigned algoritmo)
 
 void modo_estadistica(void)
 {
+	unsigned tamano;
+	unsigned pruebas;
+
+
+	std::cout << "==========================================\n";
+	std::cout << "|| AEDA | Practica 5 | Modo estadistica ||\n";
+	std::cout << "==========================================\n";
+	std::cout << "\n";
+	std::cout << "Escribe el tamano de la secuencia a ordenar:\n";
+	std::cout << "   >";
+
+	std::cout.flush();
+
+	std::cin >> tamano;
+
+	std::cout << "Escribe la cantidad de pruebas a realizar\n";
+	std::cout << "   >";
+
+	std::cout.flush();
+
+	std::cin >> pruebas;
+
+
+	long unsigned comparaciones[5][5]; //0=actual 1=minimo, 2=medio, 3=maximo, 4=acumulado
+
+	for(int i = 0; i < 5; i++){
+		for(int j = 0; j < 5; j++){
+			if(j!=1)
+				comparaciones[i][j] = 0;
+			else
+				comparaciones[i][j] = 99999;
+		}
+	}
+
+
+
+	for(unsigned z = 0; z < pruebas; z++){
+		std::vector<dra::key*> test;
+
+		for(unsigned j = 0; j < tamano; j++)
+			test.push_back(new dra::key_human_dni(new dra::human));
+
+		std::vector<dra::key*> test_backup = test;
+
+		for(unsigned j = 0; j < 5; j++){
+			test = test_backup;
+			comparaciones[j][0] = ejecutar_algoritmo(test, 0, j);
+			if(comparaciones[j][1] > comparaciones[j][0])
+				comparaciones[j][1] = comparaciones[j][0];
+			if(comparaciones[j][3] < comparaciones[j][0])
+				comparaciones[j][3] = comparaciones[j][0];
+			comparaciones[j][4] += comparaciones[j][0];
+
+
+			system("clear");
+			std::cout << "==========================================\n";
+			std::cout << "|| AEDA | Practica 5 | Modo estadistica ||\n";
+			std::cout << "==========================================\n";
+			std::cout << "\n";
+			printf("|%10s|%10s|%10s|%10s|%10s|\n", "Algoritmo", "Minimo", "Medio", "Maximo", "Acumulado");
+			for(int k = 0; k < 5; k++){
+				switch(k){
+				case 0: printf("|%10s", "Insercion"); break;
+				case 1: printf("|%10s", "Seleccion"); break;
+				case 2: printf("|%10s", "ShellSort"); break;
+				case 3: printf("|%10s", "QuickSort"); break;
+				case 4: printf("|%10s", "MergeSort"); break;
+				}
+				printf("|%10lu|%10lu|%10lu|%10lu|\n", comparaciones[k][1], comparaciones[k][2], comparaciones[k][3], comparaciones[k][4]);
+			}
+		}
+		//usleep(50000);
+		for(unsigned j = 0; j < tamano; j++)
+			delete test[j];
+	}
+	for(unsigned j = 0; j < 5; j++){
+		comparaciones[j][2] = comparaciones[j][4] / pruebas;
+	}
+
+
 	system("clear");
-	std::cout << "Foo" << std::endl;
+	std::cout << "==========================================\n";
+	std::cout << "|| AEDA | Practica 5 | Modo estadistica ||\n";
+	std::cout << "==========================================\n";
+	std::cout << "\n";
+	printf("|%10s|%10s|%10s|%10s|%10s|\n", "Algoritmo", "Minimo", "Medio", "Maximo", "Acumulado");
+	for(int k = 0; k < 5; k++){
+		switch(k){
+		case 0: printf("|%10s", "Insercion"); break;
+		case 1: printf("|%10s", "Seleccion"); break;
+		case 2: printf("|%10s", "ShellSort"); break;
+		case 3: printf("|%10s", "QuickSort"); break;
+		case 4: printf("|%10s", "MergeSort"); break;
+		}
+		printf("|%10lu|%10lu|%10lu|%10lu|\n", comparaciones[k][1], comparaciones[k][2], comparaciones[k][3], comparaciones[k][4]);
+	}
 	std::cin.ignore().get();
 }
 
