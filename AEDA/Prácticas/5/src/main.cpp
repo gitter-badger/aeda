@@ -77,6 +77,7 @@ void cabecera_demo(int tamano, int error)
 	std::cout << " o) Shells[o]rt\n"; //2
 	std::cout << " u) Q[u]ickSort\n"; //3
 	std::cout << " g) Mer[g]eSort\n"; //4
+	std::cout << " x) Radi[x]Sort\n"; //4
 	std::cout << " a) Atr[a]s\n";
 
 	switch(error){
@@ -120,6 +121,8 @@ void modo_demostracion(void)
 		case 'U': algoritmo = 3; break;
 		case 'g':
 		case 'G': algoritmo = 4; break;
+		case 'x':
+		case 'X': algoritmo = 5; break;
 		case 'a':
 		case 'A': quedarse = false; break;
 		default: error = 1;
@@ -181,6 +184,7 @@ unsigned ejecutar_algoritmo(std::vector<dra::key*> &vec, unsigned modo, unsigned
 	case 2: comparaciones = dra::shellsort(vec, modo); break;
 	case 3: comparaciones = dra::quickSort(vec, modo); break;
 	case 4: comparaciones = dra::mergeSort(vec, modo); break;
+	case 5: comparaciones = dra::radixSort(vec, modo); break;
 	}
 
 	return comparaciones;

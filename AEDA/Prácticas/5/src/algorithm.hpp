@@ -13,6 +13,12 @@
 
 namespace dra{
 
+*dra::key max(std::vector<dra::key*> &vec)
+{
+	dra::key*//aqui me quede
+}
+
+
 unsigned insercion(std::vector<dra::key*> &vec, bool demo = false)
 {
 	unsigned comparaciones = 0;
@@ -312,7 +318,7 @@ void merge(std::vector<dra::key*> &vec, std::vector<dra::key*> &izq, std::vector
 	vec = resultado;
 }
 
-void mergeSortVerdadero(std::vector<dra::key*> &vec, unsigned &comparaciones, bool demo = false)
+void mergeSortV(std::vector<dra::key*> &vec, unsigned &comparaciones, bool demo = false)
 {
 	comparaciones++;
 	if(vec.size() == 1)
@@ -323,8 +329,8 @@ void mergeSortVerdadero(std::vector<dra::key*> &vec, unsigned &comparaciones, bo
 	std::vector<dra::key*> izq(vec.begin(), middle);
 	std::vector<dra::key*> der(middle, vec.end());
 
-	mergeSortVerdadero(izq, comparaciones, demo);
-	mergeSortVerdadero(der, comparaciones, demo);
+	mergeSortV(izq, comparaciones, demo);
+	mergeSortV(der, comparaciones, demo);
 
 	if(demo){
 		system("clear");
@@ -355,11 +361,16 @@ void mergeSortVerdadero(std::vector<dra::key*> &vec, unsigned &comparaciones, bo
 unsigned mergeSort(std::vector<dra::key*> &vec, bool demo = false)
 {
 	unsigned comparaciones=0;
-	mergeSortVerdadero(vec, comparaciones, demo);
+	mergeSortV(vec, comparaciones, demo);
 	return comparaciones;
 }
 
+unsigned radixSort(std::vector<dra::key*> &vec, bool demo = false)
+{
+	
+	std::cin.get();
 }
 
+}
 
 #endif
