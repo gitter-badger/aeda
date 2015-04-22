@@ -41,24 +41,29 @@ public:
 	~binaryTree(void);
 
 
-	void preOrder(binaryNode<T>* node = root_);
+	/*void preOrder(binaryNode<T>* node = root_);
 	void postOrder(binaryNode<T>* node_ = root_);
-	void inOrder(binaryNode<T>* node = root_);
+	void inOrder(binaryNode<T>* node = root_);*/
 
 	void insert(binaryNode<T>* node);
 	void insertBalanced(binaryNode<T>* node);
 	void insertOrdered(binaryNode<T>* node);
 
-	void prune(binaryNode<T>* node = root_);
-	bool leave(binaryNode<T>* node = root_) const;
+	void prune(void);
+	void prune(binaryNode<T>* node);
+	bool leave(void) const;
+	bool leave(binaryNode<T>* node) const;
 
-	bool empty(binaryNode<T> *node = root_) const;
-	unsigned size(binaryNode<T> *node = root_) const;
-	unsigned height(binaryNode<T> *node = root_) const;
+	bool empty(void) const;
+	bool empty(binaryNode<T> *node) const;
+	unsigned size(void) const;
+	unsigned size(binaryNode<T> *node) const;
+	unsigned height(void) const;
+	unsigned height(binaryNode<T> *node) const;
 
 	binaryNode<T>* find(T& data);
 };
-/*
+
 template<class T>
 binaryTree<T>::binaryTree(void):
 root_(nullptr)
@@ -67,11 +72,17 @@ root_(nullptr)
 template<class T>
 binaryTree<T>::~binaryTree(void)
 {
+	prune();
+}
+
+template<class T>
+void binaryTree<T>::prune(void)
+{
 	prune(root_);
 }
 
 template<class T>
-void binaryTree<T>::prune(binaryNode<T>* node = root_)
+void binaryTree<T>::prune(binaryNode<T>* node)
 {
 	if(empty(node))
 		return;
@@ -82,7 +93,13 @@ void binaryTree<T>::prune(binaryNode<T>* node = root_)
 }
 
 template<class T>
-unsigned binaryTree<T>::size(binaryNode<T>* node = root_) const
+unsigned binaryTree<T>::size(void) const
+{
+	return size(root_);
+}
+
+template<class T>
+unsigned binaryTree<T>::size(binaryNode<T>* node) const
 {
 	if(empty(node))
 		return 0;
@@ -90,23 +107,41 @@ unsigned binaryTree<T>::size(binaryNode<T>* node = root_) const
 }
 
 template<class T>
-bool binaryTree<T>::leave(binaryNode<T>* node = root_) const
+bool binaryTree<T>::leave(void) const
+{
+	return leave(root_);
+}
+
+template<class T>
+bool binaryTree<T>::leave(binaryNode<T>* node) const
 {
 	return empty(node->left()) && empty(node->right());
 }
 
 template<class T>
-bool binaryTree<T>::empty(binaryNode<T>* node = root_) const
+bool binaryTree<T>::empty(void) const
+{
+	return empty(root_);
+}
+
+template<class T>
+bool binaryTree<T>::empty(binaryNode<T>* node) const
 {
 	return node == nullptr;
 }
 
 template<class T>
-unsigned binaryTree<T>::height(binaryNode<T> *node = root_) const
+unsigned binaryTree<T>::height(void) const
+{
+	return height(root_);
+}
+
+template<class T>
+unsigned binaryTree<T>::height(binaryNode<T> *node) const
 {
 	return 0;
 }
-*/
+
 }
 
 #endif // BINARYTREE
