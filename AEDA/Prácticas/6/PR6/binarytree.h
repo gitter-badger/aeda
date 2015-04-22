@@ -6,19 +6,19 @@
   * \code
   * //Código de ejemplo
   * <iostream>
-  * 
+  *
   * int main(void){
-        binaryTree<int> mi_arbol;
-        binaryNode* nodo_ptr = new binaryNode(7);
-        binaryTree.insert(nodo_ptr)
-        binaryNode* nodo_ptr = new binaryNode(1);
-        binaryTree.insert(nodo_ptr)
-        binaryNode* nodo_ptr = new binaryNode(9);
-        binaryTree.insert(nodo_ptr)
-        binaryNode* nodo_ptr = new binaryNode(2);
-        binaryTree.insert(nodo_ptr)
-        std::cout << mi_arbol << std::endl;
-    }
+		binaryTree<int> mi_arbol;
+		binaryNode* nodo_ptr = new binaryNode(7);
+		binaryTree.insert(nodo_ptr)
+		binaryNode* nodo_ptr = new binaryNode(1);
+		binaryTree.insert(nodo_ptr)
+		binaryNode* nodo_ptr = new binaryNode(9);
+		binaryTree.insert(nodo_ptr)
+		binaryNode* nodo_ptr = new binaryNode(2);
+		binaryTree.insert(nodo_ptr)
+		std::cout << test3 << std::endl;
+	}
   * \endcode
 */
 
