@@ -28,40 +28,54 @@
 
 #include "binarynode.h"
 
-namespace dra{
+#include <iostream>
+#include <iomanip> //std::setw
+#include <vector>
 
+namespace dra{
 
 
 template<class T>
 class binaryTree{
-private:
+private: //atributes
 	binaryNode<T>* root_;
-public:
+public: //methods
+	//constructores
 	binaryTree(void);
 	~binaryTree(void);
 
+	//metodos para sacar el arbol
+	void postOrder(void);
 
-	/*void preOrder(binaryNode<T>* node = root_);
-	void postOrder(binaryNode<T>* node_ = root_);
-	void inOrder(binaryNode<T>* node = root_);*/
+	//metodos de insericon
+	void insert(const T& data);
 
-	void insert(binaryNode<T>* node);
+	//metodos de informacion del arbol
+	bool empty(void) const;
+	unsigned size(void) const;
+	unsigned height(void) const;
+
+	//utilidades del arbol
+	binaryNode<T>* find(T& data);
+private:
+	//metodos para sacar el arbol
+	void preOrder(binaryNode<T>* node);
+	void postOrder(binaryNode<T>* node);
+	void inOrder(binaryNode<T>* node);
+
+	//metodos para insertar algo en el arbol
+	void insert(binaryNode<T>* node, binaryNode<T>*& root);
 	void insertBalanced(binaryNode<T>* node);
 	void insertOrdered(binaryNode<T>* node);
 
-	void prune(void);
+	//metodos para podar el arbol
 	void prune(binaryNode<T>* node);
-	bool leave(void) const;
+
+	//metodos de informacion del arbol
 	bool leave(binaryNode<T>* node) const;
-
-	bool empty(void) const;
 	bool empty(binaryNode<T> *node) const;
-	unsigned size(void) const;
 	unsigned size(binaryNode<T> *node) const;
-	unsigned height(void) const;
 	unsigned height(binaryNode<T> *node) const;
-
-	binaryNode<T>* find(T& data);
 };
 
 template<class T>
@@ -72,13 +86,43 @@ root_(nullptr)
 template<class T>
 binaryTree<T>::~binaryTree(void)
 {
-	prune();
+	prune(root_);
 }
 
 template<class T>
-void binaryTree<T>::prune(void)
+void binaryTree<T>::postOrder(void)
 {
-	prune(root_);
+	postOrder(root_);
+	std::cout << std::endl;
+}
+
+template<class T>
+void binaryTree<T>::postOrder(binaryNode<T>* node)
+{
+	if(node == nullptr)
+		return;
+	postOrder(node->left());
+	postOrder(node->right());
+	std::cout << node->data() << " ";
+}
+
+template<class T>
+void binaryTree<T>::insert(const T& data)
+{
+	insert(new dra::binaryNode<T>(data), root_);
+}
+
+template<class T>
+void binaryTree<T>::insert(binaryNode<T>* node, binaryNode<T>*& root)
+{
+	if(root == nullptr){
+		root = node;
+		return;
+	}
+	if(node->data() <= root->data())
+		insert(node, root->left());
+	else
+		insert(node, root->right());
 }
 
 template<class T>
@@ -104,12 +148,6 @@ unsigned binaryTree<T>::size(binaryNode<T>* node) const
 	if(empty(node))
 		return 0;
 	return(1 + size(node->left()) + size(node->right()));
-}
-
-template<class T>
-bool binaryTree<T>::leave(void) const
-{
-	return leave(root_);
 }
 
 template<class T>
@@ -139,10 +177,15 @@ unsigned binaryTree<T>::height(void) const
 template<class T>
 unsigned binaryTree<T>::height(binaryNode<T> *node) const
 {
-	return 0;
+	if(node == nullptr)
+		return 1;
+
+	unsigned left_height = height(node->left());
+	unsigned right_height = height(node->right());
+
+	return left_height>right_height?left_height:right_height;
 }
 
 }
 
 #endif // BINARYTREE
-

@@ -1,6 +1,8 @@
 #ifndef BINARYNODE
 #define BINARYNODE
 
+#include <iostream> //std::cout
+
 namespace dra{
 
 template<class T>
@@ -23,13 +25,6 @@ public:
 	T& data(void);
 	T data(void) const;
 
-	/*
-	bool leave(void) const;
-
-	unsigned size(void) const;
-
-	bool height(void) const;*/
-
 	std::ostream& toStream(std::ostream& os) const;
 };
 
@@ -50,12 +45,7 @@ data_(data)
 
 template<class T>
 binaryNode<T>::~binaryNode(void)
-{
-	if(left_ != nullptr)
-		delete left_;
-	if(right_ != nullptr)
-		delete right_;
-}
+{}
 
 template<class T>
 binaryNode<T>*& binaryNode<T>::left(void)
