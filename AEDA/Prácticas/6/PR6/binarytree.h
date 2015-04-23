@@ -29,8 +29,6 @@
 #include "binarynode.h"
 
 #include <iostream>
-#include <iomanip> //std::setw
-#include <vector>
 
 namespace dra{
 
@@ -44,38 +42,36 @@ public: //methods
 	binaryTree(void);
 	~binaryTree(void);
 
-	//metodos para sacar el arbol
+	//metodos para explorar el arbol
+	void preOrder(void);
 	void postOrder(void);
-
-	//metodos de insericon
-	void insert(const T& data);
+	void inOrder(void);
 
 	//metodos de informacion del arbol
 	bool empty(void) const;
 	unsigned size(void) const;
 	unsigned height(void) const;
 
-	//utilidades del arbol
-	binaryNode<T>* find(T& data);
-private:
-	//metodos para sacar el arbol
-	void preOrder(binaryNode<T>* node);
-	void postOrder(binaryNode<T>* node);
-	void inOrder(binaryNode<T>* node);
-
-	//metodos para insertar algo en el arbol
-	void insert(binaryNode<T>* node, binaryNode<T>*& root);
-	void insertBalanced(binaryNode<T>* node);
-	void insertOrdered(binaryNode<T>* node);
-
+	//metodos para insertar el arbol
+	void insert(binaryNode<T>*);
+protected:
 	//metodos para podar el arbol
-	void prune(binaryNode<T>* node);
+	void prune(binaryNode<T>*);
+
+	//metodos para explorar el arbol
+	void preOrder(binaryNode<T>*);
+	void postOrder(binaryNode<T>*);
+	void inOrder(binaryNode<T>*);
+
+	virtual void process(binaryNode<T>*)=0; //metodo usado por los metodos para explorar el arbol
 
 	//metodos de informacion del arbol
-	bool leave(binaryNode<T>* node) const;
-	bool empty(binaryNode<T> *node) const;
-	unsigned size(binaryNode<T> *node) const;
-	unsigned height(binaryNode<T> *node) const;
+	bool leave(binaryNode<T>*) const;
+	bool empty(binaryNode<T>*) const;
+	unsigned size(binaryNode<T>*) const;
+	unsigned height(binaryNode<T>*) const;
+
+	virtual void insert(binaryNode<T>*, binaryNode<T>*)=0;
 };
 
 template<class T>
@@ -90,10 +86,31 @@ binaryTree<T>::~binaryTree(void)
 }
 
 template<class T>
+void binaryTree<T>::preOrder(void)
+{
+	preOrder(root_);
+}
+
+template<class T>
 void binaryTree<T>::postOrder(void)
 {
 	postOrder(root_);
-	std::cout << std::endl;
+}
+
+template<class T>
+void binaryTree<T>::inOrder(void)
+{
+	inOrder(root_);
+}
+
+template<class T>
+void binaryTree<T>::preOrder(binaryNode<T>* node)
+{
+	if(node == nullptr)
+		return;
+	process(node->data());
+	postOrder(node->left());
+	postOrder(node->right());
 }
 
 template<class T>
@@ -103,26 +120,17 @@ void binaryTree<T>::postOrder(binaryNode<T>* node)
 		return;
 	postOrder(node->left());
 	postOrder(node->right());
-	std::cout << node->data() << " ";
+	process(node->data());
 }
 
 template<class T>
-void binaryTree<T>::insert(const T& data)
+void binaryTree<T>::inOrder(binaryNode<T>* node)
 {
-	insert(new dra::binaryNode<T>(data), root_);
-}
-
-template<class T>
-void binaryTree<T>::insert(binaryNode<T>* node, binaryNode<T>*& root)
-{
-	if(root == nullptr){
-		root = node;
+	if(node == nullptr)
 		return;
-	}
-	if(node->data() <= root->data())
-		insert(node, root->left());
-	else
-		insert(node, root->right());
+	postOrder(node->left());
+	process(node->data());
+	postOrder(node->right());
 }
 
 template<class T>

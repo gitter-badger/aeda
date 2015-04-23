@@ -3,12 +3,16 @@
 
 #include <iostream> //std::cout
 
+#include "node.h"
+
+
 namespace dra{
+	template<class T> class binaryNode;
+}
 
 template<class T>
-class binaryNode{
+class dra::binaryNode : public dra::node{
 private:
-	T data_;
 	binaryNode* left_;
 	binaryNode* right_;
 public:
@@ -28,63 +32,63 @@ public:
 	std::ostream& toStream(std::ostream& os) const;
 };
 
-
+/*
 template<class T>
-binaryNode<T>::binaryNode(void):
+dra::binaryNode<T>::binaryNode(void):
 left_(nullptr),
 right_(nullptr),
 data_()
 {}
 
 template<class T>
-binaryNode<T>::binaryNode(const T& data):
+dra::binaryNode<T>::binaryNode(const T& data):
 left_(nullptr),
 right_(nullptr),
 data_(data)
 {}
 
 template<class T>
-binaryNode<T>::~binaryNode(void)
+dra::binaryNode<T>::~binaryNode(void)
 {}
 
 template<class T>
-binaryNode<T>*& binaryNode<T>::left(void)
+dra::binaryNode<T>*& dra::binaryNode<T>::left(void)
 {
 	return left_;
 }
 
 template<class T>
-binaryNode<T>* binaryNode<T>::left(void) const
+dra::binaryNode<T>* dra::binaryNode<T>::left(void) const
 {
 	return left_;
 }
 
 template<class T>
-binaryNode<T>*& binaryNode<T>::right(void)
+dra::binaryNode<T>*& dra::binaryNode<T>::right(void)
 {
 	return right_;
 }
 
 template<class T>
-binaryNode<T>* binaryNode<T>::right(void) const
+dra::binaryNode<T>* dra::binaryNode<T>::right(void) const
 {
 	return right_;
 }
 
 template<class T>
-T& binaryNode<T>::data(void)
+T& dra::binaryNode<T>::data(void)
 {
 	return data_;
 }
 
 template<class T>
-T binaryNode<T>::data(void) const
+T dra::binaryNode<T>::data(void) const
 {
 	return data_;
 }
 
 template<class T>
-std::ostream& binaryNode<T>::toStream(std::ostream& os) const
+std::ostream& dra::binaryNode<T>::toStream(std::ostream& os) const
 {
 	if(right_ != nullptr)
 		os << "[ " << data_ << " ][" << right_ << "]->";
@@ -96,7 +100,7 @@ std::ostream& binaryNode<T>::toStream(std::ostream& os) const
 	return os;
 }
 
-}
+
 
 //==============================================================================
 // Fin de implementación de la clase
@@ -107,5 +111,5 @@ std::ostream& operator<<(std::ostream& os, const dra::binaryNode<T>& n)
 {
 	return n.toStream(os);
 }
-
+*/
 #endif // BINARYNODE

@@ -1,15 +1,10 @@
 #include <iostream>
 
-#include "binarytree.h"
+#include "binarynode.h"
 
 
 int main()
 {
-	dra::binaryTree<int> my_tree;
-
-	my_tree.insert(18);
-	my_tree.insert(45);
-	my_tree.insert(28);
 
 
 
@@ -17,7 +12,6 @@ int main()
 
 	std::cin.ignore().get();
 
-	my_tree.postOrder();
 
 
 	std::cout << "\n\nYa lo acabo de sacar por pantalla" << std::endl;
