@@ -1,7 +1,25 @@
+/** \file binarynode.h
+  * \version 1.0
+  * \date 24/04/2015
+  * \author Daniel Ramos Acosta
+  * \brief Contiene la definición e implementación de la clase binaryNode.
+  * \code
+  * //Código de ejemplo
+  *
+  * int main(void){
+  *		//...
+  *
+  *		mi_arbol_binario.insertar(new binaryNode<int>(8));
+  *		//Esto insertaría un nodo de valor ocho en un árbol binario.
+  * }
+  *
+  * \endcode
+*/
+
 #ifndef BINARYNODE
 #define BINARYNODE
 
-#include <iostream> //std::cout
+#include <iostream>
 
 #include "node.h"
 
@@ -11,40 +29,80 @@ namespace dra{
 }
 
 template<class T>
-class dra::binaryNode : public dra::node{
+class dra::binaryNode : public dra::node<T>{
+	/*!
+	 * \class dra::binaryNode<T>
+	 * \brief Esta clase representa un nodo binario
+	 * \details
+	 * Esta clase representa a un nodo binario para usarse en un árbol binario de
+	 * un grafo. Tiene enlaces a la derecha y a la izquierda que conectan con más
+	 * nodos. Los datos del nodo en sí, se guardan en la clase padre nodo genérico.
+	 */
 private:
 	binaryNode* left_;
 	binaryNode* right_;
 public:
+	/*!
+	 * \brief Este es el constructor por defecto, los enlaces serán nulos.
+	 */
 	binaryNode(void);
-	binaryNode(const T& data);
+
+	/*!
+	 * \brief Este constructor se le pasa un dato que se almacenará en la clase padre.
+	 * \param data es el dato a almacenar.
+	 */
+	binaryNode(const T data);
+
+	/*!
+	 * \brief Destructor de la clase, no hace nada especial.
+	 */
 	~binaryNode(void);
 
+	/*!
+	 * \brief Este metodo sirve para modificar el enlace izquierdo del nodo.
+	 * \return Devuelve una referencia al puntero izquierdo.
+	 */
 	binaryNode*& left(void);
+
+	/*!
+	 * \brief Este metodo sirve para leer el enlace izquierdo del nodo.
+	 * \return Devuelve una copia del puntero izquierdo.
+	 */
 	binaryNode* left(void) const;
 
+	/*!
+	 * \brief Este metodo sirve para modificar el enlace derecho del nodo.
+	 * \return Devuelve una referencia al puntero derecho.
+	 */
 	binaryNode*& right(void);
+
+	/*!
+	 * \brief Este metodo sirve para leer el enlace derecho del nodo.
+	 * \return Devuelve una copia del puntero derecho.
+	 */
 	binaryNode* right(void) const;
 
-	T& data(void);
-	T data(void) const;
-
+	/*!
+	 * \brief Envía al stream de salida el dato del nodo
+	 * \param os es la referencia al stream de salida (OutStream).
+	 * \return devuelve la refecia al stream de salida que fue pasado por parametro
+	 */
 	std::ostream& toStream(std::ostream& os) const;
 };
 
-/*
+
 template<class T>
 dra::binaryNode<T>::binaryNode(void):
+node<T>(),
 left_(nullptr),
-right_(nullptr),
-data_()
+right_(nullptr)
 {}
 
 template<class T>
-dra::binaryNode<T>::binaryNode(const T& data):
+dra::binaryNode<T>::binaryNode(const T data):
+node<T>(data),
 left_(nullptr),
-right_(nullptr),
-data_(data)
+right_(nullptr)
 {}
 
 template<class T>
@@ -76,40 +134,10 @@ dra::binaryNode<T>* dra::binaryNode<T>::right(void) const
 }
 
 template<class T>
-T& dra::binaryNode<T>::data(void)
-{
-	return data_;
-}
-
-template<class T>
-T dra::binaryNode<T>::data(void) const
-{
-	return data_;
-}
-
-template<class T>
 std::ostream& dra::binaryNode<T>::toStream(std::ostream& os) const
 {
-	if(right_ != nullptr)
-		os << "[ " << data_ << " ][" << right_ << "]->";
-	else
-		os << "[ " << data_ << " ][nullptr]";
-
-	if(left_ != nullptr)
-		std::cout << "|\nv\n" << left_;
+	//WIP
 	return os;
 }
 
-
-
-//==============================================================================
-// Fin de implementación de la clase
-//==============================================================================
-
-template<class T>
-std::ostream& operator<<(std::ostream& os, const dra::binaryNode<T>& n)
-{
-	return n.toStream(os);
-}
-*/
 #endif // BINARYNODE

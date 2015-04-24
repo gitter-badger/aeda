@@ -167,7 +167,8 @@ DIST          = /home/daniel/.Qt/5.4/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/daniel/.Qt/5.4/gcc_64/mkspecs/features/lex.prf \
 		../PR6/PR6.pro binarynode.h \
 		binarytree.h \
-		node.h ../PR6/main.cpp
+		node.h \
+		binarysearchtree.h ../PR6/main.cpp
 QMAKE_TARGET  = PR6
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = PR6
@@ -471,8 +472,8 @@ compiler_clean:
 
 ####### Compile
 
-main.o: ../PR6/main.cpp ../PR6/binarytree.h \
-		../PR6/binarynode.h
+main.o: ../PR6/main.cpp ../PR6/binarynode.h \
+		../PR6/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../PR6/main.cpp
 
 ####### Install

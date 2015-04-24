@@ -12,5 +12,6 @@ qtcAddDeployment()
 HEADERS += \
     binarynode.h \
     binarytree.h \
-    node.h
+    node.h \
+    binarysearchtree.h
 

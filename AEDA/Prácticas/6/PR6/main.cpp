@@ -1,22 +1,15 @@
 #include <iostream>
 
-#include "binarynode.h"
+#include "binarysearchtree.h"
 
 
 int main()
 {
+	dra::binaryNode<int> nodito(9);
 
+	nodito.data() = 8;
 
-
-	std::cout << "Ya estan insertados los nodos" << std::endl;
-
-	std::cin.ignore().get();
-
-
-
-	std::cout << "\n\nYa lo acabo de sacar por pantalla" << std::endl;
-	std::cin.ignore().get();
-
+	//dra::binaryTree<int> arbolito;
 
 	return 0;
 }
