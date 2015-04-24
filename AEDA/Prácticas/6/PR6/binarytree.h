@@ -207,7 +207,7 @@ std::ostream& binaryTree<T>::toStream(std::ostream& os)
 template<class T>
 std::ostream& binaryTree<T>::toStream(std::ostream& os, binaryNode<T>* root)
 {
-	std::cout << "Soy el metodo que imprime padre" << std::endl;
+	std::cout << "Soy el metodo que imprime padre" << std::endl;er
 	return os;
 }
 
