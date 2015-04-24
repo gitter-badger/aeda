@@ -40,6 +40,8 @@ class dra::node{
 private:
 	T data_;
 public:
+	/*! \name Constructores y destructor*/
+	///@{
 	/*!
 	 * \brief Este es el constructor por defecto del nodo.
 	 */
@@ -55,7 +57,10 @@ public:
 	 * \brief Este es el destructor, no hace nada especial.
 	 */
 	~node(void);
+	///@}
 
+	/*! \name Métodos de acceso al dato*/
+	///@{
 	/*!
 	 * \brief Este metodo devuelve el dato para poder modificarlo
 	 * \return Devuelve una referencia al dato del nodo, por lo que se puede modificar.
@@ -67,6 +72,7 @@ public:
 	 * \return Devuelve una copia del dato, por lo tanto no se edita el dato del nodo
 	 */
 	T data(void) const;
+	///@}
 };
 
 template<class T>

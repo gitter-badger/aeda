@@ -42,6 +42,8 @@ private:
 	binaryNode* left_;
 	binaryNode* right_;
 public:
+	/*! \name Constructores y destructor*/
+	///@{
 	/*!
 	 * \brief Este es el constructor por defecto, los enlaces serán nulos.
 	 */
@@ -57,7 +59,10 @@ public:
 	 * \brief Destructor de la clase, no hace nada especial.
 	 */
 	~binaryNode(void);
+	///@}
 
+	/*! \name Métodos de acceso a los punteros izquierdo y derechos*/
+	///@{
 	/*!
 	 * \brief Este metodo sirve para modificar el enlace izquierdo del nodo.
 	 * \return Devuelve una referencia al puntero izquierdo.
@@ -81,13 +86,17 @@ public:
 	 * \return Devuelve una copia del puntero derecho.
 	 */
 	binaryNode* right(void) const;
+	///@}
 
+	/*! \name Métodos de E/S*/
+	///@{
 	/*!
 	 * \brief Envía al stream de salida el dato del nodo
 	 * \param os es la referencia al stream de salida (OutStream).
 	 * \return devuelve la refecia al stream de salida que fue pasado por parametro
 	 */
 	std::ostream& toStream(std::ostream& os) const;
+	///@}
 };
 
 
