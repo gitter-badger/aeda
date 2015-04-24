@@ -6,16 +6,34 @@
 
 
 namespace dra{
-	template<class T> class binarySearchTree;
-}
-
 
 template<class T>
-class dra::binarySearchTree : public dra::binaryTree<T>{
+class binarySearchTree : public binaryTree<T>{
 public:
-	void process(dra::binaryNode<T>*);
+	virtual void process(binaryNode<T>*);
+	virtual void insert(binaryNode<T>*, binaryNode<T>*);
 };
 
+template<class T>
+void binarySearchTree<T>::process(binaryNode<T>* node)
+{
+	std::cout << node->data() << " ";
+}
+
+template<class T>
+void binarySearchTree<T>::insert(binaryNode<T>* node, binaryNode<T>* root)
+{
+	if(root == nullptr){
+		root = node;
+		return;
+	}
+	if(root->data() <= node->data())
+		insert(node, root->left());
+	else
+		insert(node, root->right());
+}
+
+}
 
 #endif // BINARYSEARCHTREE
 

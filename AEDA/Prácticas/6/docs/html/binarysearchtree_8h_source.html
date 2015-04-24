@@ -117,25 +117,48 @@ $(document).ready(function(){initNavTree('binarysearchtree_8h_source.html','');}
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacedra.html">dra</a>{</div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="classdra_1_1binary_search_tree.html">    9</a></span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="keyword">class </span><a class="code" href="classdra_1_1binary_search_tree.html">binarySearchTree</a>;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;}</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">class </span><a class="code" href="classdra_1_1binary_search_tree.html">dra::binarySearchTree</a> : <span class="keyword">public</span> <a class="code" href="classdra_1_1binary_tree.html">dra::binaryTree</a>&lt;T&gt;{</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classdra_1_1binary_search_tree.html#a4fee732caa5a0df665e7b06dd8e16246">process</a>(<a class="code" href="classdra_1_1binary_node.html">dra::binaryNode&lt;T&gt;</a>*);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;};</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#endif // BINARYSEARCHTREE</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="ttc" id="classdra_1_1binary_tree_html"><div class="ttname"><a href="classdra_1_1binary_tree.html">dra::binaryTree</a></div><div class="ttdef"><b>Definition:</b> <a href="binarytree_8h_source.html#l00034">binarytree.h:34</a></div></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classdra_1_1binary_search_tree.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="classdra_1_1binary_search_tree.html">binarySearchTree</a> : <span class="keyword">public</span> <a class="code" href="classdra_1_1binary_tree.html">binaryTree</a>&lt;T&gt;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classdra_1_1binary_search_tree.html#aa54d6b6bc43193e2d0410c99cf64f446">process</a>(<a class="code" href="classdra_1_1binary_node.html">binaryNode&lt;T&gt;</a>*);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classdra_1_1binary_search_tree.html#a384649e20966b5bf50fd3d8ead1a0a86">insert</a>(<a class="code" href="classdra_1_1binary_node.html">binaryNode&lt;T&gt;</a>*, <a class="code" href="classdra_1_1binary_node.html">binaryNode&lt;T&gt;</a>*);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;};</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classdra_1_1binary_search_tree.html#aa54d6b6bc43193e2d0410c99cf64f446">   18</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classdra_1_1binary_search_tree.html#aa54d6b6bc43193e2d0410c99cf64f446">binarySearchTree&lt;T&gt;::process</a>(<a class="code" href="classdra_1_1binary_node.html">binaryNode&lt;T&gt;</a>* <a class="code" href="classdra_1_1node.html">node</a>)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    std::cout &lt;&lt; node-&gt;<a class="code" href="classdra_1_1node.html#ae37dd5bf0e01937184e90e4b9827e81e">data</a>() &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classdra_1_1binary_search_tree.html#a384649e20966b5bf50fd3d8ead1a0a86">   24</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classdra_1_1binary_search_tree.html#a384649e20966b5bf50fd3d8ead1a0a86">binarySearchTree&lt;T&gt;::insert</a>(<a class="code" href="classdra_1_1binary_node.html">binaryNode&lt;T&gt;</a>* <a class="code" href="classdra_1_1node.html">node</a>, <a class="code" href="classdra_1_1binary_node.html">binaryNode&lt;T&gt;</a>* root)</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">if</span>(root == <span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        root = node;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    }</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">if</span>(root-&gt;<a class="code" href="classdra_1_1node.html#ae37dd5bf0e01937184e90e4b9827e81e">data</a>() &lt;= node-&gt;<a class="code" href="classdra_1_1node.html#ae37dd5bf0e01937184e90e4b9827e81e">data</a>())</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        insert(node, root-&gt;<a class="code" href="classdra_1_1binary_node.html#a910082f25c004dd8ce6dfda4cabdea34">left</a>());</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        insert(node, root-&gt;<a class="code" href="classdra_1_1binary_node.html#af4d15f6a0f8b234ae564bf6fc741a5fe">right</a>());</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#endif // BINARYSEARCHTREE</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="ttc" id="classdra_1_1binary_search_tree_html_aa54d6b6bc43193e2d0410c99cf64f446"><div class="ttname"><a href="classdra_1_1binary_search_tree.html#aa54d6b6bc43193e2d0410c99cf64f446">dra::binarySearchTree::process</a></div><div class="ttdeci">virtual void process(binaryNode&lt; T &gt; *)</div><div class="ttdef"><b>Definition:</b> <a href="binarysearchtree_8h_source.html#l00018">binarysearchtree.h:18</a></div></div>
+<div class="ttc" id="classdra_1_1binary_tree_html"><div class="ttname"><a href="classdra_1_1binary_tree.html">dra::binaryTree</a></div><div class="ttdef"><b>Definition:</b> <a href="binarytree_8h_source.html#l00037">binarytree.h:37</a></div></div>
+<div class="ttc" id="classdra_1_1node_html_ae37dd5bf0e01937184e90e4b9827e81e"><div class="ttname"><a href="classdra_1_1node.html#ae37dd5bf0e01937184e90e4b9827e81e">dra::node::data</a></div><div class="ttdeci">T &amp; data(void)</div><div class="ttdoc">Este metodo devuelve el dato para poder modificarlo. </div><div class="ttdef"><b>Definition:</b> <a href="node_8h_source.html#l00089">node.h:89</a></div></div>
 <div class="ttc" id="binarytree_8h_html"><div class="ttname"><a href="binarytree_8h.html">binarytree.h</a></div><div class="ttdoc">Header que contiene la clase del Árbol Binario. </div></div>
 <div class="ttc" id="namespacedra_html"><div class="ttname"><a href="namespacedra.html">dra</a></div><div class="ttdef"><b>Definition:</b> <a href="binarynode_8h_source.html#l00027">binarynode.h:27</a></div></div>
-<div class="ttc" id="classdra_1_1binary_search_tree_html"><div class="ttname"><a href="classdra_1_1binary_search_tree.html">dra::binarySearchTree</a></div><div class="ttdef"><b>Definition:</b> <a href="binarysearchtree_8h_source.html#l00009">binarysearchtree.h:9</a></div></div>
-<div class="ttc" id="classdra_1_1binary_search_tree_html_a4fee732caa5a0df665e7b06dd8e16246"><div class="ttname"><a href="classdra_1_1binary_search_tree.html#a4fee732caa5a0df665e7b06dd8e16246">dra::binarySearchTree::process</a></div><div class="ttdeci">void process(dra::binaryNode&lt; T &gt; *)</div></div>
-<div class="ttc" id="classdra_1_1binary_node_html"><div class="ttname"><a href="classdra_1_1binary_node.html">dra::binaryNode</a></div><div class="ttdef"><b>Definition:</b> <a href="binarynode_8h_source.html#l00028">binarynode.h:28</a></div></div>
+<div class="ttc" id="classdra_1_1binary_search_tree_html"><div class="ttname"><a href="classdra_1_1binary_search_tree.html">dra::binarySearchTree</a></div><div class="ttdef"><b>Definition:</b> <a href="binarysearchtree_8h_source.html#l00011">binarysearchtree.h:11</a></div></div>
+<div class="ttc" id="classdra_1_1binary_search_tree_html_a384649e20966b5bf50fd3d8ead1a0a86"><div class="ttname"><a href="classdra_1_1binary_search_tree.html#a384649e20966b5bf50fd3d8ead1a0a86">dra::binarySearchTree::insert</a></div><div class="ttdeci">virtual void insert(binaryNode&lt; T &gt; *, binaryNode&lt; T &gt; *)</div><div class="ttdef"><b>Definition:</b> <a href="binarysearchtree_8h_source.html#l00024">binarysearchtree.h:24</a></div></div>
+<div class="ttc" id="classdra_1_1binary_node_html_af4d15f6a0f8b234ae564bf6fc741a5fe"><div class="ttname"><a href="classdra_1_1binary_node.html#af4d15f6a0f8b234ae564bf6fc741a5fe">dra::binaryNode::right</a></div><div class="ttdeci">binaryNode *&amp; right(void)</div><div class="ttdoc">Este metodo sirve para modificar el enlace derecho del nodo. </div><div class="ttdef"><b>Definition:</b> <a href="binarynode_8h_source.html#l00132">binarynode.h:132</a></div></div>
+<div class="ttc" id="classdra_1_1binary_node_html"><div class="ttname"><a href="classdra_1_1binary_node.html">dra::binaryNode</a></div><div class="ttdef"><b>Definition:</b> <a href="binarynode_8h_source.html#l00030">binarynode.h:30</a></div></div>
+<div class="ttc" id="classdra_1_1node_html"><div class="ttname"><a href="classdra_1_1node.html">dra::node</a></div><div class="ttdef"><b>Definition:</b> <a href="node_8h_source.html#l00028">node.h:28</a></div></div>
+<div class="ttc" id="classdra_1_1binary_node_html_a910082f25c004dd8ce6dfda4cabdea34"><div class="ttname"><a href="classdra_1_1binary_node.html#a910082f25c004dd8ce6dfda4cabdea34">dra::binaryNode::left</a></div><div class="ttdeci">binaryNode *&amp; left(void)</div><div class="ttdoc">Este metodo sirve para modificar el enlace izquierdo del nodo. </div><div class="ttdef"><b>Definition:</b> <a href="binarynode_8h_source.html#l00120">binarynode.h:120</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

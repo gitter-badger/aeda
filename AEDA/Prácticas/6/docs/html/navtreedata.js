@@ -10,7 +10,8 @@ var NAVTREE =
       [ "Jerarquía de la clase", "hierarchy.html", "hierarchy" ],
       [ "Miembros de las clases", "functions.html", [
         [ "Todo", "functions.html", null ],
-        [ "Funciones", "functions_func.html", null ]
+        [ "Funciones", "functions_func.html", null ],
+        [ "Variables", "functions_vars.html", null ]
       ] ]
     ] ],
     [ "Archivos", null, [

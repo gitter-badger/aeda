@@ -1,4 +1,4 @@
-/** \file node.h
+/*! \file node.h
   * \version 1.0
   * \date 24/04/2015
   * \author Daniel Ramos Acosta
@@ -23,14 +23,11 @@
 #define NODE
 
 namespace dra{
-	template<class T> class node;
-}
-
 
 template<class T>
-class dra::node{
+class node{
 	/*!
-	 * \class dra::node<T>
+	 * \class node<T>
 	 * \brief Esta clase representa un nodo genérico
 	 * \details
 	 * Esta clase representa a un nodo genérico de un grafo. para usarlo, uno hereda
@@ -76,30 +73,31 @@ public:
 };
 
 template<class T>
-dra::node<T>::node(void)
+node<T>::node(void)
 {}
 
 template<class T>
-dra::node<T>::node(const T data):
+node<T>::node(const T data):
 	data_(data)
 {}
 
 template<class T>
-dra::node<T>::~node(void)
+node<T>::~node(void)
 {}
 
 template<class T>
-T& dra::node<T>::data(void)
+T& node<T>::data(void)
 {
 	return data_;
 }
 
 template<class T>
-T dra::node<T>::data(void) const
+T node<T>::data(void) const
 {
 	return data_;
 }
 
+}
 
 #endif // NODE
 

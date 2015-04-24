@@ -116,19 +116,25 @@ $(document).ready(function(){initNavTree('main_8cpp_source.html','');});
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
 <div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">    6</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <a class="code" href="classdra_1_1binary_node.html">dra::binaryNode&lt;int&gt;</a> nodito(9);</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <a class="code" href="classdra_1_1binary_search_tree.html">dra::binarySearchTree&lt;int&gt;</a> mi_arbol;</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    nodito.<a class="code" href="classdra_1_1node.html#a7560423f9ea624ed7e0e89b63d79c6c6">data</a>() = 8;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="comment">//dra::binaryTree&lt;int&gt; arbolito;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    mi_arbol.<a class="code" href="classdra_1_1binary_search_tree.html#a384649e20966b5bf50fd3d8ead1a0a86">insert</a>(<span class="keyword">new</span> <a class="code" href="classdra_1_1binary_node.html">dra::binaryNode&lt;int&gt;</a>(5));</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    mi_arbol.<a class="code" href="classdra_1_1binary_search_tree.html#a384649e20966b5bf50fd3d8ead1a0a86">insert</a>(<span class="keyword">new</span> <a class="code" href="classdra_1_1binary_node.html">dra::binaryNode&lt;int&gt;</a>(1));</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    mi_arbol.<a class="code" href="classdra_1_1binary_search_tree.html#a384649e20966b5bf50fd3d8ead1a0a86">insert</a>(<span class="keyword">new</span> <a class="code" href="classdra_1_1binary_node.html">dra::binaryNode&lt;int&gt;</a>(7));</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;}</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="ttc" id="classdra_1_1node_html_a7560423f9ea624ed7e0e89b63d79c6c6"><div class="ttname"><a href="classdra_1_1node.html#a7560423f9ea624ed7e0e89b63d79c6c6">dra::node::data</a></div><div class="ttdeci">T &amp; data(void)</div><div class="ttdoc">Este metodo devuelve el dato para poder modificarlo. </div></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    mi_arbol.<a class="code" href="classdra_1_1binary_tree.html#a304cba88d5a57ab7e0bb5fecb9669140">inOrder</a>();</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    nodito.data() = 8;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;}</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="ttc" id="classdra_1_1binary_tree_html_a304cba88d5a57ab7e0bb5fecb9669140"><div class="ttname"><a href="classdra_1_1binary_tree.html#a304cba88d5a57ab7e0bb5fecb9669140">dra::binaryTree::inOrder</a></div><div class="ttdeci">void inOrder(void)</div><div class="ttdef"><b>Definition:</b> <a href="binarytree_8h_source.html#l00103">binarytree.h:103</a></div></div>
 <div class="ttc" id="main_8cpp_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00006">main.cpp:6</a></div></div>
+<div class="ttc" id="classdra_1_1binary_search_tree_html"><div class="ttname"><a href="classdra_1_1binary_search_tree.html">dra::binarySearchTree</a></div><div class="ttdef"><b>Definition:</b> <a href="binarysearchtree_8h_source.html#l00011">binarysearchtree.h:11</a></div></div>
+<div class="ttc" id="classdra_1_1binary_search_tree_html_a384649e20966b5bf50fd3d8ead1a0a86"><div class="ttname"><a href="classdra_1_1binary_search_tree.html#a384649e20966b5bf50fd3d8ead1a0a86">dra::binarySearchTree::insert</a></div><div class="ttdeci">virtual void insert(binaryNode&lt; T &gt; *, binaryNode&lt; T &gt; *)</div><div class="ttdef"><b>Definition:</b> <a href="binarysearchtree_8h_source.html#l00024">binarysearchtree.h:24</a></div></div>
 <div class="ttc" id="binarysearchtree_8h_html"><div class="ttname"><a href="binarysearchtree_8h.html">binarysearchtree.h</a></div></div>
-<div class="ttc" id="classdra_1_1binary_node_html"><div class="ttname"><a href="classdra_1_1binary_node.html">dra::binaryNode</a></div><div class="ttdef"><b>Definition:</b> <a href="binarynode_8h_source.html#l00028">binarynode.h:28</a></div></div>
+<div class="ttc" id="classdra_1_1binary_node_html"><div class="ttname"><a href="classdra_1_1binary_node.html">dra::binaryNode</a></div><div class="ttdef"><b>Definition:</b> <a href="binarynode_8h_source.html#l00030">binarynode.h:30</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

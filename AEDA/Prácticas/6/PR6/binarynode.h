@@ -25,13 +25,11 @@
 
 
 namespace dra{
-	template<class T> class binaryNode;
-}
 
 template<class T>
-class dra::binaryNode : public dra::node<T>{
+class binaryNode : public dra::node<T>{
 	/*!
-	 * \class dra::binaryNode<T>
+	 * \class binaryNode<T>
 	 * \brief Esta clase representa un nodo binario
 	 * \details
 	 * Esta clase representa a un nodo binario para usarse en un árbol binario de
@@ -87,66 +85,51 @@ public:
 	 */
 	binaryNode* right(void) const;
 	///@}
-
-	/*! \name Métodos de E/S*/
-	///@{
-	/*!
-	 * \brief Envía al stream de salida el dato del nodo
-	 * \param os es la referencia al stream de salida (OutStream).
-	 * \return devuelve la refecia al stream de salida que fue pasado por parametro
-	 */
-	std::ostream& toStream(std::ostream& os) const;
-	///@}
 };
 
 
 template<class T>
-dra::binaryNode<T>::binaryNode(void):
+binaryNode<T>::binaryNode(void):
 node<T>(),
 left_(nullptr),
 right_(nullptr)
 {}
 
 template<class T>
-dra::binaryNode<T>::binaryNode(const T data):
+binaryNode<T>::binaryNode(const T data):
 node<T>(data),
 left_(nullptr),
 right_(nullptr)
 {}
 
 template<class T>
-dra::binaryNode<T>::~binaryNode(void)
+binaryNode<T>::~binaryNode(void)
 {}
 
 template<class T>
-dra::binaryNode<T>*& dra::binaryNode<T>::left(void)
+binaryNode<T>*& binaryNode<T>::left(void)
 {
 	return left_;
 }
 
 template<class T>
-dra::binaryNode<T>* dra::binaryNode<T>::left(void) const
+binaryNode<T>* binaryNode<T>::left(void) const
 {
 	return left_;
 }
 
 template<class T>
-dra::binaryNode<T>*& dra::binaryNode<T>::right(void)
+binaryNode<T>*& binaryNode<T>::right(void)
 {
 	return right_;
 }
 
 template<class T>
-dra::binaryNode<T>* dra::binaryNode<T>::right(void) const
+binaryNode<T>* binaryNode<T>::right(void) const
 {
 	return right_;
 }
 
-template<class T>
-std::ostream& dra::binaryNode<T>::toStream(std::ostream& os) const
-{
-	//WIP
-	return os;
 }
 
 #endif // BINARYNODE

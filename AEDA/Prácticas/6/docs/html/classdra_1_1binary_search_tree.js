@@ -1,4 +1,5 @@
 var classdra_1_1binary_search_tree =
 [
-    [ "process", "classdra_1_1binary_search_tree.html#a4fee732caa5a0df665e7b06dd8e16246", null ]
+    [ "insert", "classdra_1_1binary_search_tree.html#a384649e20966b5bf50fd3d8ead1a0a86", null ],
+    [ "process", "classdra_1_1binary_search_tree.html#aa54d6b6bc43193e2d0410c99cf64f446", null ]
 ];

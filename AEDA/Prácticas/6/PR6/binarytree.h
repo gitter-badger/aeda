@@ -1,4 +1,4 @@
-/** \file binarytree.h
+/*! \file binarytree.h
   * \version 1.0
   * \date 17/03/2015
   * \author Daniel Ramos Acosta
@@ -9,13 +9,13 @@
   *
   * int main(void){
 		binaryTree<int> mi_arbol;
-		dra::binaryNode* nodo_ptr = new dra::binaryNode(7);
+		binaryNode* nodo_ptr = new binaryNode(7);
 		binaryTree.insert(nodo_ptr)
-		dra::binaryNode* nodo_ptr = new dra::binaryNode(1);
+		binaryNode* nodo_ptr = new binaryNode(1);
 		binaryTree.insert(nodo_ptr)
-		dra::binaryNode* nodo_ptr = new dra::binaryNode(9);
+		binaryNode* nodo_ptr = new binaryNode(9);
 		binaryTree.insert(nodo_ptr)
-		dra::binaryNode* nodo_ptr = new dra::binaryNode(2);
+		binaryNode* nodo_ptr = new binaryNode(2);
 		binaryTree.insert(nodo_ptr)
 		std::cout << test3 << std::endl;
 	}
@@ -26,19 +26,17 @@
 #ifndef BINARYTREE
 #define BINARYTREE
 
+#include <iostream>
+#include <algorithm>
+
 #include "binarynode.h"
 
-#include <iostream>
-
 namespace dra{
-	template<class T> class binaryTree;
-}
-
 
 template<class T>
-class dra::binaryTree{
+class binaryTree{
 private:
-	dra::binaryNode<T>* root_;
+	binaryNode<T>* root_;
 public:
 	//constructores
 	binaryTree(void);
@@ -55,88 +53,88 @@ public:
 	unsigned height(void) const;
 
 	//metodos para insertar el arbol
-	void insert(dra::binaryNode<T>*);
+	void insert(binaryNode<T>*);
+
+	std::ostream& toStream(std::ostream&);
 protected:
-	//metodos para podar el arbol
-	void prune(dra::binaryNode<T>*);
+	virtual void process(binaryNode<T>*)=0; //metodo usado por los metodos para explorar el arbol
+	virtual void insert(binaryNode<T>*, binaryNode<T>*)=0;
+private:
+	void prune(binaryNode<T>*);
 
-	//metodos para explorar el arbol
-	void preOrder(dra::binaryNode<T>*);
-	void postOrder(dra::binaryNode<T>*);
-	void inOrder(dra::binaryNode<T>*);
+	void preOrder(binaryNode<T>*);
+	void postOrder(binaryNode<T>*);
+	void inOrder(binaryNode<T>*);
 
-	virtual void process(dra::binaryNode<T>*)=0; //metodo usado por los metodos para explorar el arbol
+	bool leave(binaryNode<T>*) const;
+	bool empty(binaryNode<T>*) const;
+	unsigned size(binaryNode<T>*) const;
+	unsigned height(binaryNode<T>*) const;
 
-	//metodos de informacion del arbol
-	bool leave(dra::binaryNode<T>*) const;
-	bool empty(dra::binaryNode<T>*) const;
-	unsigned size(dra::binaryNode<T>*) const;
-	unsigned height(dra::binaryNode<T>*) const;
-
-	virtual void insert(dra::binaryNode<T>*, dra::binaryNode<T>*)=0;
+	std::ostream& toStream(std::ostream&, binaryNode<T>*);
 };
 
 template<class T>
-dra::binaryTree<T>::binaryTree(void):
+binaryTree<T>::binaryTree(void):
 root_(nullptr)
 {}
 
 template<class T>
-dra::binaryTree<T>::~binaryTree(void)
+binaryTree<T>::~binaryTree(void)
 {
 	prune(root_);
 }
 
 template<class T>
-void dra::binaryTree<T>::preOrder(void)
+void binaryTree<T>::preOrder(void)
 {
 	preOrder(root_);
 }
 
 template<class T>
-void dra::binaryTree<T>::postOrder(void)
+void binaryTree<T>::postOrder(void)
 {
 	postOrder(root_);
 }
 
 template<class T>
-void dra::binaryTree<T>::inOrder(void)
+void binaryTree<T>::inOrder(void)
 {
 	inOrder(root_);
 }
 
 template<class T>
-void dra::binaryTree<T>::preOrder(dra::binaryNode<T>* node)
+void binaryTree<T>::preOrder(binaryNode<T>* node)
 {
 	if(node == nullptr)
 		return;
-	process(node->data());
+	process(node);
 	postOrder(node->left());
 	postOrder(node->right());
 }
 
 template<class T>
-void dra::binaryTree<T>::postOrder(dra::binaryNode<T>* node)
+void binaryTree<T>::postOrder(binaryNode<T>* node)
 {
 	if(node == nullptr)
 		return;
 	postOrder(node->left());
 	postOrder(node->right());
-	process(node->data());
+	process(node);
 }
 
 template<class T>
-void dra::binaryTree<T>::inOrder(dra::binaryNode<T>* node)
+void binaryTree<T>::inOrder(binaryNode<T>* node)
 {
 	if(node == nullptr)
 		return;
 	postOrder(node->left());
-	process(node->data());
+	process(node);
 	postOrder(node->right());
 }
 
 template<class T>
-void dra::binaryTree<T>::prune(dra::binaryNode<T>* node)
+void binaryTree<T>::prune(binaryNode<T>* node)
 {
 	if(empty(node))
 		return;
@@ -147,13 +145,13 @@ void dra::binaryTree<T>::prune(dra::binaryNode<T>* node)
 }
 
 template<class T>
-unsigned dra::binaryTree<T>::size(void) const
+unsigned binaryTree<T>::size(void) const
 {
 	return size(root_);
 }
 
 template<class T>
-unsigned dra::binaryTree<T>::size(dra::binaryNode<T>* node) const
+unsigned binaryTree<T>::size(binaryNode<T>* node) const
 {
 	if(empty(node))
 		return 0;
@@ -161,39 +159,58 @@ unsigned dra::binaryTree<T>::size(dra::binaryNode<T>* node) const
 }
 
 template<class T>
-bool dra::binaryTree<T>::leave(dra::binaryNode<T>* node) const
+bool binaryTree<T>::leave(binaryNode<T>* node) const
 {
 	return empty(node->left()) && empty(node->right());
 }
 
 template<class T>
-bool dra::binaryTree<T>::empty(void) const
+bool binaryTree<T>::empty(void) const
 {
 	return empty(root_);
 }
 
 template<class T>
-bool dra::binaryTree<T>::empty(dra::binaryNode<T>* node) const
+bool binaryTree<T>::empty(binaryNode<T>* node) const
 {
 	return node == nullptr;
 }
 
 template<class T>
-unsigned dra::binaryTree<T>::height(void) const
+unsigned binaryTree<T>::height(void) const
 {
 	return height(root_);
 }
 
 template<class T>
-unsigned dra::binaryTree<T>::height(dra::binaryNode<T> *node) const
+unsigned binaryTree<T>::height(binaryNode<T> *node) const
 {
 	if(node == nullptr)
-		return 1;
+		return 0;
 
-	unsigned left_height = height(node->left());
-	unsigned right_height = height(node->right());
+	return std::max(height(node->left()), height(node->right()))+1;
+}
 
-	return left_height>right_height?left_height:right_height;
+template<class T>
+void binaryTree<T>::insert(binaryNode<T> *node)
+{
+	insert(node, root_);
+}
+
+template<class T>
+std::ostream& binaryTree<T>::toStream(std::ostream& os)
+{
+	toStream(os, root_);
+	return os;
+}
+
+template<class T>
+std::ostream& binaryTree<T>::toStream(std::ostream& os, binaryNode<T>* root)
+{
+	std::cout << "Soy el metodo que imprime padre" << std::endl;
+	return os;
+}
+
 }
 
 #endif // BINARYTREE
