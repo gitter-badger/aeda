@@ -9,15 +9,15 @@
   *
   * int main(void){
 		binaryTree<int> mi_arbol;
-		binaryNode* nodo_ptr = new binaryNode(7);
-		binaryTree.insert(nodo_ptr)
-		binaryNode* nodo_ptr = new binaryNode(1);
-		binaryTree.insert(nodo_ptr)
-		binaryNode* nodo_ptr = new binaryNode(9);
-		binaryTree.insert(nodo_ptr)
-		binaryNode* nodo_ptr = new binaryNode(2);
-		binaryTree.insert(nodo_ptr)
-		std::cout << test3 << std::endl;
+
+		//Insertar de algun modo definido en la clase hija
+		binaryTree.insert(new binaryNode(7))
+		binaryTree.insert(new binaryNode(8))
+		binaryTree.insert(new binaryNode(9))
+		binaryTree.insert(new binaryNode(2))
+
+		//Imprimir usando la clase padre
+		std::cout << mi_arbol << std::endl;
 	}
   * \endcode
 */
@@ -27,7 +27,8 @@
 #define BINARYTREE
 
 #include <iostream>
-#include <algorithm>
+#include <algorithm> //std::max
+#include <queue> //std::queue
 
 #include "binarynode.h"
 
@@ -46,6 +47,7 @@ public:
 	void preOrder(void);
 	void postOrder(void);
 	void inOrder(void);
+	void levelOrder(void);
 
 	//metodos de informacion del arbol
 	bool empty(void) const;
@@ -58,13 +60,14 @@ public:
 	std::ostream& toStream(std::ostream&);
 protected:
 	virtual void process(binaryNode<T>*)=0; //metodo usado por los metodos para explorar el arbol
-	virtual void insert(binaryNode<T>*, binaryNode<T>*)=0;
+	virtual void insert(binaryNode<T>*, binaryNode<T>*&)=0;
 private:
 	void prune(binaryNode<T>*);
 
 	void preOrder(binaryNode<T>*);
 	void postOrder(binaryNode<T>*);
 	void inOrder(binaryNode<T>*);
+	void levelOrder(binaryNode<T>*, unsigned, std::vector<std::vector<binaryNode<T>*>>&);
 
 	bool leave(binaryNode<T>*) const;
 	bool empty(binaryNode<T>*) const;
@@ -104,13 +107,26 @@ void binaryTree<T>::inOrder(void)
 }
 
 template<class T>
+void binaryTree<T>::levelOrder(void)
+{
+	std::vector<std::vector<binaryNode<T>*>> vec;
+	levelOrder(root_, 0, vec);
+	for(unsigned i = 0; i < vec.size(); i++){
+		for(unsigned j = 0; j < vec[i].size(); j++)
+			process(vec[i][j]);
+		//std::cout << std::endl;
+	}
+}
+
+
+template<class T>
 void binaryTree<T>::preOrder(binaryNode<T>* node)
 {
 	if(node == nullptr)
 		return;
 	process(node);
-	postOrder(node->left());
-	postOrder(node->right());
+	preOrder(node->left());
+	preOrder(node->right());
 }
 
 template<class T>
@@ -128,9 +144,26 @@ void binaryTree<T>::inOrder(binaryNode<T>* node)
 {
 	if(node == nullptr)
 		return;
-	postOrder(node->left());
+	inOrder(node->left());
 	process(node);
-	postOrder(node->right());
+	inOrder(node->right());
+}
+
+template<class T>
+void binaryTree<T>::levelOrder(binaryNode<T>* node, unsigned level, std::vector<std::vector<binaryNode<T>*>>& vec)
+{
+	if(node == nullptr)
+		return;
+
+	if(level >= vec.size()){
+		std::vector<binaryNode<T>*> dummy;
+		vec.push_back(dummy);
+	}
+
+	vec[level].push_back(node);
+
+	levelOrder(node->left(), level+1, vec);
+	levelOrder(node->right(), level+1, vec);
 }
 
 template<class T>
@@ -183,7 +216,7 @@ unsigned binaryTree<T>::height(void) const
 }
 
 template<class T>
-unsigned binaryTree<T>::height(binaryNode<T> *node) const
+unsigned binaryTree<T>::height(binaryNode<T>* node) const
 {
 	if(node == nullptr)
 		return 0;
@@ -192,7 +225,7 @@ unsigned binaryTree<T>::height(binaryNode<T> *node) const
 }
 
 template<class T>
-void binaryTree<T>::insert(binaryNode<T> *node)
+void binaryTree<T>::insert(binaryNode<T>* node)
 {
 	insert(node, root_);
 }
@@ -207,7 +240,6 @@ std::ostream& binaryTree<T>::toStream(std::ostream& os)
 template<class T>
 std::ostream& binaryTree<T>::toStream(std::ostream& os, binaryNode<T>* root)
 {
-	std::cout << "Soy el metodo que imprime padre" << std::endl;er
 	return os;
 }
 
