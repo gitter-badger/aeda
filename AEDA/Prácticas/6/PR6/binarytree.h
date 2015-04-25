@@ -111,11 +111,9 @@ void binaryTree<T>::levelOrder(void)
 {
 	std::vector<std::vector<binaryNode<T>*>> vec;
 	levelOrder(root_, 0, vec);
-	for(unsigned i = 0; i < vec.size(); i++){
+	for(unsigned i = 0; i < vec.size(); i++)
 		for(unsigned j = 0; j < vec[i].size(); j++)
 			process(vec[i][j]);
-		//std::cout << std::endl;
-	}
 }
 
 
