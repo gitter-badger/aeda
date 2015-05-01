@@ -168,7 +168,8 @@ DIST          = /opt/Qt/5.4/gcc_64/mkspecs/features/spec_pre.prf \
 		../PR6/PR6.pro binarynode.h \
 		binarytree.h \
 		node.h \
-		binarysearchtree.h ../PR6/main.cpp
+		binarysearchtree.h \
+		dni.h ../PR6/main.cpp
 QMAKE_TARGET  = PR6
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = PR6

@@ -49,6 +49,8 @@ int main()
 	std::cout << "inOrder..... "; mi_arbol.inOrder(); std::cout << std::endl;
 	std::cout << "levelOrder.. "; mi_arbol.levelOrder(); std::cout << std::endl;
 
+    mi_arbol.printPretty(std::cout);
+
 
 	return 0;
 }
