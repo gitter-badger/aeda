@@ -75,6 +75,7 @@ private:
 	unsigned height(binaryNode<T>*) const;
 
 	std::ostream& toStream(std::ostream&, binaryNode<T>*);
+    void toJFLAP(std::ostream& os);
 };
 
 template<class T>
@@ -239,6 +240,12 @@ template<class T>
 std::ostream& binaryTree<T>::toStream(std::ostream& os, binaryNode<T>* root)
 {
 	return os;
+}
+
+template<class T>
+void binaryTree<T>::toJFLAP(std::ostream& os)
+{
+
 }
 
 }

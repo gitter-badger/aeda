@@ -13,5 +13,6 @@ HEADERS += \
     binarynode.h \
     binarytree.h \
     node.h \
-    binarysearchtree.h
+    binarysearchtree.h \
+    dni.h
 
