@@ -1,27 +1,3 @@
-/** \file binarytree.h
-  * \version 1.0
-  * \date 17/03/2015
-  * \author Daniel Ramos Acosta
-  * \brief Header que contiene la clase del Árbol Binario
-  * \code
-  * //Código de ejemplo
-  * <iostream>
-  *
-  * int main(void){
-		binaryTree<int> mi_arbol;
-		binaryNode* nodo_ptr = new binaryNode(7);
-		binaryTree.insert(nodo_ptr)
-		binaryNode* nodo_ptr = new binaryNode(1);
-		binaryTree.insert(nodo_ptr)
-		binaryNode* nodo_ptr = new binaryNode(9);
-		binaryTree.insert(nodo_ptr)
-		binaryNode* nodo_ptr = new binaryNode(2);
-		binaryTree.insert(nodo_ptr)
-		std::cout << test3 << std::endl;
-	}
-  * \endcode
-*/
-
 
 #ifndef BINARYTREE
 #define BINARYTREE
