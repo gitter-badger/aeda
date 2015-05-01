@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 /*! \file binarytree.h
   * \version 1.0
   * \date 17/03/2015
@@ -11,20 +9,17 @@
   *
   * int main(void){
         binaryTree<int> mi_arbol;
-
         //Insertar de algun modo definido en la clase hija
         binaryTree.insert(new binaryNode(7))
         binaryTree.insert(new binaryNode(8))
         binaryTree.insert(new binaryNode(9))
         binaryTree.insert(new binaryNode(2))
-
         //Imprimir usando la clase padre
         std::cout << mi_arbol << std::endl;
     }
   * \endcode
 */
 
->>>>>>> 781bbb21da018aaeb1f8c2bcd97386304ecea066
 
 #ifndef BINARYTREE
 #define BINARYTREE
