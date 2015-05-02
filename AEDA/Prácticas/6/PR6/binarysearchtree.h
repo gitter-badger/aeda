@@ -11,6 +11,7 @@ protected:
 	virtual void process(binaryNode<T>*);
 	virtual void insert(binaryNode<T>*, binaryNode<T>*&);
     virtual void erase(T, binaryNode<T>*&);
+    virtual bool search(T, binaryNode<T>*);
 private:
     void substitute(binaryNode<T>*&, binaryNode<T>*&);
 };
@@ -72,6 +73,18 @@ void binarySearchTree<T>::substitute(binaryNode<T>*& old, binaryNode<T>*& candid
         old = candidate;
         candidate = candidate->left();
     }
+}
+
+template<class T>
+bool binarySearchTree<T>::search(T element, binaryNode<T>* root)
+{
+    if(root == nullptr)
+        return false;
+    if(element == root->data())
+        return true;
+    if(element < root->data())
+        return search(element, root->left());
+    return search(element, root->right());
 }
 
 }

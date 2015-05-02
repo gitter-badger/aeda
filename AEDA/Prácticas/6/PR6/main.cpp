@@ -151,4 +151,6 @@ void test_cuatro(void)
     mi_arbol.dra::binaryTree<dra::dni>::erase(76);
 
     mi_arbol.toStream(std::cout);
+
+    std::cout << mi_arbol.dra::binaryTree<dra::dni>::search(63) << std::endl;
 }

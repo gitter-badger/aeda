@@ -60,6 +60,9 @@ public:
     //elminar del arbol
     void erase(T);
 
+    //buscar un elemento en el arbo
+    bool search(T);
+
     std::ostream& toStream(std::ostream&);
 private:
     //void printPretty(std::ostream& os);
@@ -71,6 +74,7 @@ protected:
     virtual void process(binaryNode<T>*)=0; //metodo usado por los metodos para explorar el arbol
     virtual void insert(binaryNode<T>*, binaryNode<T>*&)=0;
     virtual void erase(T, binaryNode<T>*&)=0;
+    virtual bool search(T, binaryNode<T>*)=0;
 private:
     void prune(binaryNode<T>*);
 
@@ -253,6 +257,11 @@ void binaryTree<T>::erase(T element)
     erase(element, root_);
 }
 
+template<class T>
+bool binaryTree<T>::search(T element)
+{
+    return search(element, root_);
+}
 
 template<class T>
 std::ostream& binaryTree<T>::toStream(std::ostream& os)
