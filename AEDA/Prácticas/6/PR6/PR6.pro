@@ -14,5 +14,6 @@ HEADERS += \
     binarytree.h \
     node.h \
     binarysearchtree.h \
-    dni.h
+    dni.h \
+    random.h
 

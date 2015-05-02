@@ -31,6 +31,7 @@ dni::dni()
 {
     srand(dra::rand());
     dni_ = rand() % 50000000 +30000000;
+    dni_ = rand() % 99;
 }
 
 dni::dni(unsigned long int dni):

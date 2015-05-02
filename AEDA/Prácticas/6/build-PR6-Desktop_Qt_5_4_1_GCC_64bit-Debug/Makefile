@@ -169,7 +169,8 @@ DIST          = /opt/Qt/5.4/gcc_64/mkspecs/features/spec_pre.prf \
 		binarytree.h \
 		node.h \
 		binarysearchtree.h \
-		dni.h ../PR6/main.cpp
+		dni.h \
+		random.h ../PR6/main.cpp
 QMAKE_TARGET  = PR6
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = PR6
@@ -476,7 +477,9 @@ compiler_clean:
 main.o: ../PR6/main.cpp ../PR6/binarysearchtree.h \
 		../PR6/binarytree.h \
 		../PR6/binarynode.h \
-		../PR6/node.h
+		../PR6/node.h \
+		../PR6/dni.h \
+		../PR6/random.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../PR6/main.cpp
 
 ####### Install

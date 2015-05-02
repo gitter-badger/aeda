@@ -3,30 +3,13 @@
 #include "binarysearchtree.h"
 #include "dni.h"
 
-/*
-
-		_____52_____
-	   /            \
-	__28__        __79__
-   /      \      /      \
-  14      40    76      92
- /  \    /      /       /
-10  26  33     63      81
-
-Preorden.... 52 28 14 10 26 40 33 79 76 63 92 81
-Postorden... 10 26 14 33 40 28 63 76 81 92 79 52
-InOrden..... 10 14 26 28 33 40 52 63 76 79 81 92
-Por Niveles. 52 28 79 14 40 76 92 10 26 33 63 81
-
-
-*/
-
 void test_uno(void);
 void test_dos(void);
+void test_tres(void);
 
 int main()
 {
-	test_dos();
+    test_tres();
 	return 0;
 }
 
@@ -93,4 +76,32 @@ void test_dos(void)
 	std::cout << "levelOrder.. "; mi_arbol.levelOrder(); std::cout << std::endl;
 
     mi_arbol.toStream(std::cout);
+}
+
+void test_tres(void)
+{
+    dra::binarySearchTree<dra::dni> mi_arbol;
+
+    mi_arbol.dra::binaryTree<dra::dni>::insert(new dra::binaryNode<dra::dni>(30));
+    mi_arbol.dra::binaryTree<dra::dni>::insert(new dra::binaryNode<dra::dni>(25));
+    mi_arbol.dra::binaryTree<dra::dni>::insert(new dra::binaryNode<dra::dni>(15));
+    mi_arbol.dra::binaryTree<dra::dni>::insert(new dra::binaryNode<dra::dni>(40));
+
+    mi_arbol.toStream(std::cout);
+
+    std::cout << "PreOrder.... "; mi_arbol.preOrder(); std::cout << std::endl;
+    std::cout << "postOrder... "; mi_arbol.postOrder(); std::cout << std::endl;
+    std::cout << "inOrder..... "; mi_arbol.inOrder(); std::cout << std::endl;
+    std::cout << "levelOrder:\n"; mi_arbol.levelOrder(); std::cout << std::endl;
+
+    mi_arbol.dra::binaryTree<dra::dni>::erase(new dra::binaryNode<dra::dni>(15));
+
+    mi_arbol.toStream(std::cout);
+
+    std::cout << "PreOrder.... "; mi_arbol.preOrder(); std::cout << std::endl;
+    std::cout << "postOrder... "; mi_arbol.postOrder(); std::cout << std::endl;
+    std::cout << "inOrder..... "; mi_arbol.inOrder(); std::cout << std::endl;
+    std::cout << "levelOrder:\n"; mi_arbol.levelOrder(); std::cout << std::endl;
+
+
 }

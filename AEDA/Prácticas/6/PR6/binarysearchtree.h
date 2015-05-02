@@ -7,14 +7,21 @@ namespace dra{
 
 template<class T>
 class binarySearchTree : public binaryTree<T>{
-public:
+protected:
 	virtual void process(binaryNode<T>*);
 	virtual void insert(binaryNode<T>*, binaryNode<T>*&);
+    virtual void erase(binaryNode<T>*, binaryNode<T>*&);
+private:
+    void substitute(binaryNode<T>*&, binaryNode<T>*&);
 };
 
 template<class T>
 void binarySearchTree<T>::process(binaryNode<T>* node)
 {
+    if(node == nullptr){
+        std::cout << "[.]";
+        return;
+    }
 	std::cout << node->data() << " ";
 }
 
@@ -29,6 +36,42 @@ void binarySearchTree<T>::insert(binaryNode<T>* node, binaryNode<T>*& root)
 		insert(node, root->left());
 	else
 		insert(node, root->right());
+}
+
+template<class T>
+void binarySearchTree<T>::erase(binaryNode<T>* node, binaryNode<T>*& root)
+{
+    if(node == nullptr)
+        return;
+
+    if(node->data() < root->data())
+        erase(node, root->left());
+    else if(node->data() > root->data())
+        erase(node, root->right());
+    else{
+        auto old = root;
+
+        if(root->right() == nullptr)
+            root = root->left();
+        else if(root->left() == nullptr)
+            root = root->right();
+        else
+            substitute(old, root->left());
+
+        delete old;
+    }
+}
+
+template<class T>
+void binarySearchTree<T>::substitute(binaryNode<T>*& old, binaryNode<T>*& candidate)
+{
+    if(candidate->right() != nullptr)
+        substitute(old, candidate->right());
+    else{
+        old->data() = candidate->data();
+        old = candidate;
+        candidate = candidate->left();
+    }
 }
 
 }
