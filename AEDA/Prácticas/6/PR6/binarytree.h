@@ -15,24 +15,19 @@
         binaryTree.insert(new binaryNode(9))
         binaryTree.insert(new binaryNode(2))
         //Imprimir usando la clase padre
-        std::cout << mi_arbol << std::endl;
+        std::cos << mi_arbol << std::endl;
     }
   * \endcode
 */
 
-
 #ifndef BINARYTREE
 #define BINARYTREE
 
-#include <iostream>
+#include <iostream> //std::ostream
 #include <algorithm> //std::max
-
-#include <fstream>
-#include <deque>
-#include <iomanip>
-#include <sstream>
-#include <string>
-#include <cmath>
+#include <deque> //std::deque
+#include <iomanip> //std::setfill, std::setw
+#include <cmath> //pow
 
 #include "binarynode.h"
 
@@ -62,12 +57,11 @@ public:
     void insert(binaryNode<T>*);
 
     std::ostream& toStream(std::ostream&);
-    //
-    void printPretty(std::ostream& out);
-    void printLeaves(int indentSpace, int level, int nodesInThisLevel, const std::deque<dra::binaryNode<T>*>& nodesQueue, std::ostream& out);
-    void printNodes(int branchLen, int nodeSpaceLen, int startLen, int nodesInThisLevel, const std::deque<dra::binaryNode<T>*>& nodesQueue, std::ostream& out);
-    void printBranches(int branchLen, int nodeSpaceLen, int startLen, int nodesInThisLevel, const std::deque<dra::binaryNode<T>*>& nodesQueue, std::ostream& out);
-    std::string intToString(int val);
+private:
+    //void printPretty(std::ostream& os);
+    void printLeaves(int indentSpace, int level, int nodesInThisLevel, const std::deque<dra::binaryNode<T>*>& nodesQueue, std::ostream& os);
+    void printNodes(int branchLen, int nodeSpaceLen, int startLen, int nodesInThisLevel, const std::deque<dra::binaryNode<T>*>& nodesQueue, std::ostream& os);
+    void printBranches(int branchLen, int nodeSpaceLen, int startLen, int nodesInThisLevel, const std::deque<dra::binaryNode<T>*>& nodesQueue, std::ostream& os);
 
 protected:
     virtual void process(binaryNode<T>*)=0; //metodo usado por los metodos para explorar el arbol
@@ -246,9 +240,99 @@ std::ostream& binaryTree<T>::toStream(std::ostream& os)
     return os;
 }
 
-template<class T>
+/*
+template<typename T>
+void binaryTree<T>::printBranches(int branchLen, int nodeSpaceLen, int startLen, int nodesInThisLevel, const std::deque<dra::binaryNode<T>*>& nodesQueue, std::ostream& os)
+{
+    auto iter = nodesQueue.begin();
+    for (int i = 0; i < nodesInThisLevel / 2; i++) {
+        os << ((i == 0) ? std::setw(startLen-1) : std::setw(nodeSpaceLen-2)) << "" << ((*iter++) ? "/" : " ");
+        os << std::setw(2*branchLen+2) << "" << ((*iter++) ? "\\" : " ");
+    }
+    os << std::endl;
+}
+
+template<typename T>
+void binaryTree<T>::printNodes(int branchLen, int nodeSpaceLen, int startLen, int nodesInThisLevel, const std::deque<dra::binaryNode<T>*>& nodesQueue, std::ostream& os) {
+    auto iter = nodesQueue.begin();
+    for (int i = 0; i < nodesInThisLevel; i++, iter++) {
+        
+        os << ((i == 0) ? std::setw(startLen) : std::setw(nodeSpaceLen)) << "";
+        
+        if(*iter != nullptr && (*iter)->left() != nullptr)
+            os << std::setfill('_');
+        else
+            os << std::setfill(' ');
+        
+        os << std::setw(branchLen+2);
+        
+        if(*iter != nullptr) os << (*iter)->data();
+        
+        if(*iter != nullptr && (*iter)->right() != nullptr)
+            os << std::setfill('_');
+        else
+            os << std::setfill(' ');
+        
+        os << std::setw(branchLen) << "" << std::setfill(' ');
+    }
+    os << std::endl;
+}
+
+template<typename T>
+void binaryTree<T>::printLeaves(int indentSpace, int level, int nodesInThisLevel, const std::deque<dra::binaryNode<T>*>& nodesQueue, std::ostream& os)
+{
+    auto iter = nodesQueue.begin();
+    for (int i = 0; i < nodesInThisLevel; i++, iter++) {
+        
+        if(i == 0)
+            os << std::setw(indentSpace+2);
+        else
+            os << std::setw(2*level+2);
+        
+        if(*iter != nullptr)
+            os << (*iter)->data();
+        else
+            os << "";
+    }
+    os << std::endl;
+}
+
+template<typename T>
 std::ostream& binaryTree<T>::toStream(std::ostream& os, binaryNode<T>* root)
 {
+    int h = height(root);
+    int nodesInThisLevel = 1;
+
+    int branchLen = 2*(pow(2,h)-1) - 2*pow(2,h-1);
+    int nodeSpaceLen = 2 + 2*pow(2,h);
+    int startLen = branchLen + 2;
+
+    std::deque<dra::binaryNode<T>*> nodesQueue;
+    nodesQueue.push_back(root);
+    
+    for (int r = 1; r < h; r++) {
+        printBranches(branchLen, nodeSpaceLen, startLen, nodesInThisLevel, nodesQueue, os);
+        branchLen = branchLen/2 - 1;
+        nodeSpaceLen = nodeSpaceLen/2 + 1;
+        startLen = branchLen + (2);
+        printNodes(branchLen, nodeSpaceLen, startLen, nodesInThisLevel, nodesQueue, os);
+
+        for (int i = 0; i < nodesInThisLevel; i++) {
+            dra::binaryNode<T> *currNode = nodesQueue.front();
+            nodesQueue.pop_front();
+            if (currNode) {
+                nodesQueue.push_back(currNode->left());
+                nodesQueue.push_back(currNode->right());
+            } else {
+                nodesQueue.push_back(nullptr);
+                nodesQueue.push_back(nullptr);
+            }
+        }
+        nodesInThisLevel *= 2;
+    }
+    printBranches(branchLen, nodeSpaceLen, startLen, nodesInThisLevel, nodesQueue, os);
+    printLeaves(0, 1, nodesInThisLevel, nodesQueue, os);
+    
     return os;
 }
 
@@ -258,9 +342,8 @@ std::string binaryTree<T>::intToString(int val) {
     std::ostringstream ss;
     ss << val;
     return ss.str();
-}
+}*/
 
-// Print the arm branches (eg, /    \ ) on a line
 template<typename T>
 void binaryTree<T>::printBranches(int branchLen, int nodeSpaceLen, int startLen, int nodesInThisLevel, const std::deque<dra::binaryNode<T>*>& nodesQueue, std::ostream& out)
 {
@@ -278,7 +361,15 @@ void binaryTree<T>::printNodes(int branchLen, int nodeSpaceLen, int startLen, in
     auto iter = nodesQueue.begin();
     for (int i = 0; i < nodesInThisLevel; i++, iter++) {
         out << ((i == 0) ? std::setw(startLen) : std::setw(nodeSpaceLen)) << "" << ((*iter != nullptr && (*iter)->left()) ? std::setfill('_') : std::setfill(' '));
-        out << std::setw(branchLen+2) << ((*iter != nullptr) ? intToString((*iter)->data()) : "");
+        out << std::setw(branchLen+2);
+        
+        if(*iter != nullptr)
+            out << (*iter)->data();
+        else
+            out << "";
+        
+        
+        
         out << ((*iter != nullptr && (*iter)->right()) ? std::setfill('_') : std::setfill(' ')) << std::setw(branchLen) << "" << std::setfill(' ');
     }
     out << std::endl;
@@ -289,7 +380,13 @@ template<typename T>
 void binaryTree<T>::printLeaves(int indentSpace, int level, int nodesInThisLevel, const std::deque<dra::binaryNode<T>*>& nodesQueue, std::ostream& out) {
     auto iter = nodesQueue.begin();
     for (int i = 0; i < nodesInThisLevel; i++, iter++) {
-        out << ((i == 0) ? std::setw(indentSpace+2) : std::setw(2*level+2)) << ((*iter != nullptr) ? intToString((*iter)->data()) : "");
+        out << ((i == 0) ? std::setw(indentSpace+2) : std::setw(2*level+2));
+        
+        
+        if(*iter != nullptr)
+            out << (*iter)->data();
+        else
+            out << "";
     }
     out << std::endl;
 }
@@ -301,9 +398,8 @@ void binaryTree<T>::printLeaves(int indentSpace, int level, int nodesInThisLevel
 
 
 template<typename T>
-void binaryTree<T>::printPretty(std::ostream& out)
+std::ostream& binaryTree<T>::toStream(std::ostream& out, dra::binaryNode<T> *root)
 {
-    dra::binaryNode<T> *root = root_;
     int level = 1;
     int indentSpace = 0;
 
@@ -340,7 +436,15 @@ void binaryTree<T>::printPretty(std::ostream& out)
     }
     printBranches(branchLen, nodeSpaceLen, startLen, nodesInThisLevel, nodesQueue, out);
     printLeaves(indentSpace, level, nodesInThisLevel, nodesQueue, out);
+    return out;
 }
+
+
+
+
+
+
+
 
 
 }

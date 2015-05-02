@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "binarysearchtree.h"
+#include "dni.h"
 
 /*
 
@@ -20,9 +21,17 @@ Por Niveles. 52 28 79 14 40 76 92 10 26 33 63 81
 
 */
 
+void test_uno(void);
+void test_dos(void);
+
 int main()
 {
+	test_dos();
+	return 0;
+}
 
+void test_uno(void)
+{
 	dra::binarySearchTree<int> mi_arbol;
 
 	//mi_arbol.insert(new dra::binaryNode<int>(5)); //No funciona, y debería
@@ -49,8 +58,39 @@ int main()
 	std::cout << "inOrder..... "; mi_arbol.inOrder(); std::cout << std::endl;
 	std::cout << "levelOrder.. "; mi_arbol.levelOrder(); std::cout << std::endl;
 
-    mi_arbol.printPretty(std::cout);
+    mi_arbol.toStream(std::cout);
 
 
-	return 0;
+	std::cout << "Voy a hacer una instancia de un DNI" << std::endl;
+	
+	dra::dni mi_dni;
+	
+	std::cout << "El valor que ha cogido fue: " << mi_dni.value() << std::endl;
+}
+
+void test_dos(void)
+{
+	dra::binarySearchTree<dra::dni> mi_arbol;
+	
+	mi_arbol.dra::binaryTree<dra::dni>::insert(new dra::binaryNode<dra::dni>);
+	mi_arbol.dra::binaryTree<dra::dni>::insert(new dra::binaryNode<dra::dni>);
+	mi_arbol.dra::binaryTree<dra::dni>::insert(new dra::binaryNode<dra::dni>);
+	mi_arbol.dra::binaryTree<dra::dni>::insert(new dra::binaryNode<dra::dni>);
+	mi_arbol.dra::binaryTree<dra::dni>::insert(new dra::binaryNode<dra::dni>);
+	mi_arbol.dra::binaryTree<dra::dni>::insert(new dra::binaryNode<dra::dni>);
+	mi_arbol.dra::binaryTree<dra::dni>::insert(new dra::binaryNode<dra::dni>);
+	mi_arbol.dra::binaryTree<dra::dni>::insert(new dra::binaryNode<dra::dni>);
+	mi_arbol.dra::binaryTree<dra::dni>::insert(new dra::binaryNode<dra::dni>);
+	mi_arbol.dra::binaryTree<dra::dni>::insert(new dra::binaryNode<dra::dni>);
+	mi_arbol.dra::binaryTree<dra::dni>::insert(new dra::binaryNode<dra::dni>);
+	mi_arbol.dra::binaryTree<dra::dni>::insert(new dra::binaryNode<dra::dni>);
+	mi_arbol.dra::binaryTree<dra::dni>::insert(new dra::binaryNode<dra::dni>);
+	
+	
+	std::cout << "PreOrder.... "; mi_arbol.preOrder(); std::cout << std::endl;
+	std::cout << "postOrder... "; mi_arbol.postOrder(); std::cout << std::endl;
+	std::cout << "inOrder..... "; mi_arbol.inOrder(); std::cout << std::endl;
+	std::cout << "levelOrder.. "; mi_arbol.levelOrder(); std::cout << std::endl;
+
+    mi_arbol.toStream(std::cout);
 }
