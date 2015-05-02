@@ -17,11 +17,11 @@ int main(void)
 		std::cout << "┌────────────┬───────────────────────────┐" << "\n";
 		std::cout << "│ Práctica 6 │ Árbol Binario de Búsqueda │" << "\n";
 		std::cout << "├────────────┴───────────────────────────┤" << "\n";
-		std::cout << "│ [1] Modo demostracion                  │" << "\n";
+		std::cout << "│ [1] Modo demostración                  │" << "\n";
 		std::cout << "│ [2] Modo estadistica                   │" << "\n";
 		std::cout << "│ [3] Salir                              │" << "\n";
 		std::cout << "└────────────────────────────────────────┘" << "\n";
-		if(modo != 1 && modo && != 2 && modo != 3)
+		if(modo != 1 && modo != 2 && modo != 3)
 			std::cout << "✖  >";
 		else
 			std::cout << "   >";
