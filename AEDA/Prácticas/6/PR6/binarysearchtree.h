@@ -10,7 +10,7 @@ class binarySearchTree : public binaryTree<T>{
 protected:
 	virtual void process(binaryNode<T>*);
 	virtual void insert(binaryNode<T>*, binaryNode<T>*&);
-    virtual void erase(binaryNode<T>*, binaryNode<T>*&);
+    virtual void erase(T, binaryNode<T>*&);
 private:
     void substitute(binaryNode<T>*&, binaryNode<T>*&);
 };
@@ -39,15 +39,15 @@ void binarySearchTree<T>::insert(binaryNode<T>* node, binaryNode<T>*& root)
 }
 
 template<class T>
-void binarySearchTree<T>::erase(binaryNode<T>* node, binaryNode<T>*& root)
+void binarySearchTree<T>::erase(T element, binaryNode<T>*& root)
 {
-    if(node == nullptr)
+    if(root == nullptr)
         return;
 
-    if(node->data() < root->data())
-        erase(node, root->left());
-    else if(node->data() > root->data())
-        erase(node, root->right());
+    if(element < root->data())
+        erase(element, root->left());
+    else if(element > root->data())
+        erase(element, root->right());
     else{
         auto old = root;
 

@@ -58,7 +58,7 @@ public:
     void insert(binaryNode<T>*);
 
     //elminar del arbol
-    void erase(binaryNode<T>*);
+    void erase(T);
 
     std::ostream& toStream(std::ostream&);
 private:
@@ -70,7 +70,7 @@ private:
 protected:
     virtual void process(binaryNode<T>*)=0; //metodo usado por los metodos para explorar el arbol
     virtual void insert(binaryNode<T>*, binaryNode<T>*&)=0;
-    virtual void erase(binaryNode<T>*, binaryNode<T>*&)=0;
+    virtual void erase(T, binaryNode<T>*&)=0;
 private:
     void prune(binaryNode<T>*);
 
@@ -248,9 +248,9 @@ void binaryTree<T>::insert(binaryNode<T>* node)
 }
 
 template<class T>
-void binaryTree<T>::erase(binaryNode<T>* node)
+void binaryTree<T>::erase(T element)
 {
-    erase(node, root_);
+    erase(element, root_);
 }
 
 
