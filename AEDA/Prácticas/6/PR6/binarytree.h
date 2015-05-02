@@ -55,7 +55,7 @@ public:
     unsigned height(void) const;
 
     //metodos para insertar el arbol
-    void insert(binaryNode<T>*);
+    void insert(T);
 
     //elminar del arbol
     void erase(T);
@@ -246,8 +246,9 @@ unsigned binaryTree<T>::height(binaryNode<T>* node) const
 }
 
 template<class T>
-void binaryTree<T>::insert(binaryNode<T>* node)
+void binaryTree<T>::insert(T element)
 {
+    binaryNode<T>* node = new binaryNode<T>(element);
     insert(node, root_);
 }
 
@@ -281,7 +282,6 @@ void binaryTree<T>::printBranches(int branchLen, int nodeSpaceLen, int startLen,
     out << std::endl;
 }
 
-// Print the branches and node (eg, ___10___ )
 template<typename T>
 void binaryTree<T>::printNodes(int branchLen, int nodeSpaceLen, int startLen, int nodesInThisLevel, const std::deque<dra::binaryNode<T>*>& nodesQueue, std::ostream& out) {
     auto iter = nodesQueue.begin();
@@ -301,7 +301,6 @@ void binaryTree<T>::printNodes(int branchLen, int nodeSpaceLen, int startLen, in
     out << std::endl;
 }
 
-// Print the leaves only (just for the bottom row)
 template<typename T>
 void binaryTree<T>::printLeaves(int indentSpace, int level, int nodesInThisLevel, const std::deque<dra::binaryNode<T>*>& nodesQueue, std::ostream& out) {
     auto iter = nodesQueue.begin();
@@ -317,12 +316,6 @@ void binaryTree<T>::printLeaves(int indentSpace, int level, int nodesInThisLevel
     out << std::endl;
 }
 
-// Pretty formatting of a binary tree to the output stream
-// @ param
-// level  Control how wide you want the tree to sparse (eg, level 1 has the minimum space between nodes, while level 2 has a larger space between nodes)
-// indentSpace  Change this to add some indent space to the left (eg, indentSpace of 0 means the lowest level of the left node will stick to the left margin)
-
-
 template<typename T>
 std::ostream& binaryTree<T>::toStream(std::ostream& out, dra::binaryNode<T> *root)
 {
@@ -334,9 +327,9 @@ std::ostream& binaryTree<T>::toStream(std::ostream& out, dra::binaryNode<T> *roo
     int h = height(root);
     int nodesInThisLevel = 1;
 
-    int branchLen = 2*((int)pow(2.0,h)-1) - (3-level)*(int)pow(2.0,h-1);  // eq of the length of branch for each node of each level
-    int nodeSpaceLen = 2 + (level+1)*(int)pow(2.0,h);  // distance between left neighbor node's right arm and right neighbor node's left arm
-    int startLen = branchLen + (3-level) + indentSpace;  // starting space to the first node to print of each level (for the left most node of each level only)
+    int branchLen = 2*((int)pow(2.0,h)-1) - (3-level)*(int)pow(2.0,h-1);
+    int nodeSpaceLen = 2 + (level+1)*(int)pow(2.0,h); 
+    int startLen = branchLen + (3-level) + indentSpace;
 
     std::deque<dra::binaryNode<T>*> nodesQueue;
     nodesQueue.push_back(root);
