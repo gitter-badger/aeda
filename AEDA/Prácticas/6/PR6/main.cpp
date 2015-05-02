@@ -10,7 +10,7 @@ int main(void)
 		system("clear");
 		std::cout << "┌────────────┬───────────────────────────┐" << std::endl;
 		std::cout << "│ Práctica 6 │ Árbol Binario de Búsqueda │" << std::endl;
-		std::cout << "└────────────┴───────────────────────────┘"
+		std::cout << "└────────────┴───────────────────────────┘" << std::endl;
 		
 		
 	}while(modo != 0 && modo != 1);
