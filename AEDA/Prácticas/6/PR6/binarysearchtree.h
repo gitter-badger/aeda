@@ -9,9 +9,9 @@ template<class T>
 class binarySearchTree : public binaryTree<T>{
 protected:
 	virtual void process(binaryNode<T>*);
-	virtual void insert(binaryNode<T>*, binaryNode<T>*&);
+	virtual unsigned insert(binaryNode<T>*, binaryNode<T>*&, unsigned=0);
     virtual void erase(T, binaryNode<T>*&);
-    virtual bool search(T, binaryNode<T>*);
+    virtual bool search(T, binaryNode<T>*, unsigned&);
 private:
     void substitute(binaryNode<T>*&, binaryNode<T>*&);
 };
@@ -27,16 +27,19 @@ void binarySearchTree<T>::process(binaryNode<T>* node)
 }
 
 template<class T>
-void binarySearchTree<T>::insert(binaryNode<T>* node, binaryNode<T>*& root)
+unsigned binarySearchTree<T>::insert(binaryNode<T>* node, binaryNode<T>*& root, unsigned comp)
 {
+    comp++;
 	if(root == nullptr){
 		root = node;
-		return;
+		return comp;
 	}
 	if(node->data() <= root->data())
-		insert(node, root->left());
+		comp = insert(node, root->left(), comp);
 	else
-		insert(node, root->right());
+		comp = insert(node, root->right(), comp);
+	
+	return comp;
 }
 
 template<class T>
@@ -76,15 +79,18 @@ void binarySearchTree<T>::substitute(binaryNode<T>*& old, binaryNode<T>*& candid
 }
 
 template<class T>
-bool binarySearchTree<T>::search(T element, binaryNode<T>* root)
+bool binarySearchTree<T>::search(T element, binaryNode<T>* root, unsigned& comp)
 {
+    comp++;
     if(root == nullptr)
         return false;
+    comp++;
     if(element == root->data())
         return true;
+    comp++;
     if(element < root->data())
-        return search(element, root->left());
-    return search(element, root->right());
+        return search(element, root->left(), comp);
+    return search(element, root->right(), comp);
 }
 
 }

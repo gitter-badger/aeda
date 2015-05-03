@@ -55,13 +55,13 @@ public:
     unsigned height(void) const;
 
     //metodos para insertar el arbol
-    void insert(T);
+    unsigned insert(T);
 
     //elminar del arbol
     void erase(T);
 
     //buscar un elemento en el arbo
-    bool search(T);
+    bool search(T, unsigned&);
 
     std::ostream& toStream(std::ostream&);
 private:
@@ -72,9 +72,9 @@ private:
 
 protected:
     virtual void process(binaryNode<T>*)=0; //metodo usado por los metodos para explorar el arbol
-    virtual void insert(binaryNode<T>*, binaryNode<T>*&)=0;
+    virtual unsigned insert(binaryNode<T>*, binaryNode<T>*&, unsigned=0)=0;
     virtual void erase(T, binaryNode<T>*&)=0;
-    virtual bool search(T, binaryNode<T>*)=0;
+    virtual bool search(T, binaryNode<T>*, unsigned&)=0;
 private:
     void prune(binaryNode<T>*);
 
@@ -246,10 +246,10 @@ unsigned binaryTree<T>::height(binaryNode<T>* node) const
 }
 
 template<class T>
-void binaryTree<T>::insert(T element)
+unsigned binaryTree<T>::insert(T element)
 {
     binaryNode<T>* node = new binaryNode<T>(element);
-    insert(node, root_);
+    return insert(node, root_);
 }
 
 template<class T>
@@ -259,9 +259,9 @@ void binaryTree<T>::erase(T element)
 }
 
 template<class T>
-bool binaryTree<T>::search(T element)
+bool binaryTree<T>::search(T element, unsigned& comp)
 {
-    return search(element, root_);
+    return search(element, root_, comp);
 }
 
 template<class T>

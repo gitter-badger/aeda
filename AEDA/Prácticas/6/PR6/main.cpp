@@ -121,8 +121,6 @@ void modo_esta(void)
 	unsigned numero_pruebas = 10;
 	unsigned cantidad_nodos = 10;
 	
-	dra::binarySearchTree<dra::dni> arbol;
-	
 	do{
 		system("clear");
 		std::cout << "┌────────────┬───────────────────────────┬──────────────────┐" << "\n";
@@ -155,11 +153,30 @@ void modo_esta(void)
 				std::cin >> numero_pruebas;
 			} break;
 			case 3:{
-				unsigned insercion_datos[3] = {0,0,0};
-				unsigned busqueda_datos[3] = {0,0,0};
+				unsigned insercion_datos[4] = {65535,0,0,0};
+				unsigned busqueda_datos[4] = {65535,0,0,0}; //el 3º es el acumulado
 				
-				for(int i = 0; i < numero_pruebas; i++){
-					for(int j = 0; j < cantidad_nodos; j++){
+				for(unsigned i = 0; i < numero_pruebas; i++){
+					dra::binarySearchTree<dra::dni> arbol;
+					for(unsigned j = 0; j < cantidad_nodos; j++){
+						
+						dra::dni dummy1;
+						dra::dni dummy2;
+						unsigned insertar_ahora = arbol.dra::binaryTree<dra::dni>::insert(dummy1);
+						unsigned buscar_ahora = 0;
+						
+						arbol.dra::binaryTree<dra::dni>::search(dummy2, buscar_ahora); //temporal
+						
+						insercion_datos[3]+= insertar_ahora;
+						busqueda_datos[3]+= buscar_ahora;
+						
+						insercion_datos[0] = std::min(insercion_datos[0], insertar_ahora);
+						insercion_datos[2] = std::max(insercion_datos[2], insertar_ahora);
+						
+						busqueda_datos[0] = std::min(busqueda_datos[0], buscar_ahora);
+						busqueda_datos[2] = std::max(busqueda_datos[2], buscar_ahora);
+						
+						
 						system("clear");
 						std::cout << "┌────────────┬───────────────────────────┬──────────────────┐" << "\n";
 						std::cout << "│ Práctica 6 │ Árbol Binario de Búsqueda │ Modo estadística │" << "\n";
@@ -176,9 +193,31 @@ void modo_esta(void)
 						std::cout << "│ Inserción │" << j << std::setw(10 - digits(j)) << "│" << i << std::setw(12 - digits(i)) << "│" << insercion_datos[0] << std::setw(11 - digits(insercion_datos[0])) << "│" << insercion_datos[1] << std::setw(10 - digits(insercion_datos[1])) << "│" << insercion_datos[2] << std::setw(11 - digits(insercion_datos[2])) << "│" << "\n";
 						std::cout << "│ Búsqueda  │" << j << std::setw(10 - digits(j)) << "│" << i << std::setw(12 - digits(i)) << "│" << busqueda_datos[0] << std::setw(11 - digits(busqueda_datos[0])) << "│" << busqueda_datos[1] << std::setw(10 - digits(busqueda_datos[1])) << "│" << busqueda_datos[2] << std::setw(11 - digits(busqueda_datos[2])) << "│" << "\n";
 						std::cout << "└───────────┴───────┴─────────┴────────┴───────┴────────┘" << "\n";
-						std::cin.get();
+						std::cout.flush();
 					}
 				}
+				insercion_datos[1] = insercion_datos[3] / (numero_pruebas*cantidad_nodos);
+				busqueda_datos[1] = busqueda_datos[3] / (numero_pruebas*cantidad_nodos);
+				
+				
+				system("clear");
+				std::cout << "┌────────────┬───────────────────────────┬──────────────────┐" << "\n";
+				std::cout << "│ Práctica 6 │ Árbol Binario de Búsqueda │ Modo estadística │" << "\n";
+				std::cout << "├────────────┴───────────────────────────┴──────────────────┤" << "\n";
+				std::cout << "│ Cantidad de nodos actuales: " << cantidad_nodos << std::setw(33 - digits(cantidad_nodos)) << "│" <<"\n";
+				std::cout << "│ Numero de pruebas actual: "   << numero_pruebas << std::setw(35 - digits(numero_pruebas)) << "│" <<"\n";
+				std::cout << "│ [1] Cambiar numero de nodos en el árbol                   │" << "\n";
+				std::cout << "│ [2] Cambiar número de pruebas                             │" << "\n";
+				std::cout << "│ [3] Ejecutar                                              │" << "\n";
+				std::cout << "│ [4] Atrás                                                 │" << "\n";
+				std::cout << "└───────────────────────────────────────────────────────────┘" << "\n";
+				std::cout << "┌───────────┬───────┬─────────┬────────┬───────┬────────┐" << "\n";
+				std::cout << "│ Operación │ Nodos │ Pruebas │ Minimo │ Medio │ Máximo │" << "\n";
+				std::cout << "│ Inserción │" << cantidad_nodos << std::setw(10 - digits(cantidad_nodos)) << "│" << numero_pruebas << std::setw(12 - digits(numero_pruebas)) << "│" << insercion_datos[0] << std::setw(11 - digits(insercion_datos[0])) << "│" << insercion_datos[1] << std::setw(10 - digits(insercion_datos[1])) << "│" << insercion_datos[2] << std::setw(11 - digits(insercion_datos[2])) << "│" << "\n";
+				std::cout << "│ Búsqueda  │" << cantidad_nodos << std::setw(10 - digits(cantidad_nodos)) << "│" << numero_pruebas << std::setw(12 - digits(numero_pruebas)) << "│" << busqueda_datos[0] << std::setw(11 - digits(busqueda_datos[0])) << "│" << busqueda_datos[1] << std::setw(10 - digits(busqueda_datos[1])) << "│" << busqueda_datos[2] << std::setw(11 - digits(busqueda_datos[2])) << "│" << "\n";
+				std::cout << "└───────────┴───────┴─────────┴────────┴───────┴────────┘" << "\n";
+				std::cout << "Hecho!" << std::endl;
+				std::cin.ignore().get();
 			} break;
 		}
 	
