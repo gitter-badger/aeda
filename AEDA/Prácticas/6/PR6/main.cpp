@@ -155,8 +155,8 @@ void modo_esta(void)
 				std::cin >> numero_pruebas;
 			} break;
 			case 3:{
-				unsigned insercion_datos[3];
-				unsigned busqueda_datos[3];
+				unsigned insercion_datos[3] = {0,0,0};
+				unsigned busqueda_datos[3] = {0,0,0};
 				
 				for(int i = 0; i < numero_pruebas; i++){
 					for(int j = 0; j < cantidad_nodos; j++){
@@ -173,9 +173,10 @@ void modo_esta(void)
 						std::cout << "└───────────────────────────────────────────────────────────┘" << "\n";
 						std::cout << "┌───────────┬───────┬─────────┬────────┬───────┬────────┐" << "\n";
 						std::cout << "│ Operación │ Nodos │ Pruebas │ Minimo │ Medio │ Máximo │" << "\n";
-						std::cout << "│ Inserción │" << j << std::setw(10 - digits(j)) << "│" << i << std::setw(12 - digits(i)) << "│" << "\n";
-						std::cout << "│ Búsqueda  │" << j << std::setw(10 - digits(j)) << "│" << i << std::setw(12 - digits(i)) << "│" << "\n";
-						std::cin.ignore().get();
+						std::cout << "│ Inserción │" << j << std::setw(10 - digits(j)) << "│" << i << std::setw(12 - digits(i)) << "│" << insercion_datos[0] << std::setw(11 - digits(insercion_datos[0])) << "│" << insercion_datos[1] << std::setw(10 - digits(insercion_datos[1])) << "│" << insercion_datos[2] << std::setw(11 - digits(insercion_datos[2])) << "│" << "\n";
+						std::cout << "│ Búsqueda  │" << j << std::setw(10 - digits(j)) << "│" << i << std::setw(12 - digits(i)) << "│" << busqueda_datos[0] << std::setw(11 - digits(busqueda_datos[0])) << "│" << busqueda_datos[1] << std::setw(10 - digits(busqueda_datos[1])) << "│" << busqueda_datos[2] << std::setw(11 - digits(busqueda_datos[2])) << "│" << "\n";
+						std::cout << "└───────────┴───────┴─────────┴────────┴───────┴────────┘" << "\n";
+						std::cin.get();
 					}
 				}
 			} break;
