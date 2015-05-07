@@ -271,13 +271,18 @@ std::ostream& binaryTree<T>::toStream(std::ostream& os)
     return os;
 }
 
+//==============================================================================
+// Métodos para imprimir el arbol, sacado de:
+// http://articles.leetcode.com/2010/09/how-to-pretty-print-binary-tree.html
+//==============================================================================
+
 template<typename T>
 void binaryTree<T>::printBranches(int branchLen, int nodeSpaceLen, int startLen, int nodesInThisLevel, const std::deque<dra::binaryNode<T>*>& nodesQueue, std::ostream& out)
 {
     auto iter = nodesQueue.begin();
     for (int i = 0; i < nodesInThisLevel / 2; i++) {
-        out << ((i == 0) ? std::setw(startLen-1) : std::setw(nodeSpaceLen-2)) << "" << ((*iter++) ? "/" : " ");
-        out << std::setw(2*branchLen+2) << "" << ((*iter++) ? "\\" : " ");
+        out << ((i == 0) ? std::setw(startLen-1) : std::setw(nodeSpaceLen-2)) << "" << ((*iter++) ? "╱" : " ");
+        out << std::setw(2*branchLen+2) << "" << ((*iter++) ? "╲" : " ");
     }
     out << std::endl;
 }
