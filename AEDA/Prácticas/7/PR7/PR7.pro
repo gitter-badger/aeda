@@ -16,5 +16,6 @@ HEADERS += \
     dni.h \
     node.h \
     random.h \
-    avltree.h
+    avltree.h \
+    avlnode.h
 

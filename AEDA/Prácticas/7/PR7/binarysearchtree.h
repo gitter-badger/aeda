@@ -9,7 +9,7 @@ template<class T>
 class binarySearchTree : public binaryTree<T>{
 protected:
 	virtual void process(binaryNode<T>*);
-	virtual unsigned insert(binaryNode<T>*, binaryNode<T>*&, unsigned=0);
+    virtual unsigned insert(binaryNode<T>*, binaryNode<T>*&, unsigned=0);
     virtual void erase(T, binaryNode<T>*&);
     virtual bool search(T, binaryNode<T>*, unsigned&);
 private:

@@ -1,4 +1,7 @@
 #include <iostream>
+#include "avltree.h"
+
+/*
 #include <iomanip>
 #include <string>
 #include <sstream>
@@ -18,10 +21,42 @@ void dibujar_menu_estadisticas(unsigned c_nodos, unsigned c_pruebas);
 
 void insertar_sin_repetir(std::vector<dra::dni>& banco);
 void dibujar_tabla_estadisticas(std::vector<std::vector<unsigned>> datos);
-
+*/
 
 int main(void)
 {
+    std::cout << "Compiló!" << std::endl;
+
+    dra::AVLTree<int> arbol;
+
+    std::cout << "Voy a insertar un 8" << std::endl;
+    arbol.insert(8);
+
+    std::cout << "Voy a insertar un 20" << std::endl;
+    arbol.insert(20);
+
+    std::cout << "Voy a insertar un 6" << std::endl;
+    arbol.insert(6);
+
+    std::cout << "Voy a insertar un 1" << std::endl;
+    arbol.insert(1);
+
+    std::cout << "Voy a insertar un 40" << std::endl;
+    arbol.insert(40);
+
+    std::cout << "Voy a insertar un 7" << std::endl;
+    arbol.insert(7);
+
+    std::cout << "Voy a insertar un 80" << std::endl;
+    arbol.insert(80);
+
+    std::cout.setf(std::ios::boolalpha);
+    std::cout << arbol.isBalanced() << std::endl;
+
+    arbol.toStream(std::cout);
+
+
+    /*
     unsigned modo = 1; //0 = demostracion, 1 = estadistica
 
     do{
@@ -49,11 +84,11 @@ int main(void)
         }
 
 
-    }while(modo != 3);
+    }while(modo != 3);*/
 
     return 0;
 }
-
+/*
 void modo_demo(void)
 {
     unsigned opcion = 1; //0 = demostracion, 1 = estadistica
@@ -158,7 +193,7 @@ void modo_esta(void)
                 std::vector<std::vector<unsigned>> datos(2); //[0] = inserciones [1] = busquedas
 
                 for(unsigned i = 0; i < datos.size(); i++)
-                    for(unsigned j = 0; j < 6 /* Numero columnas*/; j++)
+                    for(unsigned j = 0; j < 6 *//* Numero columnas*//*; j++)
                         datos[i].push_back(0);
 
 
@@ -266,3 +301,4 @@ void dibujar_tabla_estadisticas(std::vector<std::vector<unsigned>> datos)
     std::cout << "│ Búsqueda  │" << datos[1][0] << std::setw(10 - digits(datos[1][0])) << "│" << datos[1][1] << std::setw(12 - digits(datos[1][1])) << "│" << datos[1][2] << std::setw(11 - digits(datos[1][2])) << "│" << datos[1][3] << std::setw(10 - digits(datos[1][3])) << "│" << datos[1][4] << std::setw(11 - digits(datos[1][4])) << "│" << "\n";
     std::cout << "└───────────┴───────┴─────────┴────────┴───────┴────────┘" << "\n";
 }
+*/

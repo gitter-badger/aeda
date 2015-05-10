@@ -171,7 +171,8 @@ DIST          = /opt/Qt/5.4/gcc_64/mkspecs/features/spec_pre.prf \
 		dni.h \
 		node.h \
 		random.h \
-		avltree.h ../PR7/main.cpp
+		avltree.h \
+		avlnode.h ../PR7/main.cpp
 QMAKE_TARGET  = PR7
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = PR7
@@ -475,12 +476,11 @@ compiler_clean:
 
 ####### Compile
 
-main.o: ../PR7/main.cpp ../PR7/binarysearchtree.h \
+main.o: ../PR7/main.cpp ../PR7/avltree.h \
+		../PR7/binarysearchtree.h \
 		../PR7/binarytree.h \
 		../PR7/binarynode.h \
-		../PR7/node.h \
-		../PR7/dni.h \
-		../PR7/random.h
+		../PR7/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../PR7/main.cpp
 
 ####### Install

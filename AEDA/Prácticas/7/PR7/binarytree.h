@@ -36,7 +36,7 @@ namespace dra{
 
 template<class T>
 class binaryTree{
-private:
+protected:
     binaryNode<T>* root_;
 public:
     //constructores
@@ -75,6 +75,8 @@ protected:
     virtual unsigned insert(binaryNode<T>*, binaryNode<T>*&, unsigned=0)=0;
     virtual void erase(T, binaryNode<T>*&)=0;
     virtual bool search(T, binaryNode<T>*, unsigned&)=0;
+
+    virtual unsigned height(binaryNode<T>*) const;
 private:
     void prune(binaryNode<T>*);
 
@@ -86,7 +88,6 @@ private:
     bool leave(binaryNode<T>*) const;
     bool empty(binaryNode<T>*) const;
     unsigned size(binaryNode<T>*) const;
-    unsigned height(binaryNode<T>*) const;
 
     std::ostream& toStream(std::ostream&, binaryNode<T>*);
 };
