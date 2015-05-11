@@ -91,15 +91,15 @@ public:
 template<class T>
 binaryNode<T>::binaryNode(void):
 node<T>(),
-left_(nullptr),
-right_(nullptr)
+	left_(nullptr),
+	right_(nullptr)
 {}
 
 template<class T>
 binaryNode<T>::binaryNode(const T data):
-node<T>(data),
-left_(nullptr),
-right_(nullptr)
+	node<T>(data),
+	left_(nullptr),
+	right_(nullptr)
 {}
 
 template<class T>

@@ -14,12 +14,19 @@ public:
     bool isBalanced(void);
 private:
     bool isBalanced(binaryNode<T>*);
+    void insert_re_balancea_izada(binaryNode<T>*&, bool&);
+    void insert_re_balancea_dcha(binaryNode<T>*&, bool&);
 };
 
 template<class T>
 void AVLTree<T>::insert(T data)
 {
     bool crece = false;
+    std::cout << "El puntero root es binaryNode y apunta a: " << binaryTree<T>::root_ << std::endl;
+    
+    
+    
+    
     insert(new AVLNode<T>(data, 0), binaryTree<T>::root_, crece);
 }
 
@@ -33,16 +40,24 @@ void AVLTree<T>::insert(AVLNode<T>* node, binaryNode<T>*& root, bool& crece)
     }
     else if(node->data() <= root->data()){
         insert(node, root->left(), crece);
-        if(crece){
-            std::cout << "insert_re_balancea_izda" << std::endl;
-        }
+        if(crece) insert_re_balancea_izada(root, crece);
     }
     else{
         insert(node, root->right(), crece);
-        if(crece){
-            std::cout << "insert_re_balancea_dcha" << std::endl;
-        }
+        if(crece) insert_re_balancea_dcha(root, crece);
     }
+}
+
+template<class T>
+void AVLTree<T>::insert_re_balancea_izada(binaryNode<T>*& root, bool& crece)
+{
+    std::cout << "insert_re_balancea_izda" << std::endl;
+}
+
+template<class T>
+void AVLTree<T>::insert_re_balancea_dcha(binaryNode<T>*& root, bool& crece)
+{
+    std::cout << "insert_re_balancea_dcha" << std::endl;
 }
 
 template<class T>
